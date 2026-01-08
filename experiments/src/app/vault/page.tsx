@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { resolveVaultLinks, VaultResolvedItem } from "@/lib/vault/resolve-links";
+import { getAllProjects } from "@/lib/vault/projects";
 import { Shell } from "@/components/layout/Shell";
 import { FilterChips } from "@/components/ui/filterchips";
 
 export const revalidate = 86400;
 
-const FILTERS = ["All", "Writings", "Library", "Fonts", "Projects"] as const;
+const FILTERS = ["All", "Writings", "Projects", "Library", "Fonts"] as const;
 type FilterType = (typeof FILTERS)[number];
 
 const VAULT_LINKS: { url: string; type: VaultResolvedItem["type"] }[] = [
@@ -16,30 +17,32 @@ const VAULT_LINKS: { url: string; type: VaultResolvedItem["type"] }[] = [
   { url: "https://fonts.google.com/", type: "Fonts" },
 ];
 
-// Static project data from Project-Alpha (no external URL resolution needed)
-const PROJECTS: Omit<VaultResolvedItem, "url" | "site">[] = [
-  {
-    title: "Component Library Platform",
-    description:
-      "A full-stack component library with authentication, moderation workflows, and a normalized PostgreSQL schema for data consistency under concurrent usage.",
-    image: null,
-    type: "Projects",
-  },
-  {
-    title: "AnyLife — AI Visual Summarizer",
-    description:
-      "A platform that transforms visual inputs into infographic summaries using Google Gemini models, solving browser constraints like storage limits and AI latency.",
-    image: null,
-    type: "Projects",
-  },
-  {
-    title: "CloudCore — Serverless AWS S3 Manager",
-    description:
-      "A serverless file management system enabling secure, high-concurrency browser-to-cloud uploads with retry logic, monitoring, and strong consistency guarantees.",
-    image: "/SiteImages/cloudcore.png",
-    type: "Projects",
-  },
-];
+// Back to home link component for the left rail
+function BackToHome() {
+  return (
+    <Link
+      href="/"
+      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        className="rotate-180"
+      >
+        <path
+          d="M6 3L11 8L6 13"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      Home
+    </Link>
+  );
+}
 
 interface VaultPageProps {
   searchParams?: Promise<{ type?: string }>;
@@ -69,11 +72,15 @@ export default async function VaultPage({ searchParams }: VaultPageProps) {
     items = [];
   }
 
-  // Add static projects to items
-  const projectItems: VaultResolvedItem[] = PROJECTS.map((project, index) => ({
-    ...project,
-    url: `#project-${index}`,
+  // Fetch projects from the projects data file
+  const projects = getAllProjects();
+  const projectItems: VaultResolvedItem[] = projects.map((project) => ({
+    url: `#${project.id}`,
+    title: project.title,
+    description: project.description,
+    image: project.image,
     site: "Local Project",
+    type: "Projects" as const,
   }));
 
   const allItems = [...items, ...projectItems];
@@ -84,11 +91,12 @@ export default async function VaultPage({ searchParams }: VaultPageProps) {
       : allItems.filter((item) => item && item.type === activeFilter);
 
   return (
-    <Shell>
+    <Shell leftRail={<BackToHome />}>
       <header className="flex flex-col gap-6 mb-16">
+        {/* Mobile back link (hidden on desktop where leftRail shows) */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors lg:hidden"
         >
           <svg
             width="16"

@@ -58,15 +58,15 @@ export default function Home() {
 
             {/* Name + role */}
             <h1 className="flex flex-wrap items-baseline gap-2 sm:gap-3 text-page-heading font-normal leading-none tracking-normal">
-              <span>Zigato —</span>
+              <span>Akash —</span>
               <span className="text-muted-foreground">
-                UI experiments &amp; components
+                Design Engineer 
               </span>
             </h1>
           </div>
 
           <p className="text-subheading font-medium text-foreground max-w-2xl">
-            Designing with humans at the centre.
+            Designing with humans at the centre. Enter the <Link href="/lab" className="text-body-emphasis underline underline-offset-4">lab</Link> to explore the components.
           </p>
 
           <p className="max-w-2xl text-body leading-relaxed text-muted-foreground">

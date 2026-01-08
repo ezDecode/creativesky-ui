@@ -1,7 +1,7 @@
 // src/lib/vault/resolve-links.ts
 // Fixed version with better error handling and fallbacks
 
-export type VaultType = "Writings" | "Portfolio" | "Library" | "Fonts" | "Projects";
+export type VaultType = "Writings" | "Projects" | "Library" | "Fonts";
 
 export interface VaultResolvedItem {
   url: string;
