@@ -3,7 +3,7 @@ import "./globals.css";
 import { ClientProviders } from "@/components/ClientProviders";
 
 export const metadata: Metadata = {
-  title: "Experiment",
+  title: "Skie — Experiment",
   description: "A premium component library showcase inspired by modern design principles.",
 };
 
