@@ -104,8 +104,7 @@ export function FilterChips<T extends string = string>({
         const chip = typeof filter === "string" ? { value: filter, label: filter } : { ...filter, label: filter.label ?? filter.value };
         const isActive = chip.value === activeFilter;
 
-        const props = {
-            key: chip.value,
+        const commonProps = {
             className: cn(
                 "relative inline-flex items-center gap-1.5 font-medium transition-colors",
                 SIZE[size],
@@ -140,9 +139,9 @@ export function FilterChips<T extends string = string>({
         );
 
         return asLinks && baseHref ? (
-            <a href={getHref(chip.value as T)} {...props}>{content}</a>
+            <a key={chip.value} href={getHref(chip.value as T)} {...commonProps}>{content}</a>
         ) : (
-            <button type="button" {...props}>{content}</button>
+            <button key={chip.value} type="button" {...commonProps}>{content}</button>
         );
     };
 
