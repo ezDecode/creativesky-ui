@@ -130,6 +130,39 @@
         "gsap",
         "react"
       ]
+    },
+    {
+      "id": "filter-chips",
+      "title": "Filter Chips",
+      "description": "Animated filter chips with smooth shared layout transitions for selection feedback.",
+      "category": "ui",
+      "status": "stable",
+      "tags": [
+        "framer-motion",
+        "animation",
+        "ui",
+        "filter"
+      ],
+      "date": "2026-01-08",
+      "featured": false,
+      "new": true,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/filter-chips/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "framer-motion"
+      ]
     }
   ]
 }

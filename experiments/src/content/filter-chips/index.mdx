@@ -1,0 +1,71 @@
+---
+name: "filter-chips"
+title: "Filter Chips"
+description: "Animated filter chips with smooth shared layout transitions."
+category: "UI"
+version: "1.0.0"
+dependencies: ["framer-motion"]
+source: "src/content/filter-chips/index.mdx"
+---
+
+# Filter Chips
+
+Animated filter chips with spring-based shared layout transitions. Great for category filters and segmented controls.
+
+## Demo
+
+<ComponentPreview name="filter-chips" />
+
+## Usage
+
+```tsx
+import { FilterChips } from "@/content/filter-chips/filter-chips";
+
+function Example() {
+  const [active, setActive] = useState("All");
+  
+  return (
+    <FilterChips
+      filters={["All", "Design", "Development"]}
+      activeFilter={active}
+      onFilterChange={setActive}
+    />
+  );
+}
+```
+
+### Custom Colors
+
+```tsx
+<FilterChips
+  filters={["All", "New", "Popular"]}
+  activeFilter={active}
+  onFilterChange={setActive}
+  activeColor="custom"
+  customActiveColor="linear-gradient(135deg, #667eea, #764ba2)"
+  customActiveTextColor="#fff"
+/>
+```
+
+## Source Code
+
+<ComponentCode name="filter-chips" title="Full Component" />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `filters` | `(string \| FilterChip)[]` | — | Filter options |
+| `activeFilter` | `string` | — | Current selection |
+| `onFilterChange` | `(filter) => void` | — | Change callback |
+| `variant` | `"default" \| "outline" \| "ghost" \| "pill"` | `"pill"` | Visual style |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
+| `activeColor` | `"default" \| "primary" \| "custom"` | `"default"` | Active indicator color |
+| `customActiveColor` | `string` | — | Custom background (supports gradients) |
+| `customActiveTextColor` | `string` | — | Custom text color |
+| `layoutId` | `string` | `"activeFilterChip"` | Animation layout ID |
+| `animation` | `{ stiffness?, damping? }` | — | Spring config |
+
+## Dependencies
+
+`framer-motion`

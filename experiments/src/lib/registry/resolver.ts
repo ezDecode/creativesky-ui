@@ -49,6 +49,7 @@ const demoImports = {
   "motion-surface": () => import("@/components/demos/motion-surface/MotionSurfaceDemo"),
   "vanish-form": () => import("@/components/demos/vanish-form/VanishFormDemo"),
   "magnetic-button": () => import("@/components/demos/magnetic-button/MagneticButtonDemo"),
+  "filter-chips": () => import("@/components/demos/filter-chips/FilterChipsDemo"),
 } as const satisfies Record<string, () => Promise<{ default: ComponentType<Record<string, unknown>> }>>;
 
 type DemoId = keyof typeof demoImports;
@@ -73,9 +74,9 @@ function validateRegistryIntegrity(): void {
   if (missingDemos.length > 0) {
     console.error(
       `[resolver] Registry validation failed!\n` +
-        `The following components are in registry.json but have no demo mapping:\n` +
-        `  ${missingDemos.join(", ")}\n` +
-        `Add entry to demoImports in src/lib/registry/resolver.ts`
+      `The following components are in registry.json but have no demo mapping:\n` +
+      `  ${missingDemos.join(", ")}\n` +
+      `Add entry to demoImports in src/lib/registry/resolver.ts`
     );
   }
 
@@ -87,8 +88,8 @@ function validateRegistryIntegrity(): void {
   if (orphanedDemos.length > 0) {
     console.warn(
       `[resolver] Demo imports have entries not in registry:\n` +
-        `  ${orphanedDemos.join(", ")}\n` +
-        `These demos will never be used.`
+      `  ${orphanedDemos.join(", ")}\n` +
+      `These demos will never be used.`
     );
   }
 
@@ -159,9 +160,9 @@ export async function resolveComponent(
   if (!metadata) {
     throw new Error(
       `Component "${id}" not found in registry. ` +
-        `Available components: ${registry.components
-          .map((c) => c.id)
-          .join(", ")}`
+      `Available components: ${registry.components
+        .map((c) => c.id)
+        .join(", ")}`
     );
   }
 
@@ -170,7 +171,7 @@ export async function resolveComponent(
   if (!importFn) {
     throw new Error(
       `Component "${id}" is registered but has no demo import. ` +
-        `Add an entry to demoImports in src/lib/registry/resolver.ts`
+      `Add an entry to demoImports in src/lib/registry/resolver.ts`
     );
   }
 
@@ -188,11 +189,10 @@ export async function resolveComponent(
   } catch (error) {
     throw new Error(
       `Failed to resolve demo for "${id}". ` +
-        `Error: ${
-          error instanceof Error
-            ? error.message
-            : String(error)
-        }`
+      `Error: ${error instanceof Error
+        ? error.message
+        : String(error)
+      }`
     );
   }
 }
