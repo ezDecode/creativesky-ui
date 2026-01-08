@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+  "components": [
+    {
+      "id": "adaptive-tooltip",
+      "title": "Adaptive Tooltip",
+      "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays.",
+      "category": "ui",
+      "status": "stable",
+      "tags": [
+        "framer-motion",
+        "animejs",
+        "clsx"
+      ],
+      "date": "2025-12-31",
+      "featured": false,
+      "new": false,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/adaptive-tooltip/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "framer-motion",
+        "animejs",
+        "clsx"
+      ]
+    },
+    {
+      "id": "motion-surface",
+      "title": "Motion Surface",
+      "description": "A shared layout animation container for list items with smooth background transitions.",
+      "category": "ui",
+      "status": "stable",
+      "tags": [
+        "framer-motion"
+      ],
+      "date": "2025-12-31",
+      "featured": false,
+      "new": false,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/motion-surface/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "framer-motion"
+      ]
+    },
+    {
+      "id": "vanish-form",
+      "title": "Vanish Form",
+      "description": "An animated input field with rotating placeholders and a pixel-based vanish effect on submit.",
+      "category": "ui",
+      "status": "experimental",
+      "tags": [
+        "motion",
+        "canvas",
+        "react"
+      ],
+      "date": "2025-12-31",
+      "featured": false,
+      "new": true,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/vanish-form/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "motion",
+        "react"
+      ]
+    },
+    {
+      "id": "magnetic-button",
+      "title": "Magnetic Button",
+      "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation.",
+      "category": "ui",
+      "status": "experimental",
+      "tags": [
+        "gsap",
+        "animation",
+        "ui"
+      ],
+      "date": "2026-01-07",
+      "featured": false,
+      "new": true,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/magnetic-button/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "gsap",
+        "react"
+      ]
+    }
+  ]
+}

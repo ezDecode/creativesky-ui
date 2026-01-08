@@ -1,0 +1,40 @@
+{
+  "name": "project-alpha",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@heroui/react": "^2.8.2",
+    "@tailwindcss/vite": "^4.1.11",
+    "framer-motion": "^12.23.9",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-github-calendar": "^5.0.3",
+    "react-router-dom": "^7.11.0",
+    "tailwindcss": "^4.1.11",
+    "vivus": "^0.4.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@types/gsap": "^1.20.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.35.1",
+    "vite": "^7.0.4"
+  }
+}

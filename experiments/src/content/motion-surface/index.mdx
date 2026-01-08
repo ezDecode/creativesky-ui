@@ -1,0 +1,39 @@
+---
+name: "motion-surface"
+title: "Motion Surface"
+description: "A shared layout animation container for list items with smooth background transitions."
+category: "UI"
+version: "1.0.0"
+dependencies: ["framer-motion"]
+source: "src/content/motion-surface/index.mdx"
+---
+
+# Motion Surface
+
+A shared layout animation container for list items with smooth background transitions. Features smooth animated background transitions between items, hover support, active state management, and natural physics-based animations powered by Framer Motion.
+
+## Demo
+
+<ComponentPreview name="motion-surface" />
+
+## Usage
+
+<DemoCode name="motion-surface" title="Demo Implementation" />
+
+## Source Code
+
+<ComponentCode name="motion-surface" title="Full Component" />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | List items to wrap |
+| `activeIndex` | `number \| null` | `null` | Explicitly active item index |
+| `enableHover` | `boolean` | `true` | Enable hover-based activation |
+| `activeClassName` | `string` | `"bg-muted"` | Class for active state |
+| `hoverClassName` | `string` | `"bg-muted/60"` | Class for hover state |
+
+## Dependencies
+
+`framer-motion`

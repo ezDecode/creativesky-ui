@@ -1,0 +1,121 @@
+@import "./fonts.css";
+
+@import "tailwindcss";
+
+/* 
+  --- Editorial Layout System ---
+  1. Strict content vessel at 65% width on desktop
+  2. Responsive scaling for tablet and mobile
+  3. PP Mori with condensed feel via subtle horizontal scaling
+*/
+@layer base {
+  :root {
+    /* Fluid base font size using clamp for smooth scaling */
+    font-size: clamp(14px, 1.25vw, 16px);
+    --font-heading: 'Migra', sans-serif;
+    --font-body: 'Saans', sans-serif;
+    --font-ui: 'Saans', sans-serif;
+  }
+
+  body {
+    font-family: 'Saans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #000000;
+    color: #d4d4d8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Condensed typography feel - subtle horizontal scaling */
+  .typography-condensed {
+    transform: scaleX(0.98);
+    transform-origin: left center;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+*::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Custom scrollbar for heatmap container */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #404040 transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  display: block;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #404040;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #525252;
+}
+
+/* Momentum scrolling for mobile */
+.-webkit-overflow-scrolling-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* GitHub Calendar Responsive Scaling */
+.github-calendar-responsive {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.github-calendar-responsive > * {
+  max-width: 100%;
+  width: 100% !important;
+}
+
+.github-calendar-responsive svg {
+  max-width: 100%;
+  height: auto !important;
+  width: 100% !important;
+}
+
+/* Scale down on smaller screens */
+@media (max-width: 768px) {
+  .github-calendar-responsive {
+    transform: scale(0.85);
+    transform-origin: left top;
+  }
+}
+
+@media (max-width: 640px) {
+  .github-calendar-responsive {
+    transform: scale(0.7);
+    transform-origin: left top;
+  }
+}
+
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}

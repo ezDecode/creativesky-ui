@@ -1,0 +1,18 @@
+/* Migra Font */
+@font-face {
+  font-family: 'Migra';
+  src: url('/fonts/Migra/Migra-Extralight.woff2') format('woff2'),
+       url('/fonts/Migra/Migra-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Saans Font Family (Variable) */
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/Saans/SaansCollectionVF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
