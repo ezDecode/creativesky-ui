@@ -16,7 +16,7 @@ const ScrollRevealTextDemo: React.FC = () => {
     const boxesRef = useRef<(HTMLSpanElement | null)[]>([]);
 
     const phrase = "Your data is taken by companies and used to train the next wave of Al models and build the world's top products and services. Yet it often happens without any earnings being distributed back to you.It's time for a change. With Navigate you join a decentralized intelligence platform that puts the power back in your hands and rewards you for the data you contribute.";
-    const highlightWords = ["wave", "AI", "products"];
+    const highlightWords = ["companies", "models", "products", "services", "change", "Navigate", "decentralized", "intelligence", "platform", "power", "hands", "rewards", "contribute"];
     const primaryColor = "#ff6b00";
     const words = phrase.split(" ");
 
@@ -143,7 +143,7 @@ const ScrollRevealTextDemo: React.FC = () => {
                                                 height: '75%',
                                                 background: highlighted
                                                     ? `rgba(${rgb}, 0.15)`
-                                                    : 'rgba(255, 255, 255, 0.12)',
+                                                    : 'rgba(255, 255, 255, 0.78)',
                                                 backdropFilter: 'blur(6px)',
                                                 WebkitBackdropFilter: 'blur(6px)',
                                                 borderRadius: '999px',
