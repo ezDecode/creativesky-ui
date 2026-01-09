@@ -50,6 +50,7 @@ const demoImports = {
   "vanish-form": () => import("@/components/demos/vanish-form/VanishFormDemo"),
   "magnetic-button": () => import("@/components/demos/magnetic-button/MagneticButtonDemo"),
   "filter-chips": () => import("@/components/demos/filter-chips/FilterChipsDemo"),
+  "scroll-reveal-text": () => import("@/components/demos/scroll-reveal-text/ScrollRevealTextDemo"),
 } as const satisfies Record<string, () => Promise<{ default: ComponentType<Record<string, unknown>> }>>;
 
 type DemoId = keyof typeof demoImports;

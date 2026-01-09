@@ -1,0 +1,174 @@
+/* =====================================================
+   SCROLL REVEAL TEXT - Component Styles
+   ===================================================== */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: transparent;
+  color: var(--color-text, #fff);
+  overflow-x: hidden;
+  position: relative;
+
+  /* GPU acceleration for smooth pinning */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.pin {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  /* Ensure smooth compositing */
+  backface-visibility: hidden;
+}
+
+.content {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   TITLE
+   ===================================================== */
+
+.title {
+  font-family: inherit;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  letter-spacing: -0.04em;
+
+  /* Gradient text effect */
+  background: linear-gradient(to bottom, #fff 40%, #555);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =====================================================
+   BODY TEXT
+   ===================================================== */
+
+.body {
+  font-family: inherit;
+  font-size: clamp(1.2rem, 2.2vw, 2rem);
+  font-weight: 600;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.15em;
+}
+
+/* =====================================================
+   WORD CONTAINER
+   ===================================================== */
+
+.wordContainer {
+  position: relative;
+  display: inline-block;
+  /* Tight word spacing for natural text flow */
+  margin: 0 0.10em;
+  vertical-align: middle;
+}
+
+/* =====================================================
+   TEXT (Revealed Word)
+   ===================================================== */
+
+.text {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  white-space: nowrap;
+
+  /* Performance optimization */
+  will-change: opacity;
+
+  /* Smooth color transitions for highlight state changes */
+  transition: color 0.3s var(--ease-smooth, ease);
+}
+
+.text.highlighted {
+  color: var(--color-primary, #ff6b00);
+}
+
+/* =====================================================
+   BOX (Animated Pill)
+   ===================================================== */
+
+.box {
+  position: absolute;
+  z-index: 1;
+
+  /* Centering via translate */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Percentage-based sizing - tighter padding */
+  width: 102%;
+  height: 70%;
+
+  /* Glassmorphism style - no border */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+  /* Initial hidden state */
+  opacity: 0;
+
+  /* Performance optimization for animations */
+  will-change: opacity, transform, background-color;
+
+  /* Non-interactive */
+  pointer-events: none;
+}
+
+.box.primary {
+  background: rgba(255, 107, 0, 0.15);
+}
+
+/* =====================================================
+   RESPONSIVE ADJUSTMENTS
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .body {
+    line-height: 1.6;
+  }
+
+  .wordContainer {
+    margin: 0 0.04em;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION PREFERENCE
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    will-change: auto;
+    transform: none;
+  }
+
+  .box {
+    will-change: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .text {
+    will-change: auto;
+    opacity: 1;
+  }
+}

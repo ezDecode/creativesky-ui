@@ -33,10 +33,10 @@ export type MDXComponents = Record<string, ComponentType<any>>;
  * Enables deep-linking to sections in MDX content
  */
 function H1({ children, ...props }: any) {
-  const id = typeof children === 'string' 
+  const id = typeof children === 'string'
     ? children.toLowerCase().replace(/\s+/g, '-')
     : undefined;
-  
+
   return (
     <h1
       id={id}
@@ -49,10 +49,10 @@ function H1({ children, ...props }: any) {
 }
 
 function H2({ children, ...props }: any) {
-  const id = typeof children === 'string' 
+  const id = typeof children === 'string'
     ? children.toLowerCase().replace(/\s+/g, '-')
     : undefined;
-  
+
   return (
     <h2
       id={id}
@@ -68,7 +68,7 @@ function H3({ children, ...props }: any) {
   const id = typeof children === 'string'
     ? children.toLowerCase().replace(/\s+/g, '-')
     : undefined;
-  
+
   return (
     <h3
       id={id}
@@ -191,7 +191,7 @@ function Pre({ children, ...props }: any) {
   // Extract code and language from children
   const code = children?.props?.children;
   const language = children?.props?.className?.replace('language-', '') || 'text';
-  
+
   if (typeof code === 'string') {
     return (
       <div className="my-6">
@@ -199,7 +199,7 @@ function Pre({ children, ...props }: any) {
       </div>
     );
   }
-  
+
   // Fallback for complex children
   return (
     <pre className="my-4 p-4 rounded-lg bg-muted overflow-x-auto" {...props}>
@@ -216,7 +216,7 @@ function Code({ children, className, ...props }: any) {
   if (className?.includes('language-')) {
     return <code className={className} {...props}>{children}</code>;
   }
-  
+
   return (
     <code
       className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono border border-border"
@@ -297,7 +297,7 @@ export function getMDXComponents(): MDXComponents {
     ComponentPreview: ComponentPreviewWrapper,
     DemoCode: DemoCodeWrapper,
     ComponentCode: ComponentCodeWrapper,
-    
+
     // Enhanced HTML elements
     h1: H1,
     h2: H2,

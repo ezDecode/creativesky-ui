@@ -163,6 +163,39 @@
       "dependencies": [
         "framer-motion"
       ]
+    },
+    {
+      "id": "scroll-reveal-text",
+      "title": "Scroll Reveal Text",
+      "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
+      "category": "ui",
+      "status": "stable",
+      "tags": [
+        "gsap",
+        "scroll",
+        "animation",
+        "text"
+      ],
+      "date": "2026-01-09",
+      "featured": false,
+      "new": true,
+      "source": {
+        "type": "mdx",
+        "path": "src/content/scroll-reveal-text/index.mdx"
+      },
+      "demo": {
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {}
+      },
+      "design": {
+        "surface": "flat",
+        "motion": "spring"
+      },
+      "dependencies": [
+        "gsap"
+      ]
     }
   ]
 }

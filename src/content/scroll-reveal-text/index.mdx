@@ -1,0 +1,39 @@
+---
+name: "scroll-reveal-text"
+title: "Scroll Reveal Text"
+description: "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve to reveal text."
+category: "UI"
+version: "2.1.0"
+dependencies: ["gsap"]
+source: "src/content/scroll-reveal-text/index.mdx"
+---
+
+# Scroll Reveal Text
+
+A production-ready, scroll-locked text reveal animation component built with GSAP ScrollTrigger. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath. Features ultra-smooth scrolling, dynamic word highlighting, and respects accessibility preferences.
+
+## Demo
+
+<ComponentPreview name="scroll-reveal-text" />
+
+## Usage
+
+<DemoCode name="scroll-reveal-text" title="Demo Implementation" />
+
+## Source Code
+
+<ComponentCode name="scroll-reveal-text" title="Full Component" />
+
+## For CSS: 
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `phrase` | `string` | `""` | The text content to be revealed word by word |
+| `highlightWords` | `string[]` | `[]` | Array of words to highlight with accent color |
+| `title` | `string` | `""` | Optional heading displayed above the text |
+| `primaryColor` | `string` | `"#ff6b00"` | Hex color for highlighted words and glow |
+
+## Dependencies
+
+`gsap`
