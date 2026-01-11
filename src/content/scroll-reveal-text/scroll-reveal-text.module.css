@@ -1,18 +1,15 @@
 /* =====================================================
-   SCROLL REVEAL TEXT - Component Styles
+   SCROLL REVEAL TEXT - Component Styles (Mobile-First)
    ===================================================== */
 
 .container {
   width: 100%;
-  min-height: 100vh;
-  background-color: transparent;
+  max-width: 100vw;
+  background-color: var(--color-bg, #0d0d0d);
   color: var(--color-text, #fff);
-  overflow-x: hidden;
   position: relative;
-
-  /* GPU acceleration for smooth pinning */
-  will-change: transform;
-  transform: translateZ(0);
+  isolation: isolate;
+  /* NOTE: Do NOT add overflow-x: hidden here - it breaks position: sticky */
 }
 
 .pin {
@@ -23,75 +20,73 @@
   justify-content: center;
   position: relative;
   z-index: 1;
-
-  /* Ensure smooth compositing */
   backface-visibility: hidden;
+  background-color: var(--color-bg, #0d0d0d);
+}
+
+/* Framer Motion uses CSS sticky positioning instead of JS-based pinning */
+.pinFramer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  backface-visibility: hidden;
+  background-color: var(--color-bg, #0d0d0d);
 }
 
 .content {
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0 1rem;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 
-/* =====================================================
-   TITLE
-   ===================================================== */
-
 .title {
-  font-family: inherit;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: clamp(1.5rem, 8vw, 2.25rem);
   font-weight: 700;
-  margin-bottom: 2rem;
-  letter-spacing: -0.04em;
-
-  /* Gradient text effect */
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   background: linear-gradient(to bottom, #fff 40%, #555);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* =====================================================
-   BODY TEXT
-   ===================================================== */
-
 .body {
-  font-family: inherit;
-  font-size: clamp(1.2rem, 2.2vw, 2rem);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(1.08rem, 4.8vw, 1.32rem);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.75;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 0.15em;
+  row-gap: 0.3em;
+  max-width: 100%;
+  /* Ensure consistent word spacing on mobile */
+  word-spacing: 0.06em;
 }
-
-/* =====================================================
-   WORD CONTAINER
-   ===================================================== */
 
 .wordContainer {
   position: relative;
   display: inline-block;
-  /* Tight word spacing for natural text flow */
-  margin: 0 0.10em;
+  /* Mobile: proper spacing between words (0.12em * 2 = 0.24em effective spacing) */
+  margin: 0 0.12em;
   vertical-align: middle;
 }
-
-/* =====================================================
-   TEXT (Revealed Word)
-   ===================================================== */
 
 .text {
   position: relative;
   z-index: 2;
   opacity: 0;
   white-space: nowrap;
-
-  /* Performance optimization */
   will-change: opacity;
-
-  /* Smooth color transitions for highlight state changes */
   transition: color 0.3s var(--ease-smooth, ease);
 }
 
@@ -99,62 +94,156 @@
   color: var(--color-primary, #ff6b00);
 }
 
-/* =====================================================
-   BOX (Animated Pill)
-   ===================================================== */
-
 .box {
   position: absolute;
   z-index: 1;
-
-  /* Centering via translate */
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
-  /* Percentage-based sizing - tighter padding */
-  width: 102%;
+  width: 101%;
   height: 70%;
-
-  /* Glassmorphism style - no border */
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
-  /* Initial hidden state */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   opacity: 0;
-
-  /* Performance optimization for animations */
   will-change: opacity, transform, background-color;
-
-  /* Non-interactive */
   pointer-events: none;
 }
 
 .box.primary {
   background: rgba(255, 107, 0, 0.15);
+  border-color: rgba(255, 107, 0, 0.25);
 }
 
-/* =====================================================
-   RESPONSIVE ADJUSTMENTS
-   ===================================================== */
+/* Tablet 640px+ */
+@media (min-width: 640px) {
+  .content {
+    width: 95%;
+    max-width: 480px;
+    padding: 0 1.5rem;
+  }
 
-@media (max-width: 768px) {
+  .title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+
   .body {
+    font-size: clamp(1.2rem, 3vw, 1.62rem);
     line-height: 1.6;
+    row-gap: 0.25em;
+    word-spacing: 0.04em;
   }
 
   .wordContainer {
-    margin: 0 0.04em;
+    margin: 0 0.1em;
+  }
+
+  .box {
+    width: 102%;
+    height: 72%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 }
 
-/* =====================================================
-   REDUCED MOTION PREFERENCE
-   ===================================================== */
+/* Small Desktop 768px+ */
+@media (min-width: 768px) {
+  .content {
+    width: 92%;
+    max-width: 600px;
+    padding: 0 2rem;
+  }
 
+  .title {
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.04em;
+  }
+
+  .body {
+    font-size: clamp(1.32rem, 2.76vw, 1.92rem);
+    line-height: 1.5;
+    row-gap: 0.22em;
+    word-spacing: 0.025em;
+  }
+
+  .wordContainer {
+    margin: 0 0.1em;
+  }
+
+  .box {
+    width: 103%;
+    height: 74%;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Desktop 1024px+ */
+@media (min-width: 1024px) {
+  .content {
+    width: 90%;
+    max-width: 680px;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    margin-bottom: 2rem;
+  }
+
+  .body {
+    font-size: clamp(1.44rem, 2.64vw, 2.22rem);
+    line-height: 1.42;
+    row-gap: 0.18em;
+  }
+
+  .wordContainer {
+    margin: 0 0.1em;
+  }
+}
+
+/* Large Desktop 1280px+ */
+@media (min-width: 1280px) {
+  .content {
+    max-width: 720px;
+  }
+
+  .title {
+    font-size: clamp(3rem, 4.5vw, 5rem);
+  }
+
+  .body {
+    font-size: clamp(1.62rem, 2.4vw, 2.4rem);
+    line-height: 1.38;
+  }
+}
+
+/* Landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .pin,
+  .pinFramer {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .body {
+    font-size: clamp(1.02rem, 2.4vw, 1.32rem);
+    line-height: 1.5;
+  }
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .container {
     will-change: auto;
@@ -170,5 +259,21 @@
   .text {
     will-change: auto;
     opacity: 1;
+  }
+}
+
+/* High Contrast */
+@media (prefers-contrast: high) {
+  .box {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .box.primary {
+    border-color: rgba(255, 107, 0, 0.5);
+  }
+
+  .text.highlighted {
+    text-decoration: underline;
   }
 }

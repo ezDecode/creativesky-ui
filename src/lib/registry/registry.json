@@ -166,17 +166,18 @@
     },
     {
       "id": "scroll-reveal-text",
-      "title": "Scroll Reveal Text",
+      "title": "NVG8 Text",
       "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
-      "category": "ui",
+      "category": "animation",
       "status": "stable",
       "tags": [
         "gsap",
+        "framer-motion",
         "scroll",
         "animation",
         "text"
       ],
-      "date": "2026-01-09",
+      "date": "2026-01-11",
       "featured": false,
       "new": true,
       "source": {
@@ -184,17 +185,19 @@
         "path": "src/content/scroll-reveal-text/index.mdx"
       },
       "demo": {
+        "external": "https://text-box-scroll.vercel.app/",
         "variants": [
-          "default"
-        ],
-        "defaultProps": {}
+          "gsap",
+          "framer"
+        ]
       },
       "design": {
-        "surface": "flat",
-        "motion": "spring"
+        "surface": "glassmorphic",
+        "motion": "scroll-locked"
       },
       "dependencies": [
-        "gsap"
+        "gsap",
+        "framer-motion"
       ]
     }
   ]

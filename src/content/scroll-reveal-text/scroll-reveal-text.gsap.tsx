@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
@@ -6,115 +6,125 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./scroll-reveal-text.module.css";
 
 // ===========================================================================
-// UTILITY FUNCTIONS
+// TYPES
+// ===========================================================================
+
+export interface ScrollRevealTextProps {
+    /** The text content to be revealed word by word (required) */
+    phrase: string;
+    /** Optional heading displayed above the text */
+    title?: string;
+    /** Words to highlight with primary color and glow */
+    highlightWords?: string[];
+    /** Hex color for highlighted words (e.g., "#ff6b00") */
+    primaryColor?: string;
+    /** Animation configuration overrides */
+    config?: AnimationConfig;
+}
+
+export interface AnimationConfig {
+    /** How many words ahead show animated boxes */
+    leadCount?: number;
+    /** Scroll distance per word in pixels */
+    scrollDistance?: number;
+    /** GSAP scrub smoothness (higher = smoother) */
+    scrubSmooth?: number;
+}
+
+// ===========================================================================
+// CONFIGURATION (Inlined)
+// ===========================================================================
+
+const ANIMATION_CONFIG = {
+    leadCount: { desktop: 8, mobile: 5 },
+    scrollDistance: { desktop: 150, mobile: 100 },
+    paddingDuration: 2,
+    scrub: { smoothTouch: 0.5, smooth: 2.5 },
+    phases: {
+        emergence: { duration: 1.0, ease: "power1.out" },
+        focus: { duration: 3.0, ease: "sine.inOut", focusOffset: 0.4 },
+        reveal: { boxDuration: 1.6, textDuration: 2.0, textDelay: 0.02, ease: "power1.inOut" }
+    }
+} as const;
+
+// ===========================================================================
+// UTILITIES (Inlined)
 // ===========================================================================
 
 /**
  * Converts hex color to RGB string for use in rgba()
- * @param {string} hex - Hex color code (e.g., "#ff6b00")
- * @returns {string} RGB values as comma-separated string
  */
-function hexToRgb(hex: string): string {
+const hexToRgb = (hex: string): string => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!result) return "255, 107, 0";
-
     return [
         parseInt(result[1], 16),
         parseInt(result[2], 16),
         parseInt(result[3], 16)
     ].join(", ");
-}
-
-// ===========================================================================
-// ANIMATION CONFIGURATION
-// ===========================================================================
-
-const ANIMATION_CONFIG = {
-    // Lead words count (how many boxes visible ahead of the revealing word)
-    leadCount: {
-        desktop: 7,
-        mobile: 5
-    },
-
-    // Scroll distance per word (higher = slower/smoother pacing)
-    scrollDistance: {
-        desktop: 150,
-        mobile: 100
-    },
-
-    // Buffer time at animation start/end
-    paddingDuration: 2,
-
-    // Scrub configuration for ultra-smooth scrolling
-    scrub: {
-        smoothTouch: 0.2,
-        smooth: 1.5
-    },
-
-    // Animation phases timing
-    phases: {
-        emergence: {
-            duration: 1.0,
-            ease: "power1.out"
-        },
-        focus: {
-            duration: 3.0,
-            ease: "sine.inOut",
-            focusOffset: 0.4
-        },
-        reveal: {
-            boxDuration: 1.6,
-            textDuration: 2.0,
-            textDelay: 0.02,
-            ease: "power1.inOut"
-        }
-    }
 };
 
-// ===========================================================================
-// COMPONENT TYPES
-// ===========================================================================
-
-interface ScrollRevealTextProps {
-    /** The text content to be revealed word by word */
-    phrase?: string;
-    /** Array of words to highlight with accent color */
-    highlightWords?: string[];
-    /** Optional heading displayed above the text */
-    title?: string;
-    /** Hex color for highlighted words and glow */
-    primaryColor?: string;
-}
+/**
+ * Checks if a word should be highlighted (case-insensitive, handles punctuation)
+ */
+const isWordHighlighted = (word: string, highlightWords: string[]): boolean => {
+    if (!highlightWords?.length) return false;
+    return highlightWords.some(hw =>
+        word.toLowerCase().includes(hw.toLowerCase())
+    );
+};
 
 // ===========================================================================
 // COMPONENT
 // ===========================================================================
 
 /**
- * ScrollRevealText Component
+ * ScrollRevealText Component (GSAP Implementation)
  * 
- * A scroll-locked text reveal animation component. Words are hidden behind
- * animated pill-shaped boxes that fade in, glow, then dissolve to reveal text.
+ * A scroll-locked text reveal animation powered by GSAP ScrollTrigger.
+ * Words are hidden behind animated glassmorphic pill overlays that emerge,
+ * glow, then dissolve to reveal the text underneath.
+ * 
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <ScrollRevealTextGSAP phrase="Your text here" />
+ * 
+ * // With highlights
+ * <ScrollRevealTextGSAP 
+ *   phrase="Highlight these important words"
+ *   highlightWords={["important", "words"]}
+ *   primaryColor="#00ff88"
+ * />
+ * ```
  */
-const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
+export function ScrollRevealTextGSAP({
     phrase = "",
     highlightWords = [],
     title = "",
-    primaryColor = "#ff6b00"
-}) => {
+    primaryColor = "#ff6b00",
+    config = {}
+}: ScrollRevealTextProps) {
     const outerRef = useRef<HTMLDivElement>(null);
     const pinRef = useRef<HTMLDivElement>(null);
 
     // Memoized animation setup function
     const setupAnimations = useCallback((isMobile: boolean) => {
-        const config = ANIMATION_CONFIG;
-        const LEAD_COUNT = isMobile ? config.leadCount.mobile : config.leadCount.desktop;
-        const SCROLL_DISTANCE = isMobile ? config.scrollDistance.mobile : config.scrollDistance.desktop;
-        const PADDING_DURATION = config.paddingDuration;
+        const LEAD_COUNT = config.leadCount ?? (isMobile
+            ? ANIMATION_CONFIG.leadCount.mobile
+            : ANIMATION_CONFIG.leadCount.desktop);
+        const SCROLL_DISTANCE = config.scrollDistance ?? (isMobile
+            ? ANIMATION_CONFIG.scrollDistance.mobile
+            : ANIMATION_CONFIG.scrollDistance.desktop);
+        const PADDING_DURATION = ANIMATION_CONFIG.paddingDuration;
+        const SCRUB_SMOOTH = config.scrubSmooth ?? ANIMATION_CONFIG.scrub.smooth;
+        const { phases } = ANIMATION_CONFIG;
+
+        if (!pinRef.current) return;
 
         const wordContainers = Array.from(
-            pinRef.current!.querySelectorAll(`.${styles.wordContainer}`)
-        );
+            pinRef.current.querySelectorAll(`.${styles.wordContainer}`)
+        ) as HTMLElement[];
 
         // Calculate total scroll distance with padding
         const totalScrollDistance = (wordContainers.length + LEAD_COUNT) * SCROLL_DISTANCE;
@@ -127,7 +137,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 end: `+=${totalScrollDistance}`,
                 pin: true,
                 pinSpacing: true,
-                scrub: isMobile ? 0.5 : 1.5,
+                scrub: SCRUB_SMOOTH,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
             }
@@ -141,13 +151,13 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             const box = container.querySelector(`.${styles.box}`) as HTMLElement;
             const text = container.querySelector(`.${styles.text}`) as HTMLElement;
 
+            if (!box || !text) return;
+
             // Check if this word should be highlighted
-            const isHighlighted = highlightWords.some(hw =>
-                text.textContent?.toLowerCase().includes(hw.toLowerCase())
-            );
+            const highlighted = isWordHighlighted(text.textContent || '', highlightWords);
 
             // Apply highlight styling
-            if (isHighlighted) {
+            if (highlighted) {
                 text.classList.add(styles.highlighted);
                 box.classList.add(styles.primary);
                 if (primaryColor !== "#ff6b00") {
@@ -161,13 +171,10 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
                 scale: 0.95,
                 transformOrigin: "center center"
             });
-            gsap.set(text, {
-                opacity: 0
-            });
+            gsap.set(text, { opacity: 0 });
 
             // Timeline position with padding offset
             const baseTime = PADDING_DURATION + index;
-            const { phases } = config;
 
             // Phase 1: Gentle Emergence (box fades in subtly)
             tl.to(box, {
@@ -184,10 +191,10 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             tl.to(box, {
                 opacity: 1,
                 scale: 1,
-                backgroundColor: isHighlighted
+                backgroundColor: highlighted
                     ? `rgba(${rgb}, 0.55)`
                     : "rgba(255, 255, 255, 0.45)",
-                boxShadow: isHighlighted
+                boxShadow: highlighted
                     ? `0 0 50px rgba(${rgb}, 0.5)`
                     : "0 0 50px rgba(255, 255, 255, 0.2)",
                 duration: phases.focus.duration,
@@ -218,7 +225,7 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
         tl.to({}, { duration: PADDING_DURATION });
 
         return tl;
-    }, [highlightWords, primaryColor]);
+    }, [highlightWords, primaryColor, config]);
 
     // Setup animations on mount
     useEffect(() => {
@@ -238,7 +245,17 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
         });
 
         // Cleanup on unmount
-        return () => mm.revert();
+        return () => {
+            mm.revert();
+            ScrollTrigger.getAll().forEach(trigger => {
+                if (trigger.trigger === outerRef.current) {
+                    trigger.kill(true);
+                }
+            });
+            if (pinRef.current) {
+                gsap.killTweensOf(pinRef.current.querySelectorAll('*'));
+            }
+        };
     }, [phrase, setupAnimations]);
 
     // Split phrase into words
@@ -262,6 +279,6 @@ const ScrollRevealText: React.FC<ScrollRevealTextProps> = ({
             </div>
         </div>
     );
-};
+}
 
-export default ScrollRevealText;
+export default ScrollRevealTextGSAP;

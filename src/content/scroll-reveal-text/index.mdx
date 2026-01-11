@@ -1,42 +1,139 @@
 ---
 name: "scroll-reveal-text"
 title: "Scroll Reveal Text"
-description: "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve to reveal text."
-category: "UI"
-version: "2.1.0"
-dependencies: ["gsap"]
-source: "src/content/scroll-reveal-text/index.mdx"
+description: "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve."
+category: "Animation"
+version: "2.2.0"
+dependencies: ["gsap", "framer-motion"]
 ---
 
 # Scroll Reveal Text
 
-A production-ready, scroll-locked text reveal animation component built with GSAP ScrollTrigger. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath. Features ultra-smooth scrolling, dynamic word highlighting, and respects accessibility preferences.
+A production-ready, scroll-locked text reveal animation with **dual engine support**. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath.
 
-## Demo
+> **Best experienced on desktop.** This component uses scroll-locking animations optimized for larger screens.
 
-<ComponentPreview name="scroll-reveal-text" />
+**[Open Live Demo →](https://text-box-scroll.vercel.app/)**
+
+---
+
+## Installation
+
+```bash
+npm install gsap framer-motion
+```
+
+Copy the component files to your project. You'll need `scroll-reveal-text.gsap.tsx` or `scroll-reveal-text.framer.tsx` along with `scroll-reveal-text.module.css`.
+
+---
 
 ## Usage
 
-<DemoCode name="scroll-reveal-text" title="Demo Implementation" />
+### GSAP Version (Recommended)
 
-## Source Code
+```tsx
+import { ScrollRevealTextGSAP } from '@/content/scroll-reveal-text/scroll-reveal-text.gsap';
 
-<ComponentCode name="scroll-reveal-text" title="Full Component" />
+export default function Hero() {
+  return (
+    <ScrollRevealTextGSAP
+      phrase="Your text content here. Each word reveals sequentially."
+      title="Welcome"
+      highlightWords={["text", "reveals"]}
+      primaryColor="#ff6b00"
+    />
+  );
+}
+```
 
-## For CSS
-[`scroll-reveal-text.module.css`](https://github.com/ezDecode/creativesky-ui/blob/main/src/content/scroll-reveal-text/scroll-reveal-text.module.css)
+### Framer Motion Version
 
+```tsx
+import { ScrollRevealTextFramer } from '@/content/scroll-reveal-text/scroll-reveal-text.framer';
+
+export default function Hero() {
+  return (
+    <ScrollRevealTextFramer
+      phrase="Spring-based animations with smooth scroll dampening."
+      highlightWords={["Spring", "smooth"]}
+      primaryColor="#6366f1"
+    />
+  );
+}
+```
+
+---
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `phrase` | `string` | `""` | The text content to be revealed word by word |
-| `highlightWords` | `string[]` | `[]` | Array of words to highlight with accent color |
-| `title` | `string` | `""` | Optional heading displayed above the text |
-| `primaryColor` | `string` | `"#ff6b00"` | Hex color for highlighted words and glow |
+**`phrase`** `string` — The text content to be revealed word by word.
 
-## Dependencies
+**`title`** `string` — Optional heading displayed above the text with gradient styling.
 
-`gsap`
+**`highlightWords`** `string[]` — Words to highlight with the accent color. Case-insensitive matching.
+
+**`primaryColor`** `string` — Hex color for highlighted words and glows. Default: `#ff6b00`
+
+**`config`** `object` — Override animation parameters. For GSAP: `leadCount`, `scrollDistance`, `scrubSmooth`. For Framer: `leadCount`, `scrollDistance`, `springStiffness`, `springDamping`.
+
+---
+
+## Config Examples
+
+```tsx
+// GSAP - slower, cinematic feel
+<ScrollRevealTextGSAP
+  phrase="Your text here"
+  config={{ leadCount: 10, scrollDistance: 200, scrubSmooth: 3.5 }}
+/>
+
+// Framer - bouncier spring
+<ScrollRevealTextFramer
+  phrase="Your text here"
+  config={{ springStiffness: 150, springDamping: 20 }}
+/>
+```
+
+---
+
+## Animation Phases
+
+**Emergence** — Box fades in at 25% opacity with slight scale.
+
+**Focus** — Box reaches full opacity with glow effect.
+
+**Reveal** — Box dissolves with blur while text fades in.
+
+**Complete** — Text visible, box invisible.
+
+---
+
+## Styling
+
+Override CSS custom properties in your root:
+
+```css
+:root {
+  --color-bg: #0d0d0d;
+  --color-text: #ffffff;
+  --color-primary: #ff6b00;
+}
+```
+
+The component is mobile-first with breakpoints at 640px, 768px, 1024px, and 1280px.
+
+---
+
+## Accessibility
+
+The component respects `prefers-reduced-motion` by disabling animations. It respects `prefers-contrast: high` with enhanced borders. Decorative boxes use `aria-hidden="true"`.
+
+---
+
+## Troubleshooting
+
+**Scroll not working?** Ensure parent containers don't have `overflow: hidden` — this breaks scroll detection.
+
+**Animation choppy?** Increase `scrubSmooth` for GSAP or `springDamping` for Framer to get smoother motion.
+
+**Text not highlighting?** Ensure words in `highlightWords` match the content. Matching is case-insensitive and uses `includes()`.
