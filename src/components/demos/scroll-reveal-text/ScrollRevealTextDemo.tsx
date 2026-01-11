@@ -41,11 +41,11 @@ const ScrollRevealTextDemo: React.FC = () => {
                     </div>
 
                     <p className="text-sm text-white/60">
-                        Scroll-locked text reveal with glassmorphic pills. Supports GSAP and Framer Motion.
+                        Scroll-locked text reveal with glassmorphic pills powered by Framer Motion.
                     </p>
 
                     <div className="flex flex-wrap gap-2">
-                        {["GSAP", "Framer Motion", "Scroll-Locked"].map((tag) => (
+                        {["Framer Motion", "Scroll-Locked", "Spring Physics"].map((tag) => (
                             <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-white/50">{tag}</span>
                         ))}
                     </div>

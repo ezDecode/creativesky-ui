@@ -3,13 +3,13 @@ name: "scroll-reveal-text"
 title: "Scroll Reveal Text"
 description: "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve."
 category: "Animation"
-version: "2.2.0"
-dependencies: ["gsap", "framer-motion"]
+version: "3.0.0"
+dependencies: ["framer-motion"]
 ---
 
 # Scroll Reveal Text
 
-A production-ready, scroll-locked text reveal animation with **dual engine support**. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath.
+A production-ready, scroll-locked text reveal animation. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath.
 
 > **Best experienced on desktop.** This component uses scroll-locking animations optimized for larger screens.
 
@@ -20,40 +20,21 @@ A production-ready, scroll-locked text reveal animation with **dual engine suppo
 ## Installation
 
 ```bash
-npm install gsap framer-motion
+npm install framer-motion
 ```
 
-Copy the component files to your project. You'll need `scroll-reveal-text.gsap.tsx` or `scroll-reveal-text.framer.tsx` along with `scroll-reveal-text.module.css`.
+Copy `scroll-reveal-text.framer.tsx` and `scroll-reveal-text.module.css` to your project.
 
 ---
 
 ## Usage
 
-### GSAP Version (Recommended)
-
 ```tsx
-import { ScrollRevealTextGSAP } from '@/content/scroll-reveal-text/scroll-reveal-text.gsap';
+import { ScrollRevealText } from '@/components/scroll-reveal-text';
 
 export default function Hero() {
   return (
-    <ScrollRevealTextGSAP
-      phrase="Your text content here. Each word reveals sequentially."
-      title="Welcome"
-      highlightWords={["text", "reveals"]}
-      primaryColor="#ff6b00"
-    />
-  );
-}
-```
-
-### Framer Motion Version
-
-```tsx
-import { ScrollRevealTextFramer } from '@/content/scroll-reveal-text/scroll-reveal-text.framer';
-
-export default function Hero() {
-  return (
-    <ScrollRevealTextFramer
+    <ScrollRevealText
       phrase="Spring-based animations with smooth scroll dampening."
       highlightWords={["Spring", "smooth"]}
       primaryColor="#6366f1"
@@ -74,23 +55,23 @@ export default function Hero() {
 
 **`primaryColor`** `string` — Hex color for highlighted words and glows. Default: `#ff6b00`
 
-**`config`** `object` — Override animation parameters. For GSAP: `leadCount`, `scrollDistance`, `scrubSmooth`. For Framer: `leadCount`, `scrollDistance`, `springStiffness`, `springDamping`.
+**`config`** `object` — Override animation parameters: `leadCount`, `scrollDistance`, `springStiffness`, `springDamping`.
 
 ---
 
 ## Config Examples
 
 ```tsx
-// GSAP - slower, cinematic feel
-<ScrollRevealTextGSAP
-  phrase="Your text here"
-  config={{ leadCount: 10, scrollDistance: 200, scrubSmooth: 3.5 }}
-/>
-
-// Framer - bouncier spring
-<ScrollRevealTextFramer
+// Bouncier spring animation
+<ScrollRevealText
   phrase="Your text here"
   config={{ springStiffness: 150, springDamping: 20 }}
+/>
+
+// Slower, cinematic feel
+<ScrollRevealText
+  phrase="Your text here"
+  config={{ leadCount: 10, scrollDistance: 200 }}
 />
 ```
 
@@ -134,6 +115,6 @@ The component respects `prefers-reduced-motion` by disabling animations. It resp
 
 **Scroll not working?** Ensure parent containers don't have `overflow: hidden` — this breaks scroll detection.
 
-**Animation choppy?** Increase `scrubSmooth` for GSAP or `springDamping` for Framer to get smoother motion.
+**Animation choppy?** Increase `springDamping` for smoother motion.
 
 **Text not highlighting?** Ensure words in `highlightWords` match the content. Matching is case-insensitive and uses `includes()`.
