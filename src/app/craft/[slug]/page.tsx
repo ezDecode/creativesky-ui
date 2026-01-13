@@ -31,10 +31,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-      <div className="w-full border-t border-white/5">
+      <div className="w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-4rem)]">
           {/* Left Column: Content */}
-          <div className="px-6 py-6 lg:py-10 lg:px-16 border-r border-white/5">
+          <div className="px-6 py-6 lg:py-10 lg:px-16">
             {/* Breadcrumbs */}
             <nav className="sticky top-0 z-20 flex items-center gap-2 text-sm text-muted-foreground mb-12 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4">
               <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
