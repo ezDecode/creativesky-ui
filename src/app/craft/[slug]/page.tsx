@@ -48,7 +48,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 
                 {/* Overlay details */}
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-md border border-border/40 text-[10px] font-bold uppercase tracking-widest text-muted-foreground shadow-sm">
+                  <div className="px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-md border border-border/40 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground shadow-sm">
                     Interactive Specimen
                   </div>
                 </div>
@@ -71,13 +71,13 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                   }
                 />
                 
-                <nav className="hidden sm:flex items-center gap-3 text-sm text-muted-foreground">
-                  <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-                  <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 opacity-40" />
-                  <span className="text-foreground font-medium truncate max-w-[200px]">
-                    {displayTitle}
-                  </span>
-                </nav>
+                  <nav className="hidden sm:flex items-center gap-3 text-sm text-muted-foreground">
+                    <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+                    <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 opacity-40" />
+                    <span className="text-foreground font-semibold truncate max-w-[200px]">
+                      {displayTitle}
+                    </span>
+                  </nav>
               </div>
 
               <Link 
@@ -90,29 +90,29 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
             {/* Documentation Section */}
             <div className="flex-1 max-w-2xl">
-              <div className="mb-12 space-y-4">
-                <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">
-                  {displayTitle}
-                </h1>
-                <p className="text-lg text-muted-foreground/80 font-light leading-relaxed">
-                  Exploring the principles of {displayTitle.toLowerCase()} through high-end interaction and motion design.
-                </p>
-              </div>
+                <div className="mb-12 space-y-4">
+                  <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">
+                    {displayTitle}
+                  </h1>
+                  <p className="text-lg text-muted-foreground/80 font-normal leading-relaxed">
+                    Exploring the principles of {displayTitle.toLowerCase()} through high-end interaction and motion design.
+                  </p>
+                </div>
 
               <article className="prose prose-zinc dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground/90 prose-p:leading-relaxed prose-pre:bg-zinc-900/80 prose-pre:backdrop-blur-md prose-pre:border prose-pre:border-border/10 prose-h2:text-3xl prose-h2:mt-20 prose-h2:mb-8 prose-h3:text-xl prose-h3:mt-12 prose-p:my-6 prose-pre:my-10 prose-li:text-muted-foreground/90">
                 {mdxContent ? (
                   <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
                 ) : (
-                  <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-border/10 rounded-3xl">
-                    <Icon icon="lucide:file-text" className="w-10 h-10 text-muted-foreground/20 mb-4" />
-                    <p className="text-muted-foreground/60 font-light">Laboratory notes for this specimen are still being compiled.</p>
-                  </div>
+                    <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-border/10 rounded-3xl">
+                      <Icon icon="lucide:file-text" className="w-10 h-10 text-muted-foreground/20 mb-4" />
+                      <p className="text-muted-foreground/60 font-normal">Laboratory notes for this specimen are still being compiled.</p>
+                    </div>
                 )}
               </article>
             </div>
 
             {/* Footer */}
-            <footer className="mt-20 pt-10 border-t border-border/10 text-sm text-muted-foreground/50 font-light">
+            <footer className="mt-20 pt-10 border-t border-border/10 text-sm text-muted-foreground/50 font-normal">
               <p>© 2026 Creative Sky • Refined UI Laboratory</p>
             </footer>
           </div>

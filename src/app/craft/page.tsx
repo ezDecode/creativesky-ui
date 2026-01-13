@@ -69,7 +69,7 @@ export default function CraftPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-              className="text-lg sm:text-xl text-muted-foreground/90 leading-relaxed max-w-2xl font-light"
+              className="text-lg sm:text-xl text-muted-foreground/90 leading-relaxed max-w-2xl font-normal"
             >
               A minimalist laboratory for exploring refined UI components and experiments.
               Each piece is crafted with a focus on motion, aesthetics, and high-end
@@ -96,7 +96,7 @@ export default function CraftPage() {
                 
                 <div className="flex flex-col gap-6 relative z-10 h-full">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-muted-foreground/50 uppercase tracking-[0.2em] bg-muted/30 px-2.5 py-1 rounded-full border border-border/10">
+                    <span className="text-[10px] font-semibold text-muted-foreground/50 uppercase tracking-[0.2em] bg-muted/30 px-2.5 py-1 rounded-full border border-border/10">
                       Experimental
                     </span>
                     <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -110,7 +110,7 @@ export default function CraftPage() {
                     </h3>
 
                     {component.description && (
-                      <p className="text-muted-foreground/70 leading-relaxed font-light line-clamp-3 text-base">
+                      <p className="text-muted-foreground/70 leading-relaxed font-normal line-clamp-3 text-base">
                         {component.description}
                       </p>
                     )}

@@ -150,7 +150,7 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                     </motion.div>
 
                                     <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="px-3 pt-3 pb-1">
-                                        <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40">Components</span>
+                                        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/40">Components</span>
                                     </motion.div>
 
                                     {sortedComponents.map((component) => {
