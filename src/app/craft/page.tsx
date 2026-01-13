@@ -43,16 +43,16 @@ export default function CraftPage() {
       </header>
 
       {/* Component List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border/10">
+      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border/25">
         {components.map((component, index) => (
           <Link
             key={component.id}
             href={`/craft/${component.id}`}
-            className="group relative flex flex-col gap-4 p-8 border-b border-r border-border/10 hover:bg-muted/5 transition-all duration-300 outline-none"
+            className="group relative flex flex-col gap-4 p-5 border-b border-r border-border/25 outline-none"
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="flex flex-col gap-1.5 relative z-10">
-              <h3 className="text-[17px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
+              <h3 className="text-[17px] font-medium text-foreground tracking-tight">
                 {component.title}
               </h3>
             </div>
