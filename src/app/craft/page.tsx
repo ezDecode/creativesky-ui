@@ -15,9 +15,9 @@ export default function CraftPage() {
           <div className="flex items-center gap-4">
             <Link 
               href="/" 
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group outline-none"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground transition-all duration-300 outline-none"
             >
-              <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+              <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5" />
             </Link>
             <CraftNavDrawer 
               components={components} 
