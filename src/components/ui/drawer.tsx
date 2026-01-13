@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 const Drawer = ({
     shouldScaleBackground = true,
+    direction = "bottom",
     ...props
 }: React.ComponentProps<typeof VaulDrawer.Root>) => (
     <VaulDrawer.Root
-        direction="right"
+        direction={direction}
         shouldScaleBackground={shouldScaleBackground}
         {...props}
     />
@@ -28,7 +29,7 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <VaulDrawer.Overlay
         ref={ref}
-        className={cn("fixed inset-0 z-50 bg-black/80", className)}
+        className={cn("fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]", className)}
         {...props}
     />
 ));
@@ -43,15 +44,11 @@ const DrawerContent = React.forwardRef<
         <VaulDrawer.Content
             ref={ref}
             className={cn(
-                "bg-background fixed bottom-0 right-0 z-50 flex h-full w-[90%] max-w-[400px] flex-col border-l shadow-2xl focus:outline-none",
-                // CSS variable fallback for initial transform if needed
-                "[--initial-transform:translateX(100%)]",
+                "fixed z-50 flex flex-col focus:outline-none",
                 className
             )}
             {...props}
         >
-            {/* Handle for visual cues if desired, though often hidden for side drawers */}
-            <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted hidden" />
             {children}
         </VaulDrawer.Content>
     </DrawerPortal>
