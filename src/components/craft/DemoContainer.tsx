@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { ComponentDesign } from "@/lib/types";
 
-interface DemoContainerProps {
+interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   design?: ComponentDesign;
   scrollable?: boolean;
@@ -29,6 +29,8 @@ export function DemoContainer({
   background = "dark",
   minHeight,
   onScrollContainerRef,
+  className,
+  ...props
 }: DemoContainerProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
@@ -40,8 +42,9 @@ export function DemoContainer({
 
   const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
   const baseStyles = cn(
-    "relative w-full h-full rounded-xl overflow-hidden",
-    surfaceStyles
+    "relative w-full h-full rounded-xl overflow-hidden border border-white/5 shadow-2xl ring-1 ring-white/5",
+    surfaceStyles,
+    className
   );
 
   // Scrollable: independent scroll context for scroll-based animations
@@ -50,6 +53,7 @@ export function DemoContainer({
       <div 
         className={baseStyles}
         style={{ minHeight }}
+        {...props}
       >
         <div
           ref={scrollRef}
@@ -71,6 +75,7 @@ export function DemoContainer({
     <div 
       className={cn(baseStyles, "flex items-center justify-center")}
       style={{ minHeight }}
+      {...props}
     >
       {children}
     </div>

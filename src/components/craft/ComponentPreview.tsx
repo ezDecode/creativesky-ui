@@ -110,26 +110,26 @@ export function ComponentPreview({
   const minHeight = demo.minHeight;
 
   return (
-    <div className={cn("w-full h-full", className)} {...props}>
-      <DemoContainer
-        design={metadata?.design}
-        scrollable={isScrollable}
-        background={background}
-        minHeight={minHeight}
-        onScrollContainerRef={handleScrollContainerRef}
-      >
-        {isScrollable ? (
-          // For scrollable components, wait for container ref
-          scrollContainer && (
-            <Component
-              {...(demo.defaultProps || {})}
-              scrollContainerRef={scrollContainerRef}
-            />
-          )
-        ) : (
-          <Component {...(demo.defaultProps || {})} />
-        )}
-      </DemoContainer>
-    </div>
+    <DemoContainer
+      design={metadata?.design}
+      scrollable={isScrollable}
+      background={background}
+      minHeight={minHeight}
+      onScrollContainerRef={handleScrollContainerRef}
+      className={className}
+      {...props}
+    >
+      {isScrollable ? (
+        // For scrollable components, wait for container ref
+        scrollContainer && (
+          <Component
+            {...(demo.defaultProps || {})}
+            scrollContainerRef={scrollContainerRef}
+          />
+        )
+      ) : (
+        <Component {...(demo.defaultProps || {})} />
+      )}
+    </DemoContainer>
   );
 }
