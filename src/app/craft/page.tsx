@@ -87,10 +87,10 @@ export default function CraftPage() {
         >
           {components.map((component) => (
             <motion.div key={component.id} variants={itemVariants}>
-              <Link
-                href={`/craft/${component.id}`}
-                className="group relative flex flex-col h-full min-h-[320px] overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xs p-8 transition-all duration-500 hover:bg-card/60 hover:border-border/80 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-2"
-              >
+                <Link
+                  href={`/craft/${component.id}`}
+                  className="group relative flex flex-col h-full min-h-[320px] overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xs p-8 transition-all duration-500 hover:bg-card/60 hover:border-border/80 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)]"
+                >
                 {/* Subtle Glow Effect */}
                 <div className="absolute -inset-px bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 
@@ -99,7 +99,7 @@ export default function CraftPage() {
                     <span className="text-[10px] font-bold text-muted-foreground/50 uppercase tracking-[0.2em] bg-muted/30 px-2.5 py-1 rounded-full border border-border/10">
                       Experimental
                     </span>
-                    <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                    <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <Icon icon="lucide:arrow-up-right" className="w-4 h-4 text-muted-foreground" />
                     </div>
                   </div>
@@ -117,11 +117,8 @@ export default function CraftPage() {
                   </div>
 
                   <div className="mt-auto pt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-all duration-300">
-                    <span className="relative overflow-hidden">
-                      <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">View Details</span>
-                      <span className="absolute top-0 left-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-primary">Explore Project</span>
-                    </span>
-                    <Icon icon="lucide:chevron-right" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <span>View Details</span>
+                    <Icon icon="lucide:chevron-right" className="w-4 h-4" />
                   </div>
                 </div>
               </Link>
