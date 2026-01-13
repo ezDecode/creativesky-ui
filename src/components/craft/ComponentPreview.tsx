@@ -10,6 +10,16 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
 }
 
+/**
+ * ComponentPreview - Universal Component Renderer
+ * 
+ * Dynamically loads and renders any component from the registry.
+ * Handles:
+ * - Loading states with skeleton
+ * - Error states with retry
+ * - Scroll container references for scroll-based components
+ * - Design tokens (surface, background, motion)
+ */
 export function ComponentPreview({
   name,
   className,
@@ -59,13 +69,10 @@ export function ComponentPreview({
   // Loading state
   if (isLoading) {
     return (
-      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-950 rounded-2xl", className)} {...props}>
-        <div className="flex flex-col items-center gap-6">
-          <div className="relative">
-            <div className="h-12 w-12 border-2 border-primary/20 rounded-full" />
-            <div className="absolute top-0 left-0 h-12 w-12 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          </div>
-          <p className="text-sm font-light tracking-widest text-zinc-500 uppercase">Initializing Specimen</p>
+      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl", className)} {...props}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="h-10 w-10 animate-spin border-4 border-zinc-700 border-t-primary rounded-full" />
+          <p className="text-sm text-zinc-500">Loading component...</p>
         </div>
       </div>
     );
@@ -74,27 +81,29 @@ export function ComponentPreview({
   // Error state
   if (error || !Component) {
     return (
-      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-950 rounded-2xl", className)} {...props}>
-        <div className="flex flex-col items-center gap-6 text-center p-8">
-          <div className="p-4 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
-            <Icon icon="solar:danger-triangle-bold" className="w-8 h-8" />
+      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl", className)} {...props}>
+        <div className="flex flex-col items-center gap-4 text-center p-6">
+          <div className="p-3 rounded-full bg-red-500/10 text-red-500">
+            <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
           </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-white tracking-tight">Component Encountered an Error</h3>
-            <p className="text-sm text-zinc-500 font-light max-w-xs">{error}</p>
-          </div>
-          <button
-            onClick={handleRetry}
-            className="group mt-4 px-6 py-2.5 text-sm font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-full transition-all flex items-center gap-2 hover:scale-105 active:scale-95"
-          >
-            <Icon icon="solar:restart-bold" className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
-            Restart Process
+            <div>
+              <h3 className="text-sm font-medium text-white">Failed to load component</h3>
+              <p className="text-xs text-zinc-500 mt-1 max-w-xs">{error}</p>
+            </div>
+            <button
+              onClick={handleRetry}
+              className="mt-2 px-4 py-2 text-xs font-normal bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors flex items-center gap-2"
+            >
+
+            <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
+            Retry
           </button>
         </div>
       </div>
     );
   }
 
+  // Extract demo config from metadata
   const demo = metadata?.demo || {};
   const isScrollable = demo.scrollable === true;
   const background = demo.background || "dark";
@@ -111,6 +120,7 @@ export function ComponentPreview({
       {...props}
     >
       {isScrollable ? (
+        // For scrollable components, wait for container ref
         scrollContainer && (
           <Component
             {...(demo.defaultProps || {})}
