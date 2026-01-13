@@ -31,47 +31,52 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-      <div className="max-w-5xl mx-auto px-6 py-12 lg:py-20">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-          <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-          <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-          <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-          <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-          <span className="text-foreground font-normal">{metadata.title}</span>
-        </nav>
+      <div className="max-w-[1400px] mx-auto px-6 py-12 lg:py-20">
+        <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
+          {/* Left Column: Content */}
+          <div className="flex-1 min-w-0">
+            {/* Breadcrumbs */}
+            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+              <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+              <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+              <span className="text-foreground font-normal">{metadata.title}</span>
+            </nav>
 
-        {/* Header */}
-        <header className="mb-10">
-          <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mb-3">
-            {metadata.title}
-          </h1>
-          {metadata.description && (
-            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              {metadata.description}
-            </p>
-          )}
-        </header>
+            {/* Header */}
+            <header className="mb-12">
+              <h1 className="text-3xl lg:text-4xl font-semibold tracking-tight mb-4">
+                {metadata.title}
+              </h1>
+              {metadata.description && (
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  {metadata.description}
+                </p>
+              )}
+            </header>
 
-        {/* Preview Section */}
-        <section className="mb-16">
-          <div 
-            className="group relative rounded-2xl border border-white/5 bg-zinc-800/50 overflow-hidden min-h-[450px] lg:min-h-[600px]"
-          >
-            <ComponentPreview name={slug} className="bg-transparent" />
+            {/* Documentation Section */}
+            <section className="max-w-none">
+              <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5 prose-hr:border-white/5">
+                {mdxContent ? (
+                  <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
+                ) : (
+                  <p className="text-muted-foreground italic">No documentation available.</p>
+                )}
+              </article>
+            </section>
           </div>
-        </section>
 
-        {/* Documentation Section */}
-        <section className="max-w-none">
-          <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5">
-            {mdxContent ? (
-              <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
-            ) : (
-              <p className="text-muted-foreground italic">No documentation available.</p>
-            )}
-          </article>
-        </section>
+          {/* Right Column: Sticky Preview */}
+          <div className="lg:w-1/2 lg:sticky lg:top-12 lg:max-h-[calc(100vh-6rem)]">
+            <div 
+              className="group relative rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden h-[450px] lg:h-[700px] shadow-2xl ring-1 ring-white/5"
+            >
+              <ComponentPreview name={slug} className="bg-transparent" />
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );

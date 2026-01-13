@@ -8,33 +8,24 @@ dependencies: ["gsap"]
 source: "src/content/magnetic-button/index.mdx"
 ---
 
-# Magnetic Button
-
-A magnetic, cursor-following call-to-action with a GSAP-powered flair animation. The button features a dynamic hover effect that tracks cursor movement, creating an engaging visual experience for attention-grabbing CTAs without layout shift.
-
-## Demo
-
-<ComponentPreview name="magnetic-button" />
+A magnetic, cursor-following call-to-action with a GSAP-powered flair animation. Tracks cursor movement for an engaging visual experience without layout shift.
 
 ## Usage
 
 <DemoCode name="magnetic-button" title="Demo Implementation" />
 
+## Props
+
+**`children`** `ReactNode` — Content to display inside the button.
+
+**`className`** `string` — Additional CSS classes for styling.
+
+**`onClick`** `function` — Click handler function.
+
+**`hoverVariant`** `"light" | "dark"` — Predefined color variant for the flair.
+
+**`customColor`** `string` — Custom hex/rgb color (overrides hoverVariant).
+
 ## Source Code
 
 <ComponentCode name="magnetic-button" title="Full Component" />
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Content to display inside the button |
-| `className` | `string` | `''` | Additional CSS classes for styling |
-| `onClick` | `() => void` | `undefined` | Click handler function |
-| `hoverVariant` | `'light' \| 'dark'` | `'light'` | Predefined color variant for the flair |
-| `customColor` | `string` | `undefined` | Custom hex/rgb color (overrides hoverVariant) |
-| `style` | `React.CSSProperties` | `undefined` | Inline styles for the button |
-
-## Dependencies
-
-`gsap`

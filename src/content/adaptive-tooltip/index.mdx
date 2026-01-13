@@ -8,39 +8,26 @@ dependencies: ["framer-motion", "animejs", "clsx"]
 source: "src/content/adaptive-tooltip/index.mdx"
 ---
 
-# Adaptive Tooltip
-
-An intelligent tooltip system that adapts to user intent with confidence-based delays. The tooltip delay decreases as the user hovers over multiple items, showing confidence in their intent to explore tooltips.
-
-## Demo
-
-<ComponentPreview name="adaptive-tooltip" />
+An intelligent tooltip system that adapts to user intent. The tooltip delay decreases as the user hovers over multiple items, showing confidence in their intent to explore.
 
 ## Usage
 
 <DemoCode name="adaptive-tooltip" title="Demo Implementation" />
 
-## Source Code
-
-<ComponentCode name="adaptive-tooltip" title="Full Component" />
-
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `AdaptiveTooltipItem[]` | - | Array of tooltip items |
-| `enablePinning` | `boolean` | `false` | Enable keyboard pinning |
+**`items`** `AdaptiveTooltipItem[]` — Array of tooltip items to display.
+
+**`enablePinning`** `boolean` — Enable keyboard pinning functionality (default: `false`).
 
 ### AdaptiveTooltipItem
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `icon` | `ReactNode` | Icon element to display |
-| `label` | `string` | Tooltip text label |
-| `hasBadge` | `boolean` | Show notification badge |
+**`icon`** `ReactNode` — Icon element to display.
 
-## Dependencies
+**`label`** `string` — Tooltip text label.
 
-`framer-motion`
-`animejs`
-`clsx`
+**`hasBadge`** `boolean` — Show a notification badge on the icon.
+
+## Source Code
+
+<ComponentCode name="adaptive-tooltip" title="Full Component" />

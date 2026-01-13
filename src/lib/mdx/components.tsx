@@ -60,22 +60,13 @@ function H2({ children, ...props }: any) {
     : undefined;
 
   return (
-    <div className="group flex items-center gap-2 mt-12 mb-6 scroll-mt-24">
-      <h2
-        id={id}
-        className="text-2xl font-medium tracking-tight text-foreground w-full flex items-center gap-2"
-        {...props}
-      >
-        {children}
-        <a
-          href={`#${id}`}
-          className="opacity-0 group-hover:opacity-100 transition-opacity text-primary/50 hover:text-primary"
-          aria-label="Permalink"
-        >
-          #
-        </a>
-      </h2>
-    </div>
+    <h2
+      id={id}
+      className="text-xl font-medium tracking-tight text-foreground mt-12 mb-4 scroll-mt-24"
+      {...props}
+    >
+      {children}
+    </h2>
   );
 }
 
@@ -87,17 +78,10 @@ function H3({ children, ...props }: any) {
   return (
     <h3
       id={id}
-      className="group scroll-mt-24 text-xl font-medium tracking-tight mb-3 mt-8 text-foreground flex items-center gap-2"
+      className="text-lg font-medium tracking-tight mt-8 mb-3 text-foreground scroll-mt-24"
       {...props}
     >
       {children}
-      <a
-        href={`#${id}`}
-        className="opacity-0 group-hover:opacity-100 transition-opacity text-primary/50 hover:text-primary text-sm"
-        aria-label="Permalink"
-      >
-        #
-      </a>
     </h3>
   );
 }
@@ -107,7 +91,7 @@ function H3({ children, ...props }: any) {
  */
 function P({ children, ...props }: any) {
   return (
-    <p className="text-base leading-7 text-muted-foreground mb-6 last:mb-0 max-w-[69ch]" {...props}>
+    <p className="text-[15px] leading-relaxed text-muted-foreground mb-4 last:mb-0" {...props}>
       {children}
     </p>
   );
