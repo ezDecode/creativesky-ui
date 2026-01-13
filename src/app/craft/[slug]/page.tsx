@@ -44,77 +44,77 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             </div>
           </div>
 
-          {/* Left Column: Content */}
-          <div className="px-6 py-12 lg:py-20 lg:px-24 lg:order-1 flex flex-col">
-            {/* Header Group */}
-            <header className="flex flex-col gap-10 mb-20">
-              <div className="flex items-center gap-6">
-                <Link 
-                  href="/craft" 
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
-                >
-                  <Icon icon="lucide:arrow-left" className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-                </Link>
-                <CraftNavDrawer 
-                  components={components} 
-                  trigger={
-                    <button className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border/10 bg-muted/30 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 w-fit group">
-                      <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                      <span className="text-[13px] font-medium tracking-tight">Library</span>
-                    </button>
-                  }
-                />
-              </div>
+            {/* Left Column: Content */}
+            <div className="px-6 py-12 lg:py-16 lg:px-20 lg:order-1 flex flex-col">
+              {/* Header Group */}
+              <header className="flex flex-col gap-10 mb-16">
+                <div className="flex items-center gap-6">
+                  <Link 
+                    href="/craft" 
+                    className="flex items-center justify-center w-9 h-9 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
+                  >
+                    <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                  </Link>
+                  <CraftNavDrawer 
+                    components={components} 
+                    trigger={
+                      <button className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 w-fit group">
+                        <Icon icon="lucide:layout-grid" className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                        <span className="text-[12px] font-medium tracking-tight">Library</span>
+                      </button>
+                    }
+                  />
+                </div>
 
-              <div className="flex flex-col gap-4">
-                <nav className="flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-muted-foreground/50 font-bold mb-2">
-                  <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                  <span className="text-muted-foreground/80">{displayTitle}</span>
-                </nav>
-                <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.1] text-foreground">
-                  {displayTitle}
-                </h1>
-                {mdxContent?.frontmatter.description && (
-                  <p className="text-xl text-muted-foreground/60 leading-relaxed font-light tracking-tight max-w-xl">
-                    {mdxContent.frontmatter.description}
-                  </p>
-                )}
-              </div>
-            </header>
+                <div className="flex flex-col gap-3">
+                  <nav className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/40 font-bold mb-1">
+                    <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+                    <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
+                    <span className="text-muted-foreground/60">{displayTitle}</span>
+                  </nav>
+                  <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-foreground">
+                    {displayTitle}
+                  </h1>
+                  {mdxContent?.frontmatter.description && (
+                    <p className="text-base text-muted-foreground/60 leading-relaxed font-light tracking-tight max-w-xl">
+                      {mdxContent.frontmatter.description}
+                    </p>
+                  )}
+                </div>
+              </header>
 
-            {/* Documentation Section */}
-            <section className="flex-1">
-              <article className="prose prose-zinc dark:prose-invert 
-                prose-headings:font-medium prose-headings:tracking-tight 
-                prose-h2:text-3xl prose-h2:mt-20 prose-h2:mb-8 
-                prose-h3:text-xl prose-h3:mt-12 prose-h3:mb-4
-                prose-p:text-[17px] prose-p:leading-relaxed prose-p:text-muted-foreground/80 prose-p:font-light
-                prose-a:text-foreground prose-a:underline-offset-4 hover:prose-a:text-primary transition-colors
-                prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border/10 prose-pre:rounded-2xl prose-pre:p-6
-                prose-code:text-foreground prose-code:font-mono prose-code:text-sm prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
-                max-w-none">
-                {mdxContent ? (
-                  <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
-                ) : (
-                  <p className="text-muted-foreground italic">No documentation available.</p>
-                )}
-              </article>
-            </section>
+              {/* Documentation Section */}
+              <section className="flex-1">
+                <article className="prose prose-zinc dark:prose-invert 
+                  prose-headings:font-medium prose-headings:tracking-tight 
+                  prose-h2:text-xl prose-h2:mt-16 prose-h2:mb-6 
+                  prose-h3:text-lg prose-h3:mt-10 prose-h3:mb-3
+                  prose-p:text-[14px] prose-p:leading-relaxed prose-p:text-muted-foreground/70 prose-p:font-light
+                  prose-a:text-foreground prose-a:underline-offset-4 hover:prose-a:text-primary transition-colors
+                  prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border/10 prose-pre:rounded-xl prose-pre:p-5
+                  prose-code:text-foreground prose-code:font-mono prose-code:text-[12px] prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                  max-w-none">
+                  {mdxContent ? (
+                    <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
+                  ) : (
+                    <p className="text-muted-foreground text-sm italic">No documentation available.</p>
+                  )}
+                </article>
+              </section>
 
-            {/* Footer Navigation */}
-            <footer className="mt-32 pt-12 border-t border-border/10 flex items-center justify-between text-sm">
-              <div className="flex flex-col gap-1">
-                <span className="text-muted-foreground/40 uppercase tracking-widest text-[10px] font-bold">Designer Notes</span>
-                <p className="text-muted-foreground/60 font-light">Crafted with precision and motion.</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
-                  <span className="font-medium">Share Component</span>
-                  <Icon icon="lucide:share-2" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                </button>
-              </div>
-            </footer>
+              {/* Footer Navigation */}
+              <footer className="mt-24 pt-10 border-t border-border/10 flex items-center justify-between text-xs">
+                <div className="flex flex-col gap-1">
+                  <span className="text-muted-foreground/30 uppercase tracking-[0.2em] text-[9px] font-bold">Designer Notes</span>
+                  <p className="text-muted-foreground/50 font-light">Crafted with precision and motion.</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
+                    <span className="font-medium">Share Component</span>
+                    <Icon icon="lucide:share-2" className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                  </button>
+                </div>
+              </footer>
           </div>
         </div>
       </div>
