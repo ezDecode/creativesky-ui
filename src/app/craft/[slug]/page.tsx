@@ -33,8 +33,15 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <div className="w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-4rem)]">
+          {/* Right Column: Sticky Preview - First in JSX for mobile top placement */}
+          <div className="relative lg:order-2">
+            <div className="sticky top-0 h-[400px] lg:h-screen p-2">
+              <ComponentPreview name={slug} />
+            </div>
+          </div>
+
           {/* Left Column: Content */}
-          <div className="px-6 py-6 lg:py-10 lg:px-16">
+          <div className="px-6 py-6 lg:py-10 lg:px-16 lg:order-1">
             {/* Breadcrumbs */}
             <nav className="sticky top-0 z-20 flex items-center gap-2 text-sm text-muted-foreground mb-12 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4">
               <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
@@ -48,7 +55,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
             {/* Documentation Section */}
             <section className="max-w-2xl mx-auto lg:mx-0">
-              <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5 prose-hr:border-white/5">
+              <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-h2:mt-24 prose-h2:mb-8 prose-h3:mt-16 prose-p:my-8 prose-pre:my-12">
                 {mdxContent ? (
                   <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
                 ) : (
@@ -56,13 +63,6 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 )}
               </article>
             </section>
-          </div>
-
-          {/* Right Column: Sticky Preview */}
-          <div className="relative bg-zinc-900/20">
-            <div className="sticky top-0 h-[500px] lg:h-screen p-2">
-              <ComponentPreview name={slug} />
-            </div>
           </div>
         </div>
       </div>
