@@ -33,49 +33,51 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <div className="w-full">
-        {/* Header Group: Sidebar Trigger + Breadcrumbs */}
-        <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-6">
-          <CraftNavDrawer 
-            components={components} 
-            trigger={
-              <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
-                <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-medium">Components</span>
-              </button>
-            }
-          />
-          
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground overflow-hidden">
-            <Link href="/" className="hover:text-foreground transition-colors shrink-0">Home</Link>
-            <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
-            <Link href="/craft" className="hover:text-foreground transition-colors shrink-0">Craft</Link>
-            <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
-            <span className="text-foreground font-normal truncate">
-              {displayTitle}
-            </span>
-          </nav>
-        </header>
-
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Right Column: Sticky Preview - First in JSX for mobile top placement */}
           <div className="relative lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
-            <div className="sticky top-[57px] h-[400px] lg:h-[calc(100vh-57px)] p-4">
+            <div className="sticky top-0 h-[400px] lg:h-screen p-4">
               <ComponentPreview name={slug} />
             </div>
           </div>
 
           {/* Left Column: Content */}
-          <div className="px-6 py-10 lg:px-16 lg:order-1">
-            {/* Documentation Section */}
-            <section className="max-w-2xl mx-auto lg:mx-0">
-              <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-h2:mt-24 prose-h2:mb-8 prose-h3:mt-16 prose-p:my-8 prose-pre:my-12">
-                {mdxContent ? (
-                  <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
-                ) : (
-                  <p className="text-muted-foreground italic">No documentation available.</p>
-                )}
-              </article>
-            </section>
+          <div className="lg:order-1">
+            {/* Header Group: Sidebar Trigger + Breadcrumbs */}
+            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-6">
+              <CraftNavDrawer 
+                components={components} 
+                trigger={
+                  <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
+                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium">Components</span>
+                  </button>
+                }
+              />
+              
+              <nav className="flex items-center gap-2 text-sm text-muted-foreground overflow-hidden">
+                <Link href="/" className="hover:text-foreground transition-colors shrink-0">Home</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
+                <Link href="/craft" className="hover:text-foreground transition-colors shrink-0">Craft</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
+                <span className="text-foreground font-normal truncate">
+                  {displayTitle}
+                </span>
+              </nav>
+            </header>
+
+            <div className="px-6 py-10 lg:px-16">
+              {/* Documentation Section */}
+              <section className="max-w-2xl mx-auto lg:mx-0">
+                <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-h2:mt-24 prose-h2:mb-8 prose-h3:mt-16 prose-p:my-8 prose-pre:my-12">
+                  {mdxContent ? (
+                    <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
+                  ) : (
+                    <p className="text-muted-foreground italic">No documentation available.</p>
+                  )}
+                </article>
+              </section>
+            </div>
           </div>
         </div>
       </div>
