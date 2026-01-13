@@ -24,7 +24,7 @@ export default function CraftPage() {
               trigger={
                 <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group">
                   <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-medium tracking-tight">Library</span>
+                  <span className="text-xs font-medium tracking-tight">Library</span>
                 </button>
               }
             />
@@ -32,10 +32,10 @@ export default function CraftPage() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-medium tracking-tight leading-tight text-foreground">
-            Crafting the <span className="text-muted-foreground/30 italic font-serif">Future</span>.
+          <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
+            Crafting the <span className="text-muted-foreground/30 font-serif">Future</span>.
           </h1>
-          <p className="text-[13px] text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
+          <p className="text-sm text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
             A laboratory for refined components and motion experiments.
             Focused on the intersection of aesthetics and high-end interaction.
           </p>
@@ -53,22 +53,22 @@ export default function CraftPage() {
           >
             <div className="flex flex-col gap-1.5 relative z-10">
               <div className="flex items-center gap-3">
-                <span className="text-[9px] font-medium text-muted-foreground/30 tabular-nums">
+                <span className="text-[11px] font-medium text-muted-foreground/30 tabular-nums">
                   0{index + 1}
                 </span>
-                <h3 className="text-[14px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
+                <h3 className="text-[17px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
                   {component.title}
                 </h3>
               </div>
               {component.description && (
-                <p className="text-[12px] text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/60 transition-colors">
+                <p className="text-sm text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/60 transition-colors">
                   {component.description}
                 </p>
               )}
             </div>
 
             <div className="flex items-center gap-4">
-              <span className="text-[9px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+              <span className="text-[11px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
                 Explore
               </span>
               <div className="w-7 h-7 rounded-full border border-border/10 flex items-center justify-center text-muted-foreground/20 group-hover:text-foreground group-hover:border-border/40 transition-all duration-500">
