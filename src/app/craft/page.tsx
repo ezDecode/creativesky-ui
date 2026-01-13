@@ -43,12 +43,12 @@ export default function CraftPage() {
       </header>
 
       {/* Component List */}
-      <div className="flex flex-col border-t border-border/10">
+      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border/10">
         {components.map((component, index) => (
           <Link
             key={component.id}
             href={`/craft/${component.id}`}
-            className="group relative flex items-center justify-between py-8 px-6 border border-transparent border-b-border/10 hover:border-border/40 hover:bg-muted/5 hover:rounded-2xl transition-all duration-300 -mx-6 outline-none"
+            className="group relative flex flex-col gap-4 p-8 border-b border-r border-border/10 hover:bg-muted/5 transition-all duration-300 outline-none"
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="flex flex-col gap-1.5 relative z-10">
@@ -61,14 +61,14 @@ export default function CraftPage() {
                 </h3>
               </div>
               {component.description && (
-                <p className="text-[15px] text-muted-foreground/40 leading-relaxed font-light ml-7 w-full line-clamp-1 group-hover:text-muted-foreground/70 transition-colors">
+                <p className="text-[15px] text-muted-foreground/40 leading-relaxed font-light ml-7 w-full group-hover:text-muted-foreground/70 transition-colors">
                   {component.description}
                 </p>
               )}
             </div>
 
-            <div className="flex items-center gap-4">
-              <span className="text-[11px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+            <div className="flex items-center justify-between mt-auto pt-4">
+              <span className="text-[11px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] group-hover:text-foreground/40 transition-colors">
                 Explore
               </span>
               <div className="w-7 h-7 rounded-full border border-border/10 flex items-center justify-center text-muted-foreground/20 group-hover:text-foreground group-hover:border-border/40 transition-all duration-500">
