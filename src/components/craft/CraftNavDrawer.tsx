@@ -173,10 +173,6 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                                     )}
                                                 >
                                                     <div className="flex items-center gap-3">
-                                                        <div className={cn(
-                                                            "w-1 h-1 rounded-full",
-                                                            isActive ? "bg-background" : "bg-border group-hover:bg-muted-foreground"
-                                                        )} />
                                                         {component.title}
                                                     </div>
                                                     {isActive && (
