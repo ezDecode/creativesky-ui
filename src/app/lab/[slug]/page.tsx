@@ -32,16 +32,16 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const mdxContent = await loadComponentMDX(slug);
 
   return (
-    <>
+    <div className="grid grid-cols-12 lg:min-h-screen">
       {/* LEFT COLUMN: Documentation */}
-      <div className="col-span-12 lg:col-span-6 order-2 lg:order-1 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards">
-        <div className="w-full ml-auto px-4 lg:px-8 py-10 lg:py-24">
+      <div className="col-span-12 lg:col-span-6 order-2 lg:order-1 flex flex-col min-h-screen bg-background dark:bg-black animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards border-r border-border/10">
+        <div className="w-full h-full flex flex-col p-8 lg:p-12 xl:p-16">
           <article className="prose prose-zinc dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-lead:text-muted-foreground prose-img:rounded-xl">
-            <header className="mb-12 not-prose">
-              <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6 text-foreground bg-gradient-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
+            <header className="mb-8 not-prose">
+              <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground bg-gradient-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
                 {metadata.title}
               </h1>
-              <p className="text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
+              <p className="text-xl text-muted-foreground/80 leading-relaxed font-light">
                 {metadata.description}
               </p>
             </header>
@@ -55,12 +55,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Component Preview (Floating Box) */}
-      <div className="col-span-12 lg:col-span-6 flex flex-col h-[60vh] lg:h-screen lg:sticky lg:top-0 order-1 lg:order-2 z-10 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 ease-out fill-mode-backwards">
-        <div className="w-full h-full py-3 px-2 flex flex-col min-h-0">
-          <ComponentPreview name={slug} className="h-full shadow-2xl rounded-xl border border-border/50" />
+      {/* RIGHT COLUMN: Component Preview (Fixed) */}
+      <div className="col-span-12 lg:col-span-6 flex flex-col h-[60vh] lg:h-screen lg:sticky lg:top-0 self-start order-1 lg:order-2 z-10 bg-zinc-50/50 dark:bg-black backdrop-blur-sm animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 ease-out fill-mode-backwards">
+        <div className="w-full h-full flex flex-col min-h-0 relative p-1 lg:p-2">
+          <ComponentPreview name={slug} className="h-full w-full rounded-2xl border border-border/10 shadow-sm" />
         </div>
       </div>
-    </>
+    </div>
   );
 }

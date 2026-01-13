@@ -10,7 +10,7 @@ export default function LabLayout({
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+      <div className="w-full">
         {children}
       </div>
       <LabNavDrawer components={components} />

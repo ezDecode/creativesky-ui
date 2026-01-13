@@ -19,6 +19,8 @@ export interface ScrollRevealTextProps {
     primaryColor?: string;
     /** Animation configuration overrides */
     config?: AnimationConfig;
+    /** Optional ref to the scrollable container (useful for previews) */
+    scrollContainerRef?: React.RefObject<HTMLDivElement>;
 }
 
 export interface AnimationConfig {
@@ -241,7 +243,8 @@ export function ScrollRevealTextFramer({
     highlightWords = [],
     title = "",
     primaryColor = "#ff6b00",
-    config = {}
+    config = {},
+    scrollContainerRef
 }: ScrollRevealTextProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const words = useMemo(() => phrase.split(" "), [phrase]);
@@ -277,11 +280,15 @@ export function ScrollRevealTextFramer({
     // Track scroll progress using the container as target
     const { scrollYProgress } = useScroll({
         target: containerRef,
+        container: scrollContainerRef,
         offset: ["start start", "end end"]
     });
 
     // Apply spring smoothing for buttery-smooth feel
     const smoothProgress = useSpring(scrollYProgress, springConfig);
+
+    // Fade out content at the end of scroll to avoid awkward "slide up" unpinning
+    const contentOpacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
 
     return (
         <div
@@ -297,7 +304,7 @@ export function ScrollRevealTextFramer({
                     top: 0,
                 }}
             >
-                <div className={styles.content}>
+                <motion.div className={styles.content} style={{ opacity: contentOpacity }}>
                     {title && <h1 className={styles.title}>{title}</h1>}
 
                     <div className={styles.body}>
@@ -314,7 +321,7 @@ export function ScrollRevealTextFramer({
                             />
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

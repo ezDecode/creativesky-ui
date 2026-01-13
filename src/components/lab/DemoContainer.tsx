@@ -13,6 +13,7 @@ interface DemoContainerProps {
   padding?: "sm" | "md" | "lg" | "none";
   showDeviceToggle?: boolean;
   align?: "center" | "start" | "end";
+  onContainerRef?: (ref: HTMLDivElement | null) => void;
 }
 
 export function DemoContainer({
@@ -23,6 +24,7 @@ export function DemoContainer({
   padding = "md",
   showDeviceToggle = true,
   align = "center",
+  onContainerRef,
 }: DemoContainerProps) {
   const [viewport, setViewport] =
     React.useState<"desktop" | "tablet" | "mobile">("desktop");
@@ -70,6 +72,7 @@ export function DemoContainer({
             }}
           >
             <div
+              ref={onContainerRef}
               className={cn(
                 "w-full h-full overflow-auto scrollbar-hide",
                 paddingMap[padding],

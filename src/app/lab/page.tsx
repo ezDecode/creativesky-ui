@@ -5,7 +5,7 @@ export default function LabPage() {
   const components = getAllComponentsMetadata();
 
   return (
-    <div className="flex flex-col gap-12 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards p-4 sm:p-0">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-12 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards sm:p-0">
 
       {/* Header */}
       <header className="flex flex-col gap-6 border-b border-border/10 pb-12">

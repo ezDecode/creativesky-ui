@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { resolveVaultLinks, VaultResolvedItem } from "@/lib/vault/resolve-links";
 import { getAllProjects } from "@/lib/vault/projects";
-import { Shell } from "@/components/layout/Shell";
+import { Footer } from "@/components/layout/Footer";
 import { FilterChips } from "@/components/ui/filterchips";
 
 export const revalidate = 86400;
@@ -91,70 +91,76 @@ export default async function VaultPage({ searchParams }: VaultPageProps) {
       : allItems.filter((item) => item && item.type === activeFilter);
 
   return (
-    <Shell leftRail={<BackToHome />}>
-      <header className="flex flex-col gap-6 mb-16">
-        {/* Mobile back link (hidden on desktop where leftRail shows) */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors lg:hidden"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            className="rotate-180"
+    <main className="min-h-screen bg-background">
+      <div className="mx-auto w-full max-w-5xl px-6 pt-24 pb-20">
+
+        {/* Header Section with Back Link */}
+        <header className="flex flex-col gap-8 mb-16 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
           >
-            <path
-              d="M6 3L11 8L6 13"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className="rotate-180"
+            >
+              <path
+                d="M6 3L11 8L6 13"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Home
+          </Link>
+
+          <div className="flex flex-col gap-6">
+            <h1 className="text-4xl font-normal tracking-normal">Vault</h1>
+            <FilterChips
+              filters={FILTERS}
+              activeFilter={activeFilter}
+              baseHref="/vault"
             />
-          </svg>
-          Back to home
-        </Link>
-
-        <h1 className="text-4xl font-normal tracking-normal">Vault</h1>
-
-        <FilterChips
-          filters={FILTERS}
-          activeFilter={activeFilter}
-          baseHref="/vault"
-        />
-      </header>
-
-      {filteredItems && filteredItems.length > 0 ? (
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
-          {filteredItems.map((item, index) => (
-            <VaultCard key={item.url || `vault-item-${index}`} item={item} />
-          ))}
-        </section>
-      ) : (
-        <div className="flex flex-col items-center justify-center py-20">
-          <div className="text-center flex flex-col gap-3">
-            <div className="text-4xl mb-4">🔭</div>
-            <h3 className="text-lg font-medium text-foreground">
-              Nothing here yet
-            </h3>
-            <p className="text-sm text-muted-foreground max-w-sm">
-              {activeFilter === "All"
-                ? "No links have been added to the vault yet."
-                : `No ${activeFilter.toLowerCase()} found. Try a different filter.`}
-            </p>
-            {activeFilter !== "All" && (
-              <Link
-                href="/vault"
-                className="inline-flex mt-4 px-4 py-2 rounded-full text-sm bg-muted/40 text-foreground hover:bg-muted transition-colors"
-              >
-                View all
-              </Link>
-            )}
           </div>
-        </div>
-      )}
-    </Shell>
+        </header>
+
+        {filteredItems && filteredItems.length > 0 ? (
+          <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-24 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100 ease-out fill-mode-backwards">
+            {filteredItems.map((item, index) => (
+              <VaultCard key={item.url || `vault-item-${index}`} item={item} />
+            ))}
+          </section>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-20 animate-in fade-in duration-700">
+            <div className="text-center flex flex-col gap-3">
+              <div className="text-4xl mb-4">🔭</div>
+              <h3 className="text-lg font-medium text-foreground">
+                Nothing here yet
+              </h3>
+              <p className="text-sm text-muted-foreground max-w-sm">
+                {activeFilter === "All"
+                  ? "No links have been added to the vault yet."
+                  : `No ${activeFilter.toLowerCase()} found. Try a different filter.`}
+              </p>
+              {activeFilter !== "All" && (
+                <Link
+                  href="/vault"
+                  className="inline-flex mt-4 px-4 py-2 rounded-full text-sm bg-muted/40 text-foreground hover:bg-muted transition-colors"
+                >
+                  View all
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+
+        <Footer />
+      </div>
+    </main>
   );
 }
 

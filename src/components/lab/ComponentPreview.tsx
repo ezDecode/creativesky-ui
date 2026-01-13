@@ -36,6 +36,7 @@ export function ComponentPreview({
   const [error, setError] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [retryCount, setRetryCount] = React.useState(0);
+  const [containerRef, setContainerRef] = React.useState<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
     let mounted = true;
@@ -106,6 +107,8 @@ export function ComponentPreview({
     );
   }
 
+
+
   return (
     <div className={cn("w-full h-full flex flex-col", className)} {...props}>
       <DemoContainer
@@ -113,8 +116,14 @@ export function ComponentPreview({
         padding="none"
         align={align}
         showDeviceToggle={showDeviceToggle}
+        onContainerRef={setContainerRef}
       >
-        <Component {...(metadata?.demo?.defaultProps || {})} />
+        {containerRef && (
+          <Component
+            {...(metadata?.demo?.defaultProps || {})}
+            scrollContainerRef={{ current: containerRef }}
+          />
+        )}
       </DemoContainer>
     </div>
   );
