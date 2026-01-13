@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getAllComponentsMetadata, resolveComponent } from "@/lib/registry/resolver";
 import { loadComponentMDX } from "@/lib/mdx/loader";
 import { getMDXComponents } from "@/lib/mdx/components";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
+import { Icon } from "@iconify/react";
 
 interface ComponentPageProps {
   params: Promise<{ slug: string }>;
@@ -28,32 +30,47 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const mdxContent = await loadComponentMDX(slug);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      {/* LEFT COLUMN: Documentation - scrolls with page */}
-      <div className="order-2 lg:order-1 bg-background bg-zinc-950">
-        <div className="p-8 lg:p-12 xl:p-16">
-          <article className="prose prose-zinc dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight">
-            <header className="mb-8 not-prose">
-              <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent">
-                {metadata.title}
-              </h1>
-            </header>
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
+      <div className="max-w-5xl mx-auto px-6 py-12 lg:py-20">
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+          <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+          <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+          <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+          <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+          <span className="text-foreground font-medium">{metadata.title}</span>
+        </nav>
 
+        {/* Header */}
+        <header className="mb-10">
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight mb-3">
+            {metadata.title}
+          </h1>
+          {metadata.description && (
+            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+              {metadata.description}
+            </p>
+          )}
+        </header>
+
+        {/* Preview Section */}
+        <section className="mb-16">
+          <div className="group relative rounded-2xl border border-white/5 bg-zinc-800/50 overflow-hidden aspect-video lg:aspect-[16/9] xl:aspect-[21/9]">
+            <ComponentPreview name={slug} className="bg-transparent" />
+          </div>
+        </section>
+
+        {/* Documentation Section */}
+        <section className="max-w-none">
+          <article className="prose prose-zinc dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5">
             {mdxContent ? (
               <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
             ) : (
               <p className="text-muted-foreground italic">No documentation available.</p>
             )}
           </article>
-        </div>
+        </section>
       </div>
-
-      {/* RIGHT COLUMN: Component Preview - fixed height with internal scroll */}
-      <div className="order-1 lg:order-2 h-[70vh] lg:h-screen lg:sticky lg:top-0 bg-zinc-950 p-1 lg:p-2">
-        <div className="w-full h-full rounded-2xl bg-zinc-800/50 overflow-hidden">
-          <ComponentPreview name={slug} className="bg-transparent" />
-        </div>
-      </div>
-    </div>
+    </main>
   );
 }

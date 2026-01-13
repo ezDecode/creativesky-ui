@@ -83,8 +83,8 @@ function getSurfaceStyles(
 ): string {
   // Background base
   const bgBase = {
-    light: "bg-zinc-100 dark:bg-zinc-800",
-    dark: "bg-zinc-900 dark:bg-black",
+    light: "bg-zinc-100",
+    dark: "bg-zinc-800/50",
     transparent: "bg-transparent",
   }[background];
 
