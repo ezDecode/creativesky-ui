@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 import { Shell } from "@/components/layout/Shell";
-import { MotionSurface } from "@/content/motion-surface/motion-surface";
+
 import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 
 function pickRandom<T>(arr: T[], count: number) {
@@ -60,7 +60,7 @@ export default function Home() {
             <h1 className="flex flex-wrap items-baseline gap-2 sm:gap-3 text-page-heading font-normal leading-none tracking-normal">
               <span>Akash —</span>
               <span className="text-muted-foreground">
-                Design Engineer 
+                Design Engineer
               </span>
             </h1>
           </div>
@@ -85,12 +85,12 @@ export default function Home() {
         <motion.section variants={itemVariants} className="flex flex-col gap-4 sm:gap-6">
           <h2 className="text-xs font-medium text-muted-foreground">Lab</h2>
 
-          <MotionSurface>
+          <div className="flex flex-col gap-2">
             {components.map((component) => (
               <Link
                 key={component.id}
                 href={`/lab/${component.id}`}
-                className="group block w-full rounded-md py-3 transition-colors"
+                className="group block w-full rounded-md py-3 transition-colors hover:bg-muted/50 px-2 -mx-2"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex flex-col gap-1">
@@ -107,12 +107,12 @@ export default function Home() {
 
                   <Icon
                     icon="solar:arrow-right-linear"
-                    className="h-4 w-4 shrink-0 text-muted-foreground/30"
+                    className="h-4 w-4 shrink-0 text-muted-foreground/30 group-hover:text-foreground transition-colors"
                   />
                 </div>
               </Link>
             ))}
-          </MotionSurface>
+          </div>
         </motion.section>
 
         {/* ================= LAB CTA ================= */}

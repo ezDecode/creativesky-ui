@@ -44,73 +44,50 @@ export function DemoContainer({
   };
 
   return (
-    <section className="w-full">
-      <div className="relative">
-        {showDeviceToggle && (
-          <div className="absolute top-3 right-3 z-10 hidden md:flex items-center gap-0.5 border border-border/20 rounded-lg p-1 bg-background/95 backdrop-blur-sm shadow-sm">
-            <ViewportButton
-              active={viewport === "desktop"}
-              onClick={() => setViewport("desktop")}
-              icon="solar:monitor-linear"
-              label="Desktop view"
-            />
-            <ViewportButton
-              active={viewport === "tablet"}
-              onClick={() => setViewport("tablet")}
-              icon="solar:tablet-linear"
-              label="Tablet view"
-            />
-            <ViewportButton
-              active={viewport === "mobile"}
-              onClick={() => setViewport("mobile")}
-              icon="solar:smartphone-linear"
-              label="Mobile view"
-            />
-          </div>
-        )}
+    <div className="relative w-full h-full flex flex-col">
 
-        <div className="flex items-center justify-center w-full">
+
+      <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden">
+        <div
+          className={cn(
+            "h-full transition-all duration-300 ease-in-out origin-top",
+            viewport === "desktop"
+              ? "w-full"
+              : viewport === "tablet"
+                ? "w-[48rem]" // ~768px
+                : "w-[24rem]" // ~384px
+          )}
+        >
           <div
             className={cn(
-              "w-full transition-all duration-300",
-              viewport === "desktop"
-                ? "max-w-full"
-                : viewport === "tablet"
-                ? "max-w-2xl"
-                : "max-w-sm"
+              "relative w-full h-full rounded-xl overflow-hidden border border-border/20",
+              surfaceStyles,
+              motionStyles
             )}
+            style={{
+              minHeight,
+              maxHeight: maxHeight === "none" ? "none" : maxHeight,
+            }}
           >
             <div
               className={cn(
-                "relative isolate w-full rounded-xl overflow-hidden",
-                surfaceStyles,
-                motionStyles
+                "w-full h-full overflow-auto scrollbar-hide",
+                paddingMap[padding],
+                align !== "center" ? "flex" : "",
+                alignMap[align]
               )}
-              style={{
-                minHeight,
-                maxHeight: maxHeight === "none" ? "none" : maxHeight,
-              }}
             >
-              <div
-                className={cn(
-                  "w-full h-full overflow-auto scrollbar-hide",
-                  paddingMap[padding],
-                  align !== "center" ? "flex" : "",
-                  alignMap[align]
-                )}
-              >
-                <div className={cn(
-                  "w-full",
-                  align === "center" ? "flex items-center justify-center min-h-full" : ""
-                )}>
-                  {children}
-                </div>
+              <div className={cn(
+                "w-full",
+                align === "center" ? "flex items-center justify-center min-h-full" : ""
+              )}>
+                {children}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

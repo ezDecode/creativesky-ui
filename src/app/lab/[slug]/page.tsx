@@ -14,56 +14,53 @@ export async function generateStaticParams() {
   }));
 }
 
+import { ComponentPreview } from "@/components/lab/ComponentPreview";
+
 export default async function ComponentPage({ params }: ComponentPageProps) {
   const { slug } = await params;
 
   // Resolve component with better error handling
   const resolved = await resolveComponent(slug).catch(() => null);
-  
+
   if (!resolved) {
     notFound();
   }
 
   const { metadata } = resolved;
-  
+
   // Load and compile MDX content if available
   const mdxContent = await loadComponentMDX(slug);
 
-  // If there's no MDX content, show a minimal fallback
-  if (!mdxContent) {
-    return (
-      <article className="max-w-6xl mx-auto">
-        <header className="flex flex-col gap-4 mb-16">
-          <h1 className="text-3xl font-semibold leading-none tracking-tight text-foreground">
-            {metadata.title}
-          </h1>
-          <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
-            {metadata.description}
-          </p>
-        </header>
-        <p className="text-muted-foreground">No documentation available.</p>
-      </article>
-    );
-  }
-
   return (
-    <article className="max-w-6xl mx-auto">
-      {/* 
-        PURE MDX RENDERING
-        
-        The entire page content is controlled by the MDX file.
-        
-        MDX should include:
-        - Title and description
-        - Demo with <ComponentPreview />
-        - Props tables
-        - Installation instructions
-        - Dependencies
-        - Any other documentation
-        
-        The page component is just a container - MDX controls everything.
-      */}
-      <mdxContent.Content components={getMDXComponents()} />
-    </article>
+    <>
+      {/* LEFT COLUMN: Documentation */}
+      <div className="col-span-12 lg:col-span-6 order-2 lg:order-1 flex flex-col">
+        <div className="w-full ml-auto px-4 lg:px-8 py-10 lg:py-24">
+          <article className="prose prose-zinc dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-lead:text-muted-foreground prose-img:rounded-xl">
+            <header className="mb-8 not-prose">
+              <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground bg-gradient-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent">
+                {metadata.title}
+              </h1>
+              <p className="text-xl text-muted-foreground/80 leading-relaxed max-w-2xl">
+                {metadata.description}
+              </p>
+            </header>
+
+            {mdxContent ? (
+              <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null }} />
+            ) : (
+              <p className="text-muted-foreground italic">No documentation content available.</p>
+            )}
+          </article>
+        </div>
+      </div>
+
+      {/* RIGHT COLUMN: Component Preview (Floating Box) */}
+      <div className="col-span-12 lg:col-span-6 flex flex-col h-[50vh] lg:h-screen lg:sticky lg:top-0 order-1 lg:order-2 z-10">
+        <div className="w-full h-full py-3 px-0 flex flex-col min-h-0">
+          <ComponentPreview name={slug} className="h-full" />
+        </div>
+      </div>
+    </>
   );
 }

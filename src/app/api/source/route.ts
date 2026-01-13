@@ -8,7 +8,7 @@ import { getDemoSourceCode, getComponentSourceCode } from "@/lib/source-reader";
  * 
  * Query params:
  *   type: "demo" | "component"
- *   name: component ID (e.g., "vanish-form")
+ *   name: component ID (e.g., "adaptive-tooltip")
  */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

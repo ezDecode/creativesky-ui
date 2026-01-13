@@ -5,8 +5,8 @@
  * 
  * These components fetch and display source code from the codebase.
  * They're used in MDX files like:
- *   <DemoCode name="vanish-form" />
- *   <ComponentCode name="vanish-form" />
+ *   <DemoCode name="adaptive-tooltip" />
+ *   <ComponentCode name="adaptive-tooltip" />
  */
 
 import * as React from "react";
