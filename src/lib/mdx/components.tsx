@@ -3,7 +3,7 @@
  * 
  * Defines custom components available in MDX files.
  * This is the "component mapping" that allows MDX to use:
- * - Custom UI components (ComponentPreview, CodeBlock)
+ * - Custom UI components (ComponentPreview, CodeBlock, Callout, Steps)
  * - Enhanced HTML elements (custom headings, links, etc.)
  * - Registry-based component resolution
  * 
@@ -17,6 +17,8 @@ import type { ComponentType, ReactNode } from 'react';
 import { CodeBlock } from '@/components/code/CodeBlock';
 import { ComponentPreview } from '@/components/lab/ComponentPreview';
 import { DemoCodeWrapper, ComponentCodeWrapper } from './SourceCodeWrapper';
+import { Callout } from '@/components/mdx/Callout';
+import { Steps, Step } from '@/components/mdx/Steps';
 import { cn } from "@/lib/utils";
 
 /**
@@ -24,7 +26,7 @@ import { cn } from "@/lib/utils";
  * 
  * Keys are either:
  * - HTML elements: 'h1', 'h2', 'p', 'pre', 'code', etc.
- * - Custom components: 'ComponentPreview', 'Demo', etc.
+ * - Custom components: 'ComponentPreview', 'Callout', 'Steps', etc.
  */
 export type MDXComponents = Record<string, ComponentType<any>>;
 
@@ -53,13 +55,20 @@ function H2({ children, ...props }: any) {
     : undefined;
 
   return (
-    <div className="group flex items-center gap-2 mt-12 mb-6 scroll-mt-20">
+    <div className="group flex items-center gap-2 mt-12 mb-6 scroll-mt-24">
       <h2
         id={id}
-        className="text-2xl font-semibold tracking-tight text-foreground border-b border-border/10 pb-2 w-full"
+        className="text-2xl font-semibold tracking-tight text-foreground w-full flex items-center gap-2"
         {...props}
       >
         {children}
+        <a
+          href={`#${id}`}
+          className="opacity-0 group-hover:opacity-100 transition-opacity text-primary/50 hover:text-primary"
+          aria-label="Permalink"
+        >
+          #
+        </a>
       </h2>
     </div>
   );
@@ -73,10 +82,17 @@ function H3({ children, ...props }: any) {
   return (
     <h3
       id={id}
-      className="scroll-mt-20 text-xl font-semibold tracking-tight mb-3 mt-8 text-foreground"
+      className="group scroll-mt-24 text-xl font-semibold tracking-tight mb-3 mt-8 text-foreground flex items-center gap-2"
       {...props}
     >
       {children}
+      <a
+        href={`#${id}`}
+        className="opacity-0 group-hover:opacity-100 transition-opacity text-primary/50 hover:text-primary text-sm"
+        aria-label="Permalink"
+      >
+        #
+      </a>
     </h3>
   );
 }
@@ -86,7 +102,7 @@ function H3({ children, ...props }: any) {
  */
 function P({ children, ...props }: any) {
   return (
-    <p className="text-base leading-7 text-muted-foreground mb-6 last:mb-0" {...props}>
+    <p className="text-base leading-7 text-muted-foreground mb-6 last:mb-0 max-w-[69ch]" {...props}>
       {children}
     </p>
   );
@@ -97,7 +113,7 @@ function P({ children, ...props }: any) {
  */
 function Ul({ children, ...props }: any) {
   return (
-    <ul className="my-6 ml-6 list-none space-y-2" {...props}>
+    <ul className="my-6 ml-6 list-none space-y-2 max-w-[69ch]" {...props}>
       {children}
     </ul>
   );
@@ -106,7 +122,7 @@ function Ul({ children, ...props }: any) {
 function Li({ children, ...props }: any) {
   return (
     <li className="relative pl-2" {...props}>
-      <span className="absolute left-[-1.5rem] top-2 h-1.5 w-1.5 rounded-full bg-primary/60 content-['']" />
+      <span className="absolute left-[-1.5rem] top-2.5 h-1.5 w-1.5 rounded-full bg-primary/60 content-['']" />
       <span className="text-muted-foreground leading-7">{children}</span>
     </li>
   );
@@ -117,7 +133,7 @@ function Li({ children, ...props }: any) {
  */
 function Ol({ children, ...props }: any) {
   return (
-    <ol className="my-6 ml-6 list-decimal space-y-2 marker:text-muted-foreground/60 marker:font-medium" {...props}>
+    <ol className="my-6 ml-6 list-decimal space-y-2 marker:text-muted-foreground/60 marker:font-medium max-w-[69ch]" {...props}>
       {children}
     </ol>
   );
@@ -129,7 +145,7 @@ function Ol({ children, ...props }: any) {
 function Blockquote({ children, ...props }: any) {
   return (
     <blockquote
-      className="my-6 border-l-2 border-primary/20 bg-muted/10 pl-6 py-4 rounded-r-lg text-muted-foreground italic"
+      className="my-6 pl-6 py-3 border-l-2 border-primary/30 text-muted-foreground italic bg-muted/20 rounded-r-lg"
       {...props}
     >
       {children}
@@ -174,7 +190,7 @@ function A({ children, href, ...props }: any) {
   return (
     <a
       href={href}
-      className="font-medium text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-colors"
+      className="font-medium text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition-all"
       {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...props}
     >
@@ -192,7 +208,7 @@ function Pre({ children, ...props }: any) {
 
   if (typeof code === 'string') {
     return (
-      <div className="my-6 overflow-hidden rounded-xl border border-border/10 bg-zinc-950 dark:bg-zinc-900 shadow-sm">
+      <div className="my-6 overflow-hidden rounded-xl border border-border/10 bg-zinc-950 dark:bg-zinc-900 shadow-sm ring-1 ring-border/5">
         <CodeBlock code={code.trim()} language={language} />
       </div>
     );
@@ -215,7 +231,7 @@ function Code({ children, className, ...props }: any) {
 
   return (
     <code
-      className="relative rounded bg-muted/30 px-[0.3rem] py-[0.1rem] font-mono text-sm font-medium text-foreground border border-border/10"
+      className="relative rounded bg-muted/40 px-[0.3rem] py-[0.1rem] font-mono text-sm font-medium text-foreground border border-border/10"
       {...props}
     >
       {children}
@@ -279,6 +295,21 @@ function Td({ children, ...props }: any) {
 }
 
 /**
+ * Image component
+ */
+function Img({ src, alt, ...props }: any) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className="rounded-xl border border-border/10 my-8 w-full h-auto shadow-sm"
+      {...props}
+    />
+  );
+}
+
+/**
  * Get MDX components map
  */
 export function getMDXComponents(): MDXComponents {
@@ -286,6 +317,9 @@ export function getMDXComponents(): MDXComponents {
     ComponentPreview: ComponentPreview,
     DemoCode: DemoCodeWrapper,
     ComponentCode: ComponentCodeWrapper,
+    Callout,
+    Steps,
+    Step,
     h1: H1,
     h2: H2,
     h3: H3,
@@ -306,6 +340,7 @@ export function getMDXComponents(): MDXComponents {
     em: Em,
     hr: Hr,
     a: A,
+    img: Img,
   };
 }
 

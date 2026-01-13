@@ -54,8 +54,8 @@ export function DemoContainer({
             viewport === "desktop"
               ? "w-full"
               : viewport === "tablet"
-                ? "w-[48rem]" // ~768px
-                : "w-[24rem]" // ~384px
+                ? "w-full max-w-[48rem]" // ~768px
+                : "w-full max-w-[24rem]" // ~384px
           )}
         >
           <div

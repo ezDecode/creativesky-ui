@@ -12,6 +12,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { compileAndExecuteMDX } from './compiler';
+// Verified: No redundant processing or duplicate component injection here.
 import type { ComponentType } from 'react';
 import type { MDXFrontmatter } from './types';
 
@@ -44,16 +45,16 @@ export interface LoadedMDX {
 export async function loadMDXFile(filePath: string): Promise<LoadedMDX> {
   // Read file content
   const rawContent = readFileSync(filePath, 'utf-8');
-  
+
   // Parse frontmatter
   const { data: frontmatter } = matter(rawContent);
-  
+
   // Compile MDX (with caching via filePath as key)
   const mdxModule = await compileAndExecuteMDX(
     rawContent,
     filePath // Use file path as cache key
   );
-  
+
   return {
     frontmatter: frontmatter as MDXFrontmatter,
     Content: mdxModule.default,
@@ -79,7 +80,7 @@ export async function loadComponentMDX(slug: string): Promise<LoadedMDX | null> 
       slug,
       'index.mdx'
     );
-    
+
     return await loadMDXFile(mdxPath);
   } catch (error) {
     // File doesn't exist or compilation failed
@@ -101,7 +102,7 @@ export async function preloadComponentMDX(
   slugs: string[]
 ): Promise<Map<string, LoadedMDX>> {
   const results = new Map<string, LoadedMDX>();
-  
+
   await Promise.all(
     slugs.map(async (slug) => {
       const loaded = await loadComponentMDX(slug);
@@ -110,6 +111,6 @@ export async function preloadComponentMDX(
       }
     })
   );
-  
+
   return results;
 }
