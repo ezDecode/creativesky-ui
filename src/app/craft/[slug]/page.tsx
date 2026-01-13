@@ -61,43 +61,43 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             {/* Header Group: Sidebar Trigger + Breadcrumbs */}
             <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-xl border-b border-border/10 -mx-6 px-6 lg:-mx-20 lg:px-20 py-4 mb-12 flex items-center justify-between gap-6">
               <div className="flex items-center gap-6">
-                <CraftNavDrawer 
-                  components={components} 
-                  trigger={
-                    <button className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border/40 bg-background/50 backdrop-blur-md text-muted-foreground hover:text-foreground hover:border-border transition-all w-fit group shadow-sm">
-                      <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                      <span className="text-sm font-medium tracking-tight">Explore Library</span>
-                    </button>
-                  }
-                />
-                
-                  <nav className="hidden sm:flex items-center gap-3 text-sm text-muted-foreground">
-                    <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-                    <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 opacity-40" />
-                    <span className="text-foreground font-semibold truncate max-w-[200px]">
-                      {displayTitle}
-                    </span>
-                  </nav>
-              </div>
-
-              <Link 
-                href="/craft" 
-                className="group flex items-center justify-center w-9 h-9 rounded-full border border-border/40 bg-background/50 backdrop-blur-md hover:border-border transition-all duration-300"
-              >
-                <Icon icon="lucide:x" className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-              </Link>
-            </header>
-
-            {/* Documentation Section */}
-            <div className="flex-1 max-w-2xl">
-                <div className="mb-12 space-y-4">
-                  <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground">
-                    {displayTitle}
-                  </h1>
-                  <p className="text-lg text-muted-foreground/80 font-normal leading-relaxed">
-                    Exploring the principles of {displayTitle.toLowerCase()} through high-end interaction and motion design.
-                  </p>
+                  <CraftNavDrawer 
+                    components={components} 
+                    trigger={
+                      <button className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border/40 bg-background/50 backdrop-blur-md text-muted-foreground hover:text-foreground hover:border-border transition-all w-fit group shadow-sm">
+                        <Icon icon="lucide:layout-grid" className="w-4 h-4 transition-transform" />
+                        <span className="text-sm font-medium tracking-tight">Explore Library</span>
+                      </button>
+                    }
+                  />
+                  
+                    <nav className="hidden sm:flex items-center gap-3 text-sm text-muted-foreground">
+                      <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+                      <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 opacity-40" />
+                      <span className="text-foreground font-semibold truncate max-w-[200px]">
+                        {displayTitle}
+                      </span>
+                    </nav>
                 </div>
+
+                <Link 
+                  href="/craft" 
+                  className="group flex items-center justify-center w-9 h-9 rounded-full border border-border/40 bg-background/50 backdrop-blur-md hover:border-border transition-all duration-300"
+                >
+                  <Icon icon="lucide:x" className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </Link>
+              </header>
+
+              {/* Documentation Section */}
+              <div className="flex-1 max-w-2xl">
+                  <div className="mb-12 space-y-4">
+                    <h1 className="text-4xl font-semibold tracking-tight text-foreground">
+                      {displayTitle}
+                    </h1>
+                    <p className="text-base text-muted-foreground/80 font-normal leading-relaxed">
+                      Exploring the principles of {displayTitle.toLowerCase()} through high-end interaction and motion design.
+                    </p>
+                  </div>
 
               <article className="prose prose-zinc dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground/90 prose-p:leading-relaxed prose-pre:bg-zinc-900/80 prose-pre:backdrop-blur-md prose-pre:border prose-pre:border-border/10 prose-h2:text-3xl prose-h2:mt-20 prose-h2:mb-8 prose-h3:text-xl prose-h3:mt-12 prose-p:my-6 prose-pre:my-10 prose-li:text-muted-foreground/90">
                 {mdxContent ? (

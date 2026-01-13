@@ -48,7 +48,7 @@ export default function CraftPage() {
                 components={components} 
                 trigger={
                   <button className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border/40 bg-background/50 backdrop-blur-md text-muted-foreground hover:text-foreground hover:border-border transition-all w-fit group shadow-sm">
-                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <Icon icon="lucide:layout-grid" className="w-4 h-4 transition-transform" />
                     <span className="text-sm font-medium tracking-tight">Explore Library</span>
                   </button>
                 }
@@ -61,7 +61,7 @@ export default function CraftPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className="text-5xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground via-foreground to-muted-foreground/40 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl font-semibold tracking-tight bg-linear-to-br from-foreground via-foreground to-muted-foreground/40 bg-clip-text text-transparent"
             >
               Craft
             </motion.h1>
@@ -69,7 +69,7 @@ export default function CraftPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-              className="text-lg sm:text-xl text-muted-foreground/90 leading-relaxed max-w-2xl font-normal"
+              className="text-base sm:text-lg text-muted-foreground/90 leading-relaxed max-w-2xl font-normal"
             >
               A minimalist laboratory for exploring refined UI components and experiments.
               Each piece is crafted with a focus on motion, aesthetics, and high-end
@@ -89,34 +89,34 @@ export default function CraftPage() {
             <motion.div key={component.id} variants={itemVariants}>
                 <Link
                   href={`/craft/${component.id}`}
-                  className="group relative flex flex-col h-full min-h-[320px] overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xs p-8 transition-all duration-500 hover:bg-card/60 hover:border-border/80 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)]"
+                  className="group relative flex flex-col h-full min-h-[320px] overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xs p-8 transition-all duration-500 hover:bg-card/60 hover:border-border/80 hover:shadow-lg"
                 >
                 {/* Subtle Glow Effect */}
-                <div className="absolute -inset-px bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute -inset-px bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 
                 <div className="flex flex-col gap-6 relative z-10 h-full">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-semibold text-muted-foreground/50 uppercase tracking-[0.2em] bg-muted/30 px-2.5 py-1 rounded-full border border-border/10">
                       Experimental
                     </span>
-                    <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <Icon icon="lucide:arrow-up-right" className="w-4 h-4 text-muted-foreground" />
+                    <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 transition-all duration-500">
+                      <Icon icon="lucide:arrow-up-right" className="w-4 h-4 text-muted-foreground/50 group-hover:text-foreground transition-colors" />
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <h3 className="text-2xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl font-semibold text-foreground tracking-tight transition-colors duration-300">
                       {component.title}
                     </h3>
 
                     {component.description && (
-                      <p className="text-muted-foreground/70 leading-relaxed font-normal line-clamp-3 text-base">
+                      <p className="text-muted-foreground/70 leading-relaxed font-normal line-clamp-3 text-sm">
                         {component.description}
                       </p>
                     )}
                   </div>
 
-                  <div className="mt-auto pt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-all duration-300">
+                  <div className="mt-auto pt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground transition-all duration-300">
                     <span>View Details</span>
                     <Icon icon="lucide:chevron-right" className="w-4 h-4" />
                   </div>
