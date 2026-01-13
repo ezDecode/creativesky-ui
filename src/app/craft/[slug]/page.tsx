@@ -31,12 +31,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-      <div className="max-w-[1400px] mx-auto px-6 py-12 lg:py-20">
+      <div className="max-w-[1400px] mx-auto px-6 py-6 lg:py-10">
         <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
           {/* Left Column: Content */}
           <div className="flex-1 min-w-0">
             {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+            <nav className="sticky top-0 z-20 flex items-center gap-2 text-sm text-muted-foreground mb-8 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4">
               <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
               <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
               <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
@@ -61,7 +61,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Right Column: Sticky Preview */}
           <div className="lg:w-1/2 lg:sticky lg:top-12 lg:max-h-[calc(100vh-6rem)]">
             <div 
-              className="group relative rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden h-[450px] lg:h-[700px] shadow-2xl ring-1 ring-white/5"
+              className="group relative rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden h-[450px] lg:h-[700px] shadow-2xl ring-1 ring-white/5 p-2"
             >
               <ComponentPreview name={slug} className="bg-transparent" />
             </div>
