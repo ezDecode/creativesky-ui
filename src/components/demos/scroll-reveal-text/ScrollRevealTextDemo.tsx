@@ -13,25 +13,12 @@ import { ScrollRevealTextFramer } from '@/content/scroll-reveal-text/scroll-reve
 
 const ScrollRevealTextDemo: React.FC<{ scrollContainerRef?: React.RefObject<HTMLDivElement> }> = ({ scrollContainerRef }) => {
     return (
-        <div className="w-full relative">
-            <ScrollRevealTextFramer
-                phrase="Experience the smooth revelation of text as you scroll deeper."
-                highlightWords={["smooth", "scroll", "deeper"]}
-                primaryColor="#8b5cf6"
-                config={{
-                    leadCount: 2,
-                    scrollDistance: 120,
-                    springStiffness: 120,
-                    springDamping: 25
-                }}
-                scrollContainerRef={scrollContainerRef}
-            />
-
-            {/* Extra spacing at bottom to ensure full scroll */}
-            <div className="h-[50vh] w-full flex items-center justify-center pb-10">
-                <span className="text-sm">End of demo</span>
-            </div>
-        </div>
+        <ScrollRevealTextFramer
+            phrase="A wandering teacup hummed softly while invisible kites drifted past a forgotten clock, sprinkling echoes of lavender across a sidewalk that never learned where it was going."
+            highlightWords={["wandering", "teacup", "kites", "clock", "echoes", "sidewalk", "going"]}
+            primaryColor="#ff6b00"
+            scrollContainerRef={scrollContainerRef}
+        />
     );
 };
 

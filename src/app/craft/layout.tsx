@@ -1,7 +1,7 @@
 import { getAllComponentsMetadata } from "@/lib/registry/resolver";
-import { LabNavDrawer } from "@/components/lab/LabNavDrawer";
+import { CraftNavDrawer } from "@/components/craft/CraftNavDrawer";
 
-export default function LabLayout({
+export default function CraftLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function LabLayout({
       <div className="w-full">
         {children}
       </div>
-      <LabNavDrawer components={components} />
+      <CraftNavDrawer components={components} />
     </div>
   );
 }

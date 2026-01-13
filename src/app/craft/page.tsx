@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 
-export default function LabPage() {
+export default function CraftPage() {
   const components = getAllComponentsMetadata();
 
   return (
@@ -9,8 +9,8 @@ export default function LabPage() {
 
       {/* Header */}
       <header className="flex flex-col gap-6 border-b border-border/10 pb-12">
-        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-foreground bg-gradient-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
-          Lab
+        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
+          Craft
         </h1>
         <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
           A minimalist laboratory for exploring refined UI components and experiments.
@@ -24,12 +24,12 @@ export default function LabPage() {
         {components.map((component, index) => (
           <Link
             key={component.id}
-            href={`/lab/${component.id}`}
+            href={`/craft/${component.id}`}
             className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-border/40 bg-zinc-50/50 dark:bg-zinc-900/20 p-6 sm:p-8 transition-all duration-300 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 hover:border-border/80 hover:shadow-xl hover:-translate-y-1"
             style={{ animationDelay: `${index * 50}ms` }}
           >
             {/* Background Gradient Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-muted/10 opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-transparent to-muted/10 opacity-0 transition-opacity group-hover:opacity-100" />
 
             <div className="flex flex-col gap-4 relative z-10 h-full">
               <div className="flex items-center justify-between">

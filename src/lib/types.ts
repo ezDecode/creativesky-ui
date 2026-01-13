@@ -8,26 +8,35 @@ export type ComponentCategory =
   | "layout" 
   | "visual" 
   | "data-display" 
-  | "feedback";
+  | "feedback"
+  | "ui";
 
-export type ComponentStatus = "stable" | "experimental";
+export type ComponentStatus = "stable" | "experimental" | "deprecated";
 
 export type ComponentSourceType = "local" | "remote" | "user-uploaded" | "mdx";
 
 export interface ComponentSource {
   type: ComponentSourceType;
   path: string;
-  url?: string; // For remote sources
+  url?: string;
 }
 
 export interface ComponentDemo {
   variants: string[];
   defaultProps: Record<string, any>;
+  /** Whether this component needs a scroll container */
+  scrollable?: boolean;
+  /** External demo URL */
+  external?: string;
+  /** Minimum height for demo container */
+  minHeight?: string;
+  /** Background preference */
+  background?: "light" | "dark" | "transparent";
 }
 
 export interface ComponentDesign {
-  surface: "flat" | "elevated" | "inset";
-  motion: "spring" | "smooth" | "linear" | "none";
+  surface: "flat" | "elevated" | "inset" | "glassmorphic";
+  motion: "spring" | "smooth" | "linear" | "none" | "scroll-locked";
 }
 
 export interface RegistryComponent {
@@ -45,6 +54,11 @@ export interface RegistryComponent {
   design: ComponentDesign;
   readme?: string;
   dependencies?: string[];
+  /** Author information */
+  author?: {
+    name: string;
+    url?: string;
+  };
 }
 
 export interface ComponentRegistry {

@@ -14,11 +14,11 @@ import {
 import { cn } from "@/lib/utils";
 import { RegistryComponent } from "@/lib/types";
 
-interface LabNavDrawerProps {
+interface CraftNavDrawerProps {
     components: RegistryComponent[];
 }
 
-export function LabNavDrawer({ components }: LabNavDrawerProps) {
+export function CraftNavDrawer({ components }: CraftNavDrawerProps) {
     const pathname = usePathname();
     const [open, setOpen] = React.useState(false);
 
@@ -47,7 +47,7 @@ export function LabNavDrawer({ components }: LabNavDrawerProps) {
                 <DrawerHeader className="border-b border-border/10 pb-4">
                     <DrawerTitle>Components</DrawerTitle>
                     <DrawerDescription>
-                        Navigate through the lab examples.
+                        Navigate through the craft examples.
                     </DrawerDescription>
                 </DrawerHeader>
 
@@ -55,9 +55,9 @@ export function LabNavDrawer({ components }: LabNavDrawerProps) {
                     <div className="space-y-6">
                         <NavSection title="Getting started">
                             <NavItem
-                                href="/lab"
+                                href="/craft"
                                 label="Introduction"
-                                active={pathname === "/lab"}
+                                active={pathname === "/craft"}
                             />
                         </NavSection>
 
@@ -66,9 +66,9 @@ export function LabNavDrawer({ components }: LabNavDrawerProps) {
                                 {sortedComponents.map((component) => (
                                     <li key={component.id}>
                                         <NavItem
-                                            href={`/lab/${component.id}`}
+                                            href={`/craft/${component.id}`}
                                             label={component.title}
-                                            active={pathname === `/lab/${component.id}`}
+                                            active={pathname === `/craft/${component.id}`}
                                         />
                                     </li>
                                 ))}

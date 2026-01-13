@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useRef, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
-import styles from "./scroll-reveal-text.module.css";
 
 // ===========================================================================
 // TYPES
@@ -42,26 +41,32 @@ interface AnimatedWordProps {
     isHighlighted: boolean;
     primaryColor: string;
     leadCount: number;
+    springConfig: { stiffness: number; damping: number; restDelta: number };
 }
 
 // ===========================================================================
-// CONFIGURATION (Inlined)
+// CONFIGURATION - Refined for smoother feel
 // ===========================================================================
 
 const ANIMATION_CONFIG = {
     leadCount: { desktop: 8, mobile: 5 },
     scrollDistance: { desktop: 150, mobile: 100 },
     paddingDuration: 2,
-    spring: { stiffness: 100, damping: 30, restDelta: 0.001 },
+    // Refined spring config for buttery-smooth animations
+    spring: {
+        stiffness: 80,      // Lower = smoother, less snappy
+        damping: 25,        // Lower = more fluid motion
+        restDelta: 0.0001   // More precise rest detection
+    },
     phases: {
-        emergence: { start: 0, end: 0.15 },
-        focus: { start: 0.15, end: 0.7 },
-        reveal: { start: 0.7, end: 1.0 }
+        emergence: { start: 0, end: 0.12 },    // Slightly faster emergence
+        focus: { start: 0.12, end: 0.65 },     // Extended focus phase
+        reveal: { start: 0.65, end: 1.0 }      // Longer reveal for smoothness
     }
 } as const;
 
 // ===========================================================================
-// UTILITIES (Inlined)
+// UTILITIES
 // ===========================================================================
 
 /**
@@ -88,13 +93,9 @@ const isWordHighlighted = (word: string, highlightWords: string[]): boolean => {
 };
 
 // ===========================================================================
-// ANIMATED WORD COMPONENT
+// ANIMATED WORD COMPONENT - Refined with smoother transitions
 // ===========================================================================
 
-/**
- * Handles individual word animation based on scroll progress.
- * Uses scroll progress to animate through emergence → focus → reveal phases.
- */
 function AnimatedWord({
     word,
     index,
@@ -103,6 +104,7 @@ function AnimatedWord({
     isHighlighted,
     primaryColor,
     leadCount,
+    springConfig,
 }: AnimatedWordProps) {
     const rgb = hexToRgb(primaryColor);
     const { phases } = ANIMATION_CONFIG;
@@ -115,77 +117,106 @@ function AnimatedWord({
     // Phase boundaries within this word's window
     const phaseToScroll = (phase: number) => wordStart + (wordEnd - wordStart) * phase;
 
-    // Box opacity: 0 → 0.25 → 1 → 0 (emergence → focus → reveal)
+    // Per-word spring for ultra-smooth individual animations
+    const wordProgress = useSpring(scrollProgress, {
+        stiffness: springConfig.stiffness * 1.2,  // Slightly stiffer for words
+        damping: springConfig.damping * 0.9,
+        restDelta: springConfig.restDelta
+    });
+
+    // Box opacity: 0 → 0.3 → 1 → 0 (smoother emergence)
     const boxOpacity = useTransform(
-        scrollProgress,
+        wordProgress,
         [
             phaseToScroll(phases.emergence.start),
             phaseToScroll(phases.emergence.end),
             phaseToScroll(phases.focus.end),
             phaseToScroll(phases.reveal.end)
         ],
-        [0, 0.25, 1, 0]
+        [0, 0.3, 1, 0]
     );
 
-    // Box scale: 0.95 → 0.98 → 1 → 1.02
+    // Box scale: 0.92 → 0.97 → 1 → 1.03 (more subtle scale animation)
     const boxScale = useTransform(
-        scrollProgress,
+        wordProgress,
         [
             phaseToScroll(phases.emergence.start),
             phaseToScroll(phases.emergence.end),
             phaseToScroll(phases.focus.end),
             phaseToScroll(phases.reveal.end)
         ],
-        [0.95, 0.98, 1, 1.02]
+        [0.92, 0.97, 1, 1.03]
     );
 
-    // Box blur: 0 → 8px (during reveal)
+    // Box blur: 0 → 10px (during reveal - softer fade)
     const boxBlur = useTransform(
-        scrollProgress,
+        wordProgress,
         [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
-        [0, 8]
+        [0, 10]
     );
 
-    // Box background opacity
+    // Box background opacity - refined for glassmorphism
     const bgOpacity = useTransform(
-        scrollProgress,
+        wordProgress,
         [
             phaseToScroll(phases.emergence.start),
             phaseToScroll(phases.focus.start),
             phaseToScroll(phases.focus.end)
         ],
-        [0.1, 0.3, isHighlighted ? 0.55 : 0.45]
+        [0.08, 0.25, isHighlighted ? 0.5 : 0.4]
     );
 
-    // Box shadow intensity
+    // Box shadow - subtle only, no glow
     const shadowOpacity = useTransform(
-        scrollProgress,
+        wordProgress,
         [phaseToScroll(phases.focus.start), phaseToScroll(phases.focus.end)],
-        [0, isHighlighted ? 0.5 : 0.2]
+        [0, 0.15]
     );
 
     // Text opacity: 0 → 1 (during reveal phase)
     const textOpacity = useTransform(
-        scrollProgress,
+        wordProgress,
         [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
         [0, 1]
     );
 
+    // Text subtle Y movement for added depth
+    const textY = useTransform(
+        wordProgress,
+        [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
+        [4, 0]
+    );
+
     return (
-        <span className={styles.wordContainer}>
+        <span
+            className="relative inline-block align-middle"
+            style={{
+                margin: '0 0.12em',
+                fontFamily: 'var(--font-body, "PolySans", sans-serif)'
+            }}
+        >
+            {/* Text element */}
             <motion.span
-                className={`${styles.text} ${isHighlighted ? styles.highlighted : ''}`}
+                className="relative z-[2] whitespace-nowrap"
                 style={{
                     opacity: textOpacity,
-                    color: isHighlighted ? primaryColor : undefined
+                    y: textY,
+                    color: isHighlighted ? primaryColor : undefined,
+                    textShadow: isHighlighted ? `0 0 20px ${primaryColor}40` : undefined,
+                    willChange: 'opacity, transform',
+                    transition: 'color 0.3s ease'
                 }}
             >
                 {word}
             </motion.span>
+
+            {/* Glassmorphic pill/box element */}
             <motion.span
-                className={`${styles.box} ${isHighlighted ? styles.primary : ''}`}
                 aria-hidden="true"
+                className="absolute z-[1] left-1/2 top-1/2 pointer-events-none rounded-full"
                 style={{
+                    width: '102%',
+                    height: '72%',
                     x: "-50%",
                     y: "-50%",
                     opacity: boxOpacity,
@@ -199,10 +230,14 @@ function AnimatedWord({
                     ),
                     boxShadow: useTransform(
                         shadowOpacity,
-                        (v) => isHighlighted
-                            ? `0 0 50px rgba(${rgb}, ${v})`
-                            : `0 0 50px rgba(255, 255, 255, ${v})`
-                    )
+                        (v) => `0 2px 10px rgba(0, 0, 0, ${v})`
+                    ),
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
+                    border: isHighlighted
+                        ? `1px solid rgba(${rgb}, 0.3)`
+                        : '1px solid rgba(255, 255, 255, 0.1)',
+                    willChange: 'opacity, transform, background-color'
                 }}
             />
         </span>
@@ -210,30 +245,26 @@ function AnimatedWord({
 }
 
 // ===========================================================================
-// MAIN COMPONENT
+// MAIN COMPONENT - Tailwind CSS Version (Refined)
 // ===========================================================================
 
 /**
- * ScrollRevealTextFramer Component (Framer Motion Implementation)
+ * ScrollRevealTextFramer Component
  * 
  * A scroll-locked text reveal animation powered by Framer Motion.
- * Uses CSS sticky positioning for pinning and spring physics for smooth animations.
+ * Uses Tailwind CSS for styling with refined, buttery-smooth animations.
  * 
- * PINNING MECHANISM:
- * - The outer container is tall (scroll distance + 100vh)
- * - The inner element uses position:sticky with top:0
- * - As user scrolls, the sticky element stays pinned at viewport top
- * - useScroll tracks the container's position relative to viewport
+ * SCROLL MECHANICS:
+ * - Container height creates scroll distance for animation
+ * - Sticky positioning pins content at viewport top
+ * - useScroll tracks container position as 0-1 progress
+ * - useSpring applies physics smoothing for natural feel
  * 
  * @example
  * ```tsx
- * // Basic usage
- * <ScrollRevealTextFramer phrase="Your text here" />
- * 
- * // With highlights
  * <ScrollRevealTextFramer 
- *   phrase="Highlight these important words"
- *   highlightWords={["important", "words"]}
+ *   phrase="Your text here" 
+ *   highlightWords={["text"]}
  *   primaryColor="#00ff88"
  * />
  * ```
@@ -249,16 +280,17 @@ export function ScrollRevealTextFramer({
     const containerRef = useRef<HTMLDivElement>(null);
     const words = useMemo(() => phrase.split(" "), [phrase]);
 
-    // Detect mobile with state to avoid hydration mismatch
+    // Detect mobile for responsive adjustments
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        setIsMobile(window.innerWidth < 800);
-        const handleResize = () => setIsMobile(window.innerWidth < 800);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        const checkMobile = () => setIsMobile(window.innerWidth < 800);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // Merge config with defaults - prioritize user config
     const leadCount = config.leadCount ?? (isMobile
         ? ANIMATION_CONFIG.leadCount.mobile
         : ANIMATION_CONFIG.leadCount.desktop);
@@ -267,6 +299,7 @@ export function ScrollRevealTextFramer({
         ? ANIMATION_CONFIG.scrollDistance.mobile
         : ANIMATION_CONFIG.scrollDistance.desktop);
 
+    // Refined spring config for ultra-smooth scrolling
     const springConfig = {
         stiffness: config.springStiffness ?? ANIMATION_CONFIG.spring.stiffness,
         damping: config.springDamping ?? ANIMATION_CONFIG.spring.damping,
@@ -285,29 +318,93 @@ export function ScrollRevealTextFramer({
     });
 
     // Apply spring smoothing for buttery-smooth feel
-    const smoothProgress = useSpring(scrollYProgress, springConfig);
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: springConfig.stiffness,
+        damping: springConfig.damping,
+        restDelta: 0.001,
+    });
 
-    // Fade out content at the end of scroll to avoid awkward "slide up" unpinning
-    const contentOpacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
+    // Get container height for sticky element sizing
+    const [containerHeight, setContainerHeight] = useState("100vh");
+    
+    useEffect(() => {
+        if (scrollContainerRef?.current) {
+            const updateHeight = () => {
+                const height = scrollContainerRef.current?.clientHeight || window.innerHeight;
+                setContainerHeight(`${height}px`);
+            };
+            updateHeight();
+            window.addEventListener('resize', updateHeight);
+            return () => window.removeEventListener('resize', updateHeight);
+        }
+    }, [scrollContainerRef]);
 
     return (
         <div
             ref={containerRef}
-            className={styles.container}
-            style={{ height: `calc(${totalScrollDistance}px + 100vh)` }}
+            className="w-full relative isolate"
+            style={{
+                height: `calc(${totalScrollDistance}px + ${containerHeight})`,
+                backgroundColor: 'var(--color-bg, #0d0d0d)',
+                color: 'var(--color-text, #fff)'
+            }}
         >
             {/* Sticky inner container - pins content while scrolling */}
             <div
-                className={styles.pin}
+                className="w-full flex items-center justify-center sticky top-0 z-[1]"
                 style={{
-                    position: 'sticky',
-                    top: 0,
+                    height: containerHeight,
+                    backfaceVisibility: 'hidden',
+                    backgroundColor: 'var(--color-bg, #0d0d0d)',
+                    WebkitBackfaceVisibility: 'hidden'
                 }}
             >
-                <motion.div className={styles.content} style={{ opacity: contentOpacity }}>
-                    {title && <h1 className={styles.title}>{title}</h1>}
+                {/* Content wrapper with responsive sizing */}
+                <div
+                    className="w-full mx-auto"
+                    style={{
+                        maxWidth: isMobile ? '100%' : '680px',
+                        padding: isMobile ? '0 1rem' : '0 2rem',
+                        overflowWrap: 'break-word',
+                        boxSizing: 'border-box'
+                    }}
+                >
+                    {/* Title with gradient text */}
+                    {title && (
+                        <h1
+                            className="font-bold leading-[1.15]"
+                            style={{
+                                fontFamily: 'var(--font-heading, "PolySans", sans-serif)',
+                                fontSize: isMobile
+                                    ? 'clamp(1.5rem, 8vw, 2.25rem)'
+                                    : 'clamp(2.5rem, 5vw, 5rem)',
+                                marginBottom: isMobile ? '1.25rem' : '2rem',
+                                letterSpacing: '-0.03em',
+                                background: 'linear-gradient(to bottom, #fff 40%, #555)',
+                                WebkitBackgroundClip: 'text',
+                                backgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                color: 'transparent'
+                            }}
+                        >
+                            {title}
+                        </h1>
+                    )}
 
-                    <div className={styles.body}>
+                    {/* Body text container */}
+                    <div
+                        className="flex flex-wrap max-w-full"
+                        style={{
+                            fontFamily: 'var(--font-body, "PolySans", sans-serif)',
+                            fontSize: isMobile
+                                ? 'clamp(1.08rem, 4.8vw, 1.32rem)'
+                                : 'clamp(1.44rem, 2.64vw, 2.22rem)',
+                            fontWeight: 600,
+                            lineHeight: isMobile ? 1.75 : 1.42,
+                            rowGap: isMobile ? '0.3em' : '0.18em',
+                            wordSpacing: isMobile ? '0.06em' : '0.025em'
+                        }}
+                    >
                         {words.map((word, index) => (
                             <AnimatedWord
                                 key={index}
@@ -318,10 +415,11 @@ export function ScrollRevealTextFramer({
                                 isHighlighted={isWordHighlighted(word, highlightWords)}
                                 primaryColor={primaryColor}
                                 leadCount={leadCount}
+                                springConfig={springConfig}
                             />
                         ))}
                     </div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

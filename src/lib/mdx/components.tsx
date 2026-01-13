@@ -7,18 +7,23 @@
  * - Enhanced HTML elements (custom headings, links, etc.)
  * - Registry-based component resolution
  * 
- * ARCHITECTURE:
- * - Server components by default
- * - Client components marked with 'use client' wrapper
- * - Maintains proper RSC boundaries
+ * AVAILABLE COMPONENTS:
+ * - ComponentPreview: Renders a component from the registry
+ * - Callout: Info, warning, error, success callouts
+ * - Steps/Step: Numbered step-by-step guides
+ * - PropsTable: API documentation tables
+ * - PropItem: Inline prop documentation
+ * - DemoCode: Shows source code for demos
+ * - ComponentCode: Shows component source code
  */
 
 import type { ComponentType, ReactNode } from 'react';
 import { CodeBlock } from '@/components/code/CodeBlock';
-import { ComponentPreview } from '@/components/lab/ComponentPreview';
+import { ComponentPreview } from '@/components/craft/ComponentPreview';
 import { DemoCodeWrapper, ComponentCodeWrapper } from './SourceCodeWrapper';
 import { Callout } from '@/components/mdx/Callout';
 import { Steps, Step } from '@/components/mdx/Steps';
+import { PropsTable, PropItem } from '@/components/mdx/PropsTable';
 import { cn } from "@/lib/utils";
 
 /**
@@ -314,12 +319,16 @@ function Img({ src, alt, ...props }: any) {
  */
 export function getMDXComponents(): MDXComponents {
   return {
-    ComponentPreview: ComponentPreview,
+    // Custom components
+    ComponentPreview,
     DemoCode: DemoCodeWrapper,
     ComponentCode: ComponentCodeWrapper,
     Callout,
     Steps,
     Step,
+    PropsTable,
+    PropItem,
+    // HTML elements
     h1: H1,
     h2: H2,
     h3: H3,

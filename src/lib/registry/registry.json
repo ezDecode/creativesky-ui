@@ -125,7 +125,9 @@
         "external": "https://text-box-scroll.vercel.app/",
         "variants": [
           "default"
-        ]
+        ],
+        "defaultProps": {},
+        "scrollable": true
       },
       "design": {
         "surface": "glassmorphic",
