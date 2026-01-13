@@ -26,8 +26,8 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
-  const { metadata } = resolved;
   const mdxContent = await loadComponentMDX(slug);
+  const displayTitle = mdxContent?.frontmatter.title || slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
@@ -41,20 +41,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
               <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
               <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
               <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-              <span className="text-foreground font-normal">{metadata.title}</span>
+              <span className="text-foreground font-normal">
+                {displayTitle}
+              </span>
             </nav>
-
-            {/* Header */}
-            <header className="mb-12">
-              <h1 className="text-3xl lg:text-4xl font-semibold tracking-tight mb-4">
-                {metadata.title}
-              </h1>
-              {metadata.description && (
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  {metadata.description}
-                </p>
-              )}
-            </header>
 
             {/* Documentation Section */}
             <section className="max-w-none">
