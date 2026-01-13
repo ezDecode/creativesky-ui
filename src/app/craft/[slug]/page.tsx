@@ -91,7 +91,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
               prose-headings:font-medium prose-headings:tracking-tight 
               prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 
               prose-h3:text-md prose-h3:mt-8 prose-h3:mb-2
-              prose-p:text-sm prose-p:leading-relaxed prose-p:text-muted-foreground/60 prose-p:font-light
+                prose-p:text-sm prose-p:leading-relaxed prose-p:text-muted-foreground/70 prose-p:font-light
               prose-a:text-foreground prose-a:underline-offset-4 hover:prose-a:text-primary transition-colors
               prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border/10 prose-pre:rounded-xl prose-pre:p-4
               prose-code:text-foreground prose-code:font-mono prose-code:text-xs prose-code:bg-muted/30 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none

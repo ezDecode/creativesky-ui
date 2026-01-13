@@ -22,7 +22,7 @@ export default function CraftPage() {
             <CraftNavDrawer 
               components={components} 
               trigger={
-                <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group outline-none">
+                <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-all duration-300 w-fit group outline-none">
                   <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-medium tracking-tight">Library</span>
                 </button>
@@ -61,7 +61,7 @@ export default function CraftPage() {
                 </h3>
               </div>
               {component.description && (
-                <p className="text-sm text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/60 transition-colors">
+                <p className="text-sm text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/70 transition-colors">
                   {component.description}
                 </p>
               )}

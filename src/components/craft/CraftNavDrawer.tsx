@@ -176,7 +176,7 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                                         {component.title}
                                                     </div>
                                                     {isActive && (
-                                                        <Icon icon="lucide:check" className="w-3 h-3 opacity-60" />
+                                                        <Icon icon="lucide:check" className="w-3 h-3 opacity-70" />
                                                     )}
                                                 </Link>
                                             </motion.div>
