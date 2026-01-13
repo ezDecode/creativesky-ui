@@ -65,11 +65,11 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
                   {displayTitle}
                 </h1>
-                {mdxContent?.frontmatter.description && (
-                  <p className="text-base text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
-                    {mdxContent.frontmatter.description}
-                  </p>
-                )}
+                  {mdxContent?.frontmatter.description && (
+                    <p className="text-base text-muted-foreground/50 leading-relaxed font-light tracking-tight w-[70%]">
+                      {mdxContent.frontmatter.description}
+                    </p>
+                  )}
             </div>
           </header>
 

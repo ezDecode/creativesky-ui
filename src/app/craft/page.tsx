@@ -35,7 +35,7 @@ export default function CraftPage() {
           <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
             Crafting the <span className="text-muted-foreground/30 font-serif">Future</span>.
           </h1>
-          <p className="text-base text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
+          <p className="text-base text-muted-foreground/50 leading-relaxed font-light tracking-tight w-[70%]">
             A laboratory for refined components and motion experiments.
             Focused on the intersection of aesthetics and high-end interaction.
           </p>
@@ -61,7 +61,7 @@ export default function CraftPage() {
                 </h3>
               </div>
               {component.description && (
-                <p className="text-[15px] text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/70 transition-colors">
+                <p className="text-[15px] text-muted-foreground/40 leading-relaxed font-light ml-7 w-[70%] line-clamp-1 group-hover:text-muted-foreground/70 transition-colors">
                   {component.description}
                 </p>
               )}

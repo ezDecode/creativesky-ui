@@ -49,9 +49,9 @@ export default function Home() {
                   </Link> to explore the components.
                 </p>
 
-                <p className="text-xl sm:text-2xl text-muted-foreground/80 font-light leading-relaxed">
-                  I build systems that balance ambition with pragmatism. My work spans reusable foundations that scale, intelligent visual experiences that adapt, and cloud-native reliability that endures.
-                </p>
+                  <p className="text-xl sm:text-2xl text-muted-foreground/80 font-light leading-relaxed w-[70%]">
+                    I build systems that balance ambition with pragmatism. My work spans reusable foundations that scale, intelligent visual experiences that adapt, and cloud-native reliability that endures.
+                  </p>
 
                 <div className="flex items-center gap-6 pt-4">
                   <Link href="mailto:ezdecode@gmail.com" className="group flex items-center gap-2 text-sm font-normal text-foreground/80 transition-colors hover:text-foreground">
