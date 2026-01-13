@@ -16,9 +16,10 @@ import { RegistryComponent } from "@/lib/types";
 
 interface CraftNavDrawerProps {
     components: RegistryComponent[];
+    trigger?: React.ReactNode;
 }
 
-export function CraftNavDrawer({ components }: CraftNavDrawerProps) {
+export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
     const pathname = usePathname();
     const [open, setOpen] = React.useState(false);
 
@@ -35,12 +36,14 @@ export function CraftNavDrawer({ components }: CraftNavDrawerProps) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <button
-                    className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-border/10 bg-foreground text-background shadow-2xl transition-transform hover:scale-105 active:scale-95"
-                    aria-label="Open components menu"
-                >
-                    <MenuIcon />
-                </button>
+                {trigger || (
+                    <button
+                        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-border/10 bg-foreground text-background shadow-2xl transition-transform hover:scale-105 active:scale-95"
+                        aria-label="Open components menu"
+                    >
+                        <MenuIcon />
+                    </button>
+                )}
             </DrawerTrigger>
 
             <DrawerContent>

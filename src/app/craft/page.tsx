@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getAllComponentsMetadata } from "@/lib/registry/resolver";
+import { CraftNavDrawer } from "@/components/craft/CraftNavDrawer";
+import { Icon } from "@iconify/react";
 
 export default function CraftPage() {
   const components = getAllComponentsMetadata();
@@ -8,15 +10,34 @@ export default function CraftPage() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-12 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards sm:p-0">
 
       {/* Header */}
-      <header className="flex flex-col gap-6 border-b border-border/10 pb-12">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
-          Craft
-        </h1>
-        <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
-          A minimalist laboratory for exploring refined UI components and experiments.
-          Each piece is crafted with a focus on motion, aesthetics, and high-end
-          interaction design principles.
-        </p>
+      <header className="flex flex-col gap-10 border-b border-border/10 pb-12">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Icon icon="lucide:arrow-left" className="w-5 h-5" />
+            </Link>
+            <CraftNavDrawer 
+              components={components} 
+              trigger={
+                <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group">
+                  <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  <span className="text-sm font-medium">Explore</span>
+                </button>
+              }
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
+            Craft
+          </h1>
+          <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
+            A minimalist laboratory for exploring refined UI components and experiments.
+            Each piece is crafted with a focus on motion, aesthetics, and high-end
+            interaction design principles.
+          </p>
+        </div>
       </header>
 
       {/* Component Grid */}

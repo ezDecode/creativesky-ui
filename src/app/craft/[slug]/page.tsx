@@ -4,6 +4,7 @@ import { getAllComponentsMetadata, resolveComponent } from "@/lib/registry/resol
 import { loadComponentMDX } from "@/lib/mdx/loader";
 import { getMDXComponents } from "@/lib/mdx/components";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
+import { CraftNavDrawer } from "@/components/craft/CraftNavDrawer";
 import { Icon } from "@iconify/react";
 
 interface ComponentPageProps {
@@ -19,7 +20,7 @@ export async function generateStaticParams() {
 
 export default async function ComponentPage({ params }: ComponentPageProps) {
   const { slug } = await params;
-
+  const components = getAllComponentsMetadata();
   const resolved = await resolveComponent(slug).catch(() => null);
 
   if (!resolved) {
@@ -42,16 +43,28 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
           {/* Left Column: Content */}
           <div className="px-6 py-6 lg:py-10 lg:px-16 lg:order-1">
-            {/* Breadcrumbs */}
-            <nav className="sticky top-0 z-20 flex items-center gap-2 text-sm text-muted-foreground mb-12 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4">
-              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-              <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-              <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-              <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-              <span className="text-foreground font-normal">
-                {displayTitle}
-              </span>
-            </nav>
+            {/* Header Group: Sidebar Trigger + Breadcrumbs */}
+            <header className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 mb-12 flex flex-col gap-6">
+              <CraftNavDrawer 
+                components={components} 
+                trigger={
+                  <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group">
+                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium">Explore Components</span>
+                  </button>
+                }
+              />
+              
+              <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+                <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
+                <span className="text-foreground font-normal">
+                  {displayTitle}
+                </span>
+              </nav>
+            </header>
 
             {/* Documentation Section */}
             <section className="max-w-2xl mx-auto lg:mx-0">
