@@ -121,14 +121,15 @@
         "type": "mdx",
         "path": "src/content/scroll-reveal-text/index.mdx"
       },
-      "demo": {
-        "external": "https://text-box-scroll.vercel.app/",
-        "variants": [
-          "default"
-        ],
-        "defaultProps": {},
-        "scrollable": true
-      },
+        "demo": {
+          "external": "https://text-box-scroll.vercel.app/",
+          "variants": [
+            "default"
+          ],
+          "defaultProps": {},
+          "scrollable": true,
+          "minHeight": "700px"
+        },
       "design": {
         "surface": "glassmorphic",
         "motion": "scroll-locked"

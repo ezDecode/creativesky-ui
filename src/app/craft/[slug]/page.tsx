@@ -55,7 +55,9 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
         {/* Preview Section */}
         <section className="mb-16">
-          <div className="group relative rounded-2xl border border-white/5 bg-zinc-800/50 overflow-hidden aspect-video lg:aspect-[16/9] xl:aspect-[21/9]">
+          <div 
+            className="group relative rounded-2xl border border-white/5 bg-zinc-800/50 overflow-hidden min-h-[450px] lg:min-h-[600px]"
+          >
             <ComponentPreview name={slug} className="bg-transparent" />
           </div>
         </section>
