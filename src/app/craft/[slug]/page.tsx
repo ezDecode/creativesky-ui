@@ -44,11 +44,11 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Content */}
           <div className="px-6 py-6 lg:py-10 lg:px-16 lg:order-1">
             {/* Header Group: Sidebar Trigger + Breadcrumbs */}
-            <header className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 mb-12 flex items-center gap-6">
+            <header className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2 mb-8 flex items-center gap-6 max-w-2xl">
               <CraftNavDrawer 
                 components={components} 
                 trigger={
-                  <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
+                  <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
                     <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
                     <span className="text-sm font-medium">Explore Components</span>
                   </button>
