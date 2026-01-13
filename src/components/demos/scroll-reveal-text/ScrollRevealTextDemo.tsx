@@ -14,9 +14,9 @@ import { ScrollRevealTextFramer } from '@/content/scroll-reveal-text/scroll-reve
 const ScrollRevealTextDemo: React.FC<{ scrollContainerRef?: React.RefObject<HTMLDivElement> }> = ({ scrollContainerRef }) => {
     return (
         <ScrollRevealTextFramer
-            phrase="A wandering teacup hummed softly while invisible kites drifted past a forgotten clock, sprinkling echoes of lavender across a sidewalk that never learned where it was going."
-            highlightWords={["wandering", "teacup", "kites", "clock", "echoes", "sidewalk", "going"]}
-            primaryColor="#ff6b00"
+            phrase="Meanwhile, beneath the surface of yesterday's dreams, a constellation of possibility whispered secrets to the patient minds who dared to listen. Every moment transforms into a doorway, every question becomes an invitation to discover what we never knew we were searching for."
+            highlightWords={["dreams", "constellation", "whispered", "patient", "transforms", "doorway", "invitation", "discover"]}
+            primaryColor="#6366f1"
             scrollContainerRef={scrollContainerRef}
         />
     );

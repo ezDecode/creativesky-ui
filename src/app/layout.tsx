@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ClientProviders } from "@/components/ClientProviders";
+
+// Primary font for UI (Inter Tight with mathematical scale)
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+// Secondary font for components (PolySans)
+const polySans = localFont({
+  src: [
+    {
+      path: "../../public/font/PolySansNeutral.ttf",
+      weight: "400",
+      style: "normal",
+    }
+  ],
+  variable: "--font-poly",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Skie — Experiment",
@@ -10,18 +33,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link
-          rel="preload"
-          href="/font/ZigatoSans.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body
-        className="antialiased min-h-screen bg-background text-foreground"
-        style={{ fontFamily: "'Zigato Sans', 'Inter Tight', sans-serif" }}
+        className={`${interTight.variable} ${polySans.variable} antialiased min-h-screen bg-background text-foreground font-sans`}
       >
         <ClientProviders>{children}</ClientProviders>
       </body>

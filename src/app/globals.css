@@ -1,15 +1,6 @@
-/* Updated: 2025-12-27 - Inter Tight Global Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-/* Local Zigato Sans */
-@font-face {
-  font-family: 'Zigato Sans';
-  src: url('/font/ZigatoSans.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
+/* Local fonts can be added here when available */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -110,14 +101,24 @@
     'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 
-  /* Prefer local Zigato Sans if available */
-  --font-sans: 'Zigato Sans', var(--font-sans);
+  --font-poly: 'PolySans', ui-sans-serif, system-ui, sans-serif;
 
   --font-serif: 'Inter Tight', ui-serif, Georgia, Cambria,
     'Times New Roman', Times, serif;
 
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 
     'Liberation Mono', 'Courier New', monospace;
+
+  /* Mathematical Typography Scale (1.25 - Major Third) */
+  --text-xs: 0.64rem;      /* 10.24px */
+  --text-sm: 0.8rem;       /* 12.8px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.25rem;      /* 20px */
+  --text-xl: 1.563rem;     /* 25px */
+  --text-2xl: 1.953rem;    /* 31.25px */
+  --text-3xl: 2.441rem;    /* 39.06px */
+  --text-4xl: 3.052rem;    /* 48.83px */
+  --text-5xl: 3.815rem;    /* 61.04px */
 
   --radius: 0.5rem;
 

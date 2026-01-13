@@ -192,7 +192,7 @@ function AnimatedWord({
             className="relative inline-block align-middle"
             style={{
                 margin: '0 0.12em',
-                fontFamily: 'var(--font-body, "PolySans", sans-serif)'
+                fontFamily: 'var(--font-poly, sans-serif)',
             }}
         >
             {/* Text element */}
@@ -374,7 +374,6 @@ export function ScrollRevealTextFramer({
                         <h1
                             className="font-bold leading-[1.15]"
                             style={{
-                                fontFamily: 'var(--font-heading, "PolySans", sans-serif)',
                                 fontSize: isMobile
                                     ? 'clamp(1.5rem, 8vw, 2.25rem)'
                                     : 'clamp(2.5rem, 5vw, 5rem)',
@@ -395,7 +394,6 @@ export function ScrollRevealTextFramer({
                     <div
                         className="flex flex-wrap max-w-full"
                         style={{
-                            fontFamily: 'var(--font-body, "PolySans", sans-serif)',
                             fontSize: isMobile
                                 ? 'clamp(1.08rem, 4.8vw, 1.32rem)'
                                 : 'clamp(1.44rem, 2.64vw, 2.22rem)',
