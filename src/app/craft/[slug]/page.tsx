@@ -62,14 +62,14 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 <span className="w-1 h-1 rounded-full bg-muted-foreground/10" />
                 <span className="text-muted-foreground/50">{displayTitle}</span>
               </nav>
-              <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
-                {displayTitle}
-              </h1>
-              {mdxContent?.frontmatter.description && (
-                <p className="text-sm text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
-                  {mdxContent.frontmatter.description}
-                </p>
-              )}
+                <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
+                  {displayTitle}
+                </h1>
+                {mdxContent?.frontmatter.description && (
+                  <p className="text-base text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
+                    {mdxContent.frontmatter.description}
+                  </p>
+                )}
             </div>
           </header>
 
@@ -89,10 +89,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <section className="w-full">
             <article className="prose prose-zinc dark:prose-invert 
               prose-headings:font-medium prose-headings:tracking-tight 
-              prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 
-              prose-h3:text-md prose-h3:mt-8 prose-h3:mb-2
-                prose-p:text-sm prose-p:leading-relaxed prose-p:text-muted-foreground/70 prose-p:font-light
-              prose-a:text-foreground prose-a:underline-offset-4 hover:prose-a:text-primary transition-colors
+                prose-h2:text-lg prose-h2:mt-12 prose-h2:mb-4 
+                prose-h3:text-md prose-h3:mt-8 prose-h3:mb-2
+                  prose-p:text-[15px] prose-p:leading-relaxed prose-p:text-muted-foreground/70 prose-p:font-light
+                prose-a:text-foreground prose-a:underline-offset-4 hover:prose-a:text-primary transition-colors
               prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-950 prose-pre:border prose-pre:border-border/10 prose-pre:rounded-xl prose-pre:p-4
               prose-code:text-foreground prose-code:font-mono prose-code:text-xs prose-code:bg-muted/30 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
               max-w-none">

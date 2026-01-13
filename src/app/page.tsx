@@ -86,7 +86,7 @@ export default function Home() {
                           {component.title}
                         </h3>
                         {component.description && (
-                          <p className="text-sm text-muted-foreground/80 line-clamp-2 leading-relaxed">
+                          <p className="text-[15px] text-muted-foreground/80 line-clamp-2 leading-relaxed">
                             {component.description}
                           </p>
                         )}
