@@ -1,86 +1,133 @@
+"use client";
+
 import Link from "next/link";
 import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { CraftNavDrawer } from "@/components/craft/CraftNavDrawer";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 export default function CraftPage() {
   const components = getAllComponentsMetadata();
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] } },
+  };
+
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-12 py-8 animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out fill-mode-backwards sm:p-0">
+    <div className="relative min-h-screen">
+      {/* Decorative Background Element */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute top-[5%] right-[-5%] w-[30%] h-[30%] bg-secondary/10 rounded-full blur-[100px]" />
+      </div>
 
-      {/* Header */}
-      <header className="flex flex-col gap-10 border-b border-border/10 pb-12">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Icon icon="lucide:arrow-left" className="w-5 h-5" />
-            </Link>
-            <CraftNavDrawer 
-              components={components} 
-              trigger={
-                <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group">
-                  <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  <span className="text-sm font-medium">Explore</span>
-                </button>
-              }
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-6">
-          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
-            Craft
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
-            A minimalist laboratory for exploring refined UI components and experiments.
-            Each piece is crafted with a focus on motion, aesthetics, and high-end
-            interaction design principles.
-          </p>
-        </div>
-      </header>
-
-      {/* Component Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {components.map((component, index) => (
-          <Link
-            key={component.id}
-            href={`/craft/${component.id}`}
-            className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-border/40 bg-zinc-50/50 dark:bg-zinc-900/20 p-6 sm:p-8 transition-all duration-300 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 hover:border-border/80 hover:shadow-xl hover:-translate-y-1"
-            style={{ animationDelay: `${index * 50}ms` }}
-          >
-            {/* Background Gradient Effect */}
-            <div className="absolute inset-0 bg-linear-to-br from-transparent to-muted/10 opacity-0 transition-opacity group-hover:opacity-100" />
-
-            <div className="flex flex-col gap-4 relative z-10 h-full">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-muted-foreground/60 uppercase tracking-widest border border-border/20 px-2 py-1 rounded-md">
-                  Experimental
-                </span>
-                <svg className="w-5 h-5 text-muted-foreground/40 group-hover:text-primary transition-colors transform group-hover:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-
-              <h3 className="text-2xl font-medium text-foreground tracking-tight group-hover:text-primary transition-colors">
-                {component.title}
-              </h3>
-
-              {component.description && (
-                <p className="text-muted-foreground/80 leading-relaxed font-light line-clamp-3">
-                  {component.description}
-                </p>
-              )}
-
-              <div className="mt-auto pt-6 flex items-center text-sm font-normal text-muted-foreground group-hover:text-foreground transition-colors">
-                View Details
-                <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full flex flex-col gap-16 py-12 sm:py-20">
+        
+        {/* Header */}
+        <header className="flex flex-col gap-10">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <Link 
+                href="/" 
+                className="group flex items-center justify-center w-10 h-10 rounded-full border border-border/40 bg-background/50 backdrop-blur-md hover:border-border transition-all duration-300"
+              >
+                <Icon icon="lucide:arrow-left" className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+              </Link>
+              <CraftNavDrawer 
+                components={components} 
+                trigger={
+                  <button className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border/40 bg-background/50 backdrop-blur-md text-muted-foreground hover:text-foreground hover:border-border transition-all w-fit group shadow-sm">
+                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-medium tracking-tight">Explore Library</span>
+                  </button>
+                }
+              />
             </div>
-          </Link>
-        ))}
+          </div>
+
+          <div className="flex flex-col gap-8">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+              className="text-5xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground via-foreground to-muted-foreground/40 bg-clip-text text-transparent"
+            >
+              Craft
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+              className="text-lg sm:text-xl text-muted-foreground/90 leading-relaxed max-w-2xl font-light"
+            >
+              A minimalist laboratory for exploring refined UI components and experiments.
+              Each piece is crafted with a focus on motion, aesthetics, and high-end
+              interaction design principles.
+            </motion.p>
+          </div>
+        </header>
+
+        {/* Component Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+        >
+          {components.map((component) => (
+            <motion.div key={component.id} variants={itemVariants}>
+              <Link
+                href={`/craft/${component.id}`}
+                className="group relative flex flex-col h-full min-h-[320px] overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xs p-8 transition-all duration-500 hover:bg-card/60 hover:border-border/80 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-2"
+              >
+                {/* Subtle Glow Effect */}
+                <div className="absolute -inset-px bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                
+                <div className="flex flex-col gap-6 relative z-10 h-full">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-muted-foreground/50 uppercase tracking-[0.2em] bg-muted/30 px-2.5 py-1 rounded-full border border-border/10">
+                      Experimental
+                    </span>
+                    <div className="w-8 h-8 rounded-full border border-border/20 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                      <Icon icon="lucide:arrow-up-right" className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <h3 className="text-2xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors duration-300">
+                      {component.title}
+                    </h3>
+
+                    {component.description && (
+                      <p className="text-muted-foreground/70 leading-relaxed font-light line-clamp-3 text-base">
+                        {component.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-auto pt-8 flex items-center gap-2 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-all duration-300">
+                    <span className="relative overflow-hidden">
+                      <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">View Details</span>
+                      <span className="absolute top-0 left-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-primary">Explore Project</span>
+                    </span>
+                    <Icon icon="lucide:chevron-right" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
