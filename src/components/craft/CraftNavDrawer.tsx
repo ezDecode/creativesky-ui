@@ -99,23 +99,8 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                 stiffness: 220, 
                                 mass: 0.7
                             }}
-                            className="absolute left-0 top-full z-50 w-72 max-h-[75vh] bg-background/95 backdrop-blur-2xl border border-border/40 rounded-[2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col origin-top-left"
+                            className="absolute left-0 top-full z-50 w-72 max-h-[75vh] bg-background/95 backdrop-blur-2xl border border-border/40 rounded-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col origin-top-left"
                         >
-                            <div className="p-5 border-b border-border/10 flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-900/50">
-                                <div className="flex flex-col gap-0.5">
-                                    <h3 className="text-[13px] font-medium tracking-tight">Library</h3>
-                                    <p className="text-[9px] uppercase tracking-widest text-muted-foreground/30 font-bold">
-                                        {components.length} Experiments
-                                    </p>
-                                </div>
-                                <button 
-                                    onClick={() => setIsOpen(false)}
-                                    className="p-1.5 rounded-full border border-border/10 hover:bg-muted transition-colors group"
-                                >
-                                    <Icon icon="lucide:x" className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground" />
-                                </button>
-                            </div>
-
                             <div className="flex-1 overflow-y-auto p-2 scrollbar-none">
                                 <motion.div 
                                     initial="hidden"
@@ -131,27 +116,6 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                     }}
                                     className="flex flex-col gap-0.5"
                                 >
-                                    <motion.div variants={{ hidden: { opacity: 0, scale: 0.95 }, show: { opacity: 1, scale: 1 } }}>
-                                        <Link
-                                            href="/craft"
-                                            className={cn(
-                                                "flex items-center gap-3 px-3 py-2 rounded-lg text-[12px] font-medium transition-all group",
-                                                pathname === "/craft"
-                                                    ? "bg-primary/5 text-primary"
-                                                    : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
-                                            )}
-                                        >
-                                            <Icon 
-                                                icon="lucide:home" 
-                                                className={cn("w-3.5 h-3.5", pathname === "/craft" ? "text-primary" : "text-muted-foreground/40")} 
-                                            />
-                                            Overview
-                                        </Link>
-                                    </motion.div>
-
-                                    <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="px-3 pt-3 pb-1.5">
-                                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/20">Experiments</span>
-                                    </motion.div>
 
                                     {sortedComponents.map((component) => {
                                         const isActive = pathname === `/craft/${component.id}`;
@@ -172,12 +136,7 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                                             : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                                                     )}
                                                 >
-                                                    <div className="flex items-center gap-3">
-                                                        {component.title}
-                                                    </div>
-                                                    {isActive && (
-                                                        <Icon icon="lucide:check" className="w-3 h-3 opacity-70" />
-                                                    )}
+                                                    {component.title}
                                                 </Link>
                                             </motion.div>
                                         );
