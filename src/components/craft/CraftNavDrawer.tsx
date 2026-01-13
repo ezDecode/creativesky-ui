@@ -99,7 +99,7 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                 stiffness: 220, 
                                 mass: 0.7
                             }}
-                            className="absolute left-0 top-full z-50 w-72 max-h-[75vh] bg-background/95 backdrop-blur-2xl border border-border/40 rounded-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col origin-top-left"
+                            className="absolute left-0 top-full z-50 min-w-[200px] w-max max-w-[calc(100vw-2rem)] bg-background/95 backdrop-blur-2xl border border-border/40 rounded-xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col origin-top-left"
                         >
                             <div className="flex-1 overflow-y-auto p-2 scrollbar-none">
                                 <motion.div 
@@ -130,7 +130,7 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                                 <Link
                                                     href={`/craft/${component.id}`}
                                                     className={cn(
-                                                        "flex items-center justify-between px-3 py-2 rounded-lg text-[12px] font-medium transition-all group",
+                                                        "flex items-center px-3 py-2 rounded-lg text-[12px] font-medium transition-all group whitespace-nowrap",
                                                         isActive
                                                             ? "bg-foreground text-background"
                                                             : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"

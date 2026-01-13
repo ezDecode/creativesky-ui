@@ -7,15 +7,15 @@ export default function CraftPage() {
   const components = getAllComponentsMetadata();
 
   return (
-    <div className="mx-auto max-w-2xl px-6 w-full flex flex-col gap-20 py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-backwards">
-
-      {/* Header */}
-      <header className="flex flex-col gap-12">
+    <div className="mx-auto max-w-2xl w-full flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-backwards">
+      
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/5 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link 
               href="/" 
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground transition-all duration-300 outline-none"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground transition-all duration-300 outline-none hover:bg-muted/50"
             >
               <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5" />
             </Link>
@@ -30,7 +30,9 @@ export default function CraftPage() {
             />
           </div>
         </div>
+      </header>
 
+      <div className="px-6 py-20 flex flex-col gap-20">
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-medium tracking-tight leading-tight text-foreground">
             Crafting the <span className="text-muted-foreground/30 font-serif">Future</span>.
@@ -40,24 +42,24 @@ export default function CraftPage() {
             Focused on the intersection of aesthetics and high-end interaction.
           </p>
         </div>
-      </header>
 
-      {/* Component List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border/25">
-        {components.map((component, index) => (
-          <Link
-            key={component.id}
-            href={`/craft/${component.id}`}
-            className="group relative flex flex-col gap-4 p-5 border-b border-r border-border/25 outline-none"
-            style={{ animationDelay: `${index * 50}ms` }}
-          >
-            <div className="flex flex-col gap-1.5 relative z-10">
-              <h3 className="text-[17px] font-medium text-foreground tracking-tight">
-                {component.title}
-              </h3>
-            </div>
-          </Link>
-        ))}
+        {/* Component List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-border/25">
+          {components.map((component, index) => (
+            <Link
+              key={component.id}
+              href={`/craft/${component.id}`}
+              className="group relative flex flex-col gap-4 p-5 border-b border-r border-border/25 outline-none"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <div className="flex flex-col gap-1.5 relative z-10">
+                <h3 className="text-[17px] font-medium text-foreground tracking-tight">
+                  {component.title}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
