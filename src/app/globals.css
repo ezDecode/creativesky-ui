@@ -184,7 +184,7 @@
 /* -------------------------------------------------------------------------- */
 @layer base {
   * {
-    @apply outline-ring/50;
+    /* outline removed as per request */
   }
 
   html {

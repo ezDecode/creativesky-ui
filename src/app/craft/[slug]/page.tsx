@@ -38,21 +38,21 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <header className="flex flex-col gap-12">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link 
-                href="/craft" 
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
-              >
+                <Link 
+                  href="/craft" 
+                  className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group outline-none"
+                >
                 <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
               </Link>
-              <CraftNavDrawer 
-                components={components} 
-                  trigger={
-                    <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 w-fit group">
-                      <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-medium tracking-tight">Library</span>
-                    </button>
-                  }
-                />
+                    <CraftNavDrawer 
+                      components={components} 
+                        trigger={
+                          <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 w-fit group outline-none">
+                            <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                            <span className="text-xs font-medium tracking-tight">Library</span>
+                          </button>
+                        }
+                      />
               </div>
             </div>
 
@@ -110,7 +110,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
               <span className="text-muted-foreground/20 uppercase tracking-[0.2em] text-[10px] font-bold">Notes</span>
               <p className="text-xs text-muted-foreground/40 font-light">Part of the creative sky experimental lab.</p>
             </div>
-            <button className="flex items-center gap-2 text-muted-foreground/40 hover:text-foreground transition-colors group">
+              <button className="flex items-center gap-2 text-muted-foreground/40 hover:text-foreground transition-colors group outline-none">
               <span className="text-xs font-medium">Share</span>
               <Icon icon="lucide:share-2" className="w-3 h-3 group-hover:scale-110 transition-transform" />
             </button>

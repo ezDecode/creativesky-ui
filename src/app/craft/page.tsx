@@ -15,14 +15,14 @@ export default function CraftPage() {
           <div className="flex items-center gap-4">
             <Link 
               href="/" 
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group outline-none"
             >
               <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
             </Link>
             <CraftNavDrawer 
               components={components} 
               trigger={
-                <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group">
+                <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group outline-none">
                   <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-medium tracking-tight">Library</span>
                 </button>
@@ -48,7 +48,7 @@ export default function CraftPage() {
           <Link
             key={component.id}
             href={`/craft/${component.id}`}
-            className="group relative flex items-center justify-between py-8 border-b border-border/10 transition-all duration-500 hover:px-2"
+            className="group relative flex items-center justify-between py-8 px-6 border border-transparent border-b-border/10 hover:border-border/40 hover:bg-muted/5 hover:rounded-2xl transition-all duration-300 -mx-6 outline-none"
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="flex flex-col gap-1.5 relative z-10">
