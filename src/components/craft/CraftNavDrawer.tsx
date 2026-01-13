@@ -66,57 +66,57 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
             <AnimatePresence>
                 {isOpen && (
                     <>
-                        {/* Backdrop - subtle blur only */}
+                        {/* Backdrop - ultra subtle */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-40 bg-background/20 backdrop-blur-[2px] lg:hidden"
+                            className="fixed inset-0 z-40 bg-background/5 lg:hidden"
                             onClick={() => setIsOpen(false)}
                         />
 
                         <motion.div
                             initial={{ 
                                 opacity: 0, 
-                                scale: 0.8, 
+                                scale: 0.7, 
                                 y: -10,
                                 transformOrigin: "top left" 
                             }}
                             animate={{ 
                                 opacity: 1, 
                                 scale: 1, 
-                                y: 4,
+                                y: 8,
                             }}
                             exit={{ 
                                 opacity: 0, 
-                                scale: 0.9, 
-                                y: -10,
-                                transition: { duration: 0.15 }
+                                scale: 0.85, 
+                                y: -5,
+                                transition: { duration: 0.2, ease: "circIn" }
                             }}
                             transition={{ 
                                 type: "spring", 
-                                damping: 15, // Lower damping for more "rubber" bounce
-                                stiffness: 200, 
-                                mass: 0.8
+                                damping: 12, // More rubbery
+                                stiffness: 220, 
+                                mass: 0.7
                             }}
-                            className="absolute left-0 top-full z-50 w-72 max-h-[70vh] bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl overflow-hidden flex flex-col origin-top-left"
+                            className="absolute left-0 top-full z-50 w-72 max-h-[75vh] bg-background/95 backdrop-blur-2xl border border-border/40 rounded-[2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col origin-top-left"
                         >
-                            <div className="p-4 border-b border-border/10 flex items-center justify-between bg-muted/30">
-                                <div>
-                                    <h3 className="text-sm font-semibold">Craft Library</h3>
-                                    <p className="text-[10px] text-muted-foreground">
-                                        {components.length} components
+                            <div className="p-6 border-b border-border/10 flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-900/50">
+                                <div className="flex flex-col gap-0.5">
+                                    <h3 className="text-sm font-semibold tracking-tight">Library</h3>
+                                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground/50 font-bold">
+                                        {components.length} Experiments
                                     </p>
                                 </div>
                                 <button 
                                     onClick={() => setIsOpen(false)}
-                                    className="p-1.5 rounded-full hover:bg-muted transition-colors"
+                                    className="p-2 rounded-full border border-border/10 hover:bg-muted transition-colors group"
                                 >
-                                    <Icon icon="lucide:x" className="w-4 h-4 text-muted-foreground" />
+                                    <Icon icon="lucide:x" className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                                 </button>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto p-2 scrollbar-none">
+                            <div className="flex-1 overflow-y-auto p-3 scrollbar-none">
                                 <motion.div 
                                     initial="hidden"
                                     animate="show"
@@ -125,32 +125,32 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                         show: {
                                             opacity: 1,
                                             transition: {
-                                                staggerChildren: 0.03
+                                                staggerChildren: 0.04
                                             }
                                         }
                                     }}
-                                    className="flex flex-col gap-0.5"
+                                    className="flex flex-col gap-1"
                                 >
-                                    <motion.div variants={{ hidden: { opacity: 0, x: -5 }, show: { opacity: 1, x: 0 } }}>
+                                    <motion.div variants={{ hidden: { opacity: 0, scale: 0.95 }, show: { opacity: 1, scale: 1 } }}>
                                         <Link
                                             href="/craft"
                                             className={cn(
-                                                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all group",
+                                                "flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-medium transition-all group",
                                                 pathname === "/craft"
-                                                    ? "bg-primary text-primary-foreground"
-                                                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                                    ? "bg-primary/10 text-primary"
+                                                    : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                                             )}
                                         >
                                             <Icon 
                                                 icon="lucide:home" 
-                                                className={cn("w-4 h-4", pathname === "/craft" ? "text-primary-foreground" : "text-muted-foreground")} 
+                                                className={cn("w-4 h-4", pathname === "/craft" ? "text-primary" : "text-muted-foreground/60")} 
                                             />
-                                            Introduction
+                                            Overview
                                         </Link>
                                     </motion.div>
 
-                                    <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="px-3 pt-3 pb-1">
-                                        <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40">Components</span>
+                                    <motion.div variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }} className="px-4 pt-4 pb-2">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/30">Components</span>
                                     </motion.div>
 
                                     {sortedComponents.map((component) => {
@@ -159,24 +159,24 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
                                             <motion.div 
                                                 key={component.id}
                                                 variants={{ 
-                                                    hidden: { opacity: 0, x: -5 }, 
-                                                    show: { opacity: 1, x: 0 } 
+                                                    hidden: { opacity: 0, x: -8, scale: 0.95 }, 
+                                                    show: { opacity: 1, x: 0, scale: 1 } 
                                                 }}
                                             >
                                                 <Link
                                                     href={`/craft/${component.id}`}
                                                     className={cn(
-                                                        "flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-all group",
+                                                        "flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-medium transition-all group",
                                                         isActive
                                                             ? "bg-foreground text-background"
-                                                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                                                            : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                                                     )}
                                                 >
                                                     <div className="flex items-center gap-3">
                                                         {component.title}
                                                     </div>
                                                     {isActive && (
-                                                        <Icon icon="lucide:check" className="w-3 h-3 opacity-50" />
+                                                        <Icon icon="lucide:check" className="w-3.5 h-3.5 opacity-60" />
                                                     )}
                                                 </Link>
                                             </motion.div>
