@@ -52,28 +52,9 @@ export default function CraftPage() {
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="flex flex-col gap-1.5 relative z-10">
-              <div className="flex items-center gap-3">
-                <span className="text-[11px] font-medium text-muted-foreground/30 tabular-nums">
-                  0{index + 1}
-                </span>
-                <h3 className="text-[17px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
-                  {component.title}
-                </h3>
-              </div>
-              {component.description && (
-                <p className="text-[15px] text-muted-foreground/40 leading-relaxed font-light ml-7 w-full group-hover:text-muted-foreground/70 transition-colors">
-                  {component.description}
-                </p>
-              )}
-            </div>
-
-            <div className="flex items-center justify-between mt-auto pt-4">
-              <span className="text-[11px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] group-hover:text-foreground/40 transition-colors">
-                Explore
-              </span>
-              <div className="w-7 h-7 rounded-full border border-border/10 flex items-center justify-center text-muted-foreground/20 group-hover:text-foreground group-hover:border-border/40 transition-all duration-500">
-                <Icon icon="lucide:chevron-right" className="w-3 h-3" />
-              </div>
+              <h3 className="text-[17px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
+                {component.title}
+              </h3>
             </div>
           </Link>
         ))}
