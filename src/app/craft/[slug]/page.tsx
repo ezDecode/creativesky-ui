@@ -44,23 +44,23 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Content */}
           <div className="px-6 py-6 lg:py-10 lg:px-16 lg:order-1">
             {/* Header Group: Sidebar Trigger + Breadcrumbs */}
-            <header className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 mb-12 flex flex-col gap-6">
+            <header className="sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 mb-12 flex items-center gap-6">
               <CraftNavDrawer 
                 components={components} 
                 trigger={
-                  <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group">
+                  <button className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
                     <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
                     <span className="text-sm font-medium">Explore Components</span>
                   </button>
                 }
               />
               
-              <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-                <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
-                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-                <span className="text-foreground font-normal">
+              <nav className="flex items-center gap-2 text-sm text-muted-foreground overflow-hidden">
+                <Link href="/" className="hover:text-foreground transition-colors shrink-0">Home</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
+                <Link href="/craft" className="hover:text-foreground transition-colors shrink-0">Craft</Link>
+                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
+                <span className="text-foreground font-normal truncate">
                   {displayTitle}
                 </span>
               </nav>
