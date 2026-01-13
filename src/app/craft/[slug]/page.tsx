@@ -50,7 +50,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                 trigger={
                   <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
                     <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium">Explore Components</span>
+                    <span className="text-sm font-medium">Components</span>
                   </button>
                 }
               />
