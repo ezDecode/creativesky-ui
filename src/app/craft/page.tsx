@@ -7,80 +7,72 @@ export default function CraftPage() {
   const components = getAllComponentsMetadata();
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col gap-16 py-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-backwards sm:p-0">
+    <div className="mx-auto max-w-2xl px-6 w-full flex flex-col gap-20 py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000 ease-out fill-mode-backwards">
 
       {/* Header */}
-      <header className="flex flex-col gap-10">
+      <header className="flex flex-col gap-12">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <Link 
               href="/" 
-              className="flex items-center justify-center w-9 h-9 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground transition-all duration-300 group"
             >
               <Icon icon="lucide:arrow-left" className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
             </Link>
             <CraftNavDrawer 
               components={components} 
               trigger={
-                <button className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group">
-                  <Icon icon="lucide:layout-grid" className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-                  <span className="text-[12px] font-medium tracking-tight">Browse Library</span>
+                <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-300 w-fit group">
+                  <Icon icon="lucide:layout-grid" className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                  <span className="text-[10px] font-medium tracking-tight">Library</span>
                 </button>
               }
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 max-w-2xl">
-          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.1] text-foreground">
-            Crafting the <span className="text-muted-foreground/30 italic font-serif">Future</span> of UI.
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-medium tracking-tight leading-tight text-foreground">
+            Crafting the <span className="text-muted-foreground/30 italic font-serif">Future</span>.
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground/60 leading-relaxed font-light tracking-tight">
-            A specialized laboratory for exploring refined components and motion experiments.
-            Focused on the intersection of aesthetics and high-end interaction design.
+          <p className="text-[13px] text-muted-foreground/50 leading-relaxed font-light tracking-tight max-w-md">
+            A laboratory for refined components and motion experiments.
+            Focused on the intersection of aesthetics and high-end interaction.
           </p>
         </div>
       </header>
 
-      {/* Component Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Component List */}
+      <div className="flex flex-col border-t border-border/10">
         {components.map((component, index) => (
           <Link
             key={component.id}
             href={`/craft/${component.id}`}
-            className="group relative flex flex-col h-full overflow-hidden rounded-[1.5rem] border border-border/40 bg-zinc-50/30 dark:bg-zinc-900/10 p-6 sm:p-8 transition-all duration-500 hover:bg-white dark:hover:bg-zinc-900/40 hover:border-border/80 hover:shadow-[0_15px_35px_-12px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 dark:hover:shadow-[0_15px_35px_-12px_rgba(0,0,0,0.3)]"
-            style={{ animationDelay: `${index * 80}ms` }}
+            className="group relative flex items-center justify-between py-8 border-b border-border/10 transition-all duration-500 hover:px-2"
+            style={{ animationDelay: `${index * 50}ms` }}
           >
-            {/* Subtle Gradient Glow */}
-            <div className="absolute -inset-px bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-            <div className="flex flex-col gap-5 relative z-10 h-full">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary/40 animate-pulse" />
-                  <span className="text-[9px] font-bold text-muted-foreground/40 uppercase tracking-[0.25em]">
-                    v1.0.0
-                  </span>
-                </div>
-                <div className="w-8 h-8 rounded-full border border-border/10 flex items-center justify-center text-muted-foreground/20 group-hover:text-primary group-hover:border-primary/20 transition-all duration-500 transform group-hover:rotate-45">
-                  <Icon icon="lucide:arrow-up-right" className="w-4 h-4" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <h3 className="text-xl font-medium text-foreground tracking-tight transition-all duration-500">
+            <div className="flex flex-col gap-1.5 relative z-10">
+              <div className="flex items-center gap-3">
+                <span className="text-[9px] font-medium text-muted-foreground/30 tabular-nums">
+                  0{index + 1}
+                </span>
+                <h3 className="text-[14px] font-medium text-foreground tracking-tight transition-all duration-300 group-hover:translate-x-1">
                   {component.title}
                 </h3>
-                {component.description && (
-                  <p className="text-[13px] text-muted-foreground/60 leading-relaxed font-light line-clamp-2">
-                    {component.description}
-                  </p>
-                )}
               </div>
+              {component.description && (
+                <p className="text-[12px] text-muted-foreground/40 leading-relaxed font-light ml-7 max-w-md line-clamp-1 group-hover:text-muted-foreground/60 transition-colors">
+                  {component.description}
+                </p>
+              )}
+            </div>
 
-              <div className="mt-auto pt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/50 group-hover:text-foreground transition-colors duration-300">
-                <span>View Experiment</span>
-                <div className="h-[1px] flex-1 bg-border/10 group-hover:bg-foreground/20 transition-all duration-500" />
+            <div className="flex items-center gap-4">
+              <span className="text-[9px] font-bold text-muted-foreground/20 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
+                Explore
+              </span>
+              <div className="w-7 h-7 rounded-full border border-border/10 flex items-center justify-center text-muted-foreground/20 group-hover:text-foreground group-hover:border-border/40 transition-all duration-500">
+                <Icon icon="lucide:chevron-right" className="w-3 h-3" />
               </div>
             </div>
           </Link>
