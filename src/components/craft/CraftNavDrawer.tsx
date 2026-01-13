@@ -90,7 +90,7 @@ function NavSection({
 }) {
     return (
         <section className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+            <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground/70">
                 {title}
             </h3>
             {children}
@@ -111,7 +111,7 @@ function NavItem({
         <Link
             href={href}
             className={cn(
-                "block rounded-md px-3 py-2 text-sm font-medium transition-all",
+                "block rounded-md px-3 py-2 text-sm font-normal transition-all",
                 active
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"

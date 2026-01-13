@@ -32,7 +32,7 @@ export function Callout({
             {...props}
         >
             {title && (
-                <div className="flex items-center gap-2 font-semibold">
+                <div className="flex items-center gap-2 font-medium">
                     {type === "info" && <InfoIcon className="h-4 w-4" />}
                     {type === "warning" && <AlertTriangleIcon className="h-4 w-4" />}
                     {type === "error" && <AlertCircleIcon className="h-4 w-4" />}

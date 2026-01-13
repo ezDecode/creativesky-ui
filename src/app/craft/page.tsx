@@ -9,7 +9,7 @@ export default function CraftPage() {
 
       {/* Header */}
       <header className="flex flex-col gap-6 border-b border-border/10 pb-12">
-        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
+        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight bg-linear-to-br from-foreground to-muted-foreground/60 bg-clip-text text-transparent pb-1">
           Craft
         </h1>
         <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl font-light">
@@ -41,7 +41,7 @@ export default function CraftPage() {
                 </svg>
               </div>
 
-              <h3 className="text-2xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-medium text-foreground tracking-tight group-hover:text-primary transition-colors">
                 {component.title}
               </h3>
 
@@ -51,7 +51,7 @@ export default function CraftPage() {
                 </p>
               )}
 
-              <div className="mt-auto pt-6 flex items-center text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+              <div className="mt-auto pt-6 flex items-center text-sm font-normal text-muted-foreground group-hover:text-foreground transition-colors">
                 View Details
                 <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

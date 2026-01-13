@@ -38,12 +38,12 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
           <Link href="/craft" className="hover:text-foreground transition-colors">Craft</Link>
           <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5" />
-          <span className="text-foreground font-medium">{metadata.title}</span>
+          <span className="text-foreground font-normal">{metadata.title}</span>
         </nav>
 
         {/* Header */}
         <header className="mb-10">
-          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight mb-3">
+          <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight mb-3">
             {metadata.title}
           </h1>
           {metadata.description && (
@@ -62,7 +62,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
         {/* Documentation Section */}
         <section className="max-w-none">
-          <article className="prose prose-zinc dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5">
+          <article className="prose prose-zinc dark:prose-invert prose-headings:font-medium prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-zinc-900/50 prose-pre:border prose-pre:border-white/5">
             {mdxContent ? (
               <mdxContent.Content components={{ ...getMDXComponents(), ComponentPreview: () => null, h1: () => null }} />
             ) : (

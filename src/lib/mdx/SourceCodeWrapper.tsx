@@ -62,7 +62,7 @@ export function DemoCodeWrapper({ name, title }: SourceCodeProps) {
 
   return (
     <div className="my-6">
-      {title && <h3 className="text-lg font-semibold mb-3">{title}</h3>}
+      {title && <h3 className="text-lg font-medium mb-3">{title}</h3>}
       <CodeBlock code={code} language="tsx" filename={`${toPascalCase(name)}Demo.tsx`} />
     </div>
   );
@@ -113,7 +113,7 @@ export function ComponentCodeWrapper({ name, title }: SourceCodeProps) {
 
   return (
     <div className="my-6">
-      {title && <h3 className="text-lg font-semibold mb-3">{title}</h3>}
+      {title && <h3 className="text-lg font-medium mb-3">{title}</h3>}
       <CodeBlock code={code} language="tsx" filename={`${name}.tsx`} />
     </div>
   );

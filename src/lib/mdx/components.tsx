@@ -46,7 +46,7 @@ function H1({ children, ...props }: any) {
   return (
     <h1
       id={id}
-      className="scroll-mt-20 text-4xl font-bold tracking-tight text-foreground mb-6"
+      className="scroll-mt-20 text-4xl font-semibold tracking-tight text-foreground mb-6"
       {...props}
     >
       {children}
@@ -63,7 +63,7 @@ function H2({ children, ...props }: any) {
     <div className="group flex items-center gap-2 mt-12 mb-6 scroll-mt-24">
       <h2
         id={id}
-        className="text-2xl font-semibold tracking-tight text-foreground w-full flex items-center gap-2"
+        className="text-2xl font-medium tracking-tight text-foreground w-full flex items-center gap-2"
         {...props}
       >
         {children}
@@ -87,7 +87,7 @@ function H3({ children, ...props }: any) {
   return (
     <h3
       id={id}
-      className="group scroll-mt-24 text-xl font-semibold tracking-tight mb-3 mt-8 text-foreground flex items-center gap-2"
+      className="group scroll-mt-24 text-xl font-medium tracking-tight mb-3 mt-8 text-foreground flex items-center gap-2"
       {...props}
     >
       {children}
@@ -163,7 +163,7 @@ function Blockquote({ children, ...props }: any) {
  */
 function Strong({ children, ...props }: any) {
   return (
-    <strong className="font-semibold text-foreground" {...props}>
+    <strong className="font-medium text-foreground" {...props}>
       {children}
     </strong>
   );
@@ -236,7 +236,7 @@ function Code({ children, className, ...props }: any) {
 
   return (
     <code
-      className="relative rounded bg-muted/40 px-[0.3rem] py-[0.1rem] font-mono text-sm font-medium text-foreground border border-border/10"
+      className="relative rounded bg-muted/40 px-[0.3rem] py-[0.1rem] font-mono text-sm font-normal text-foreground border border-border/10"
       {...props}
     >
       {children}
@@ -269,7 +269,7 @@ function Thead({ children, ...props }: any) {
 
 function Th({ children, ...props }: any) {
   return (
-    <th className="px-4 py-3 text-left font-medium text-foreground/80 whitespace-nowrap" {...props}>
+    <th className="px-4 py-3 text-left font-normal text-foreground/80 whitespace-nowrap" {...props}>
       {children}
     </th>
   );

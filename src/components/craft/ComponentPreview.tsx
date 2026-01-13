@@ -86,14 +86,15 @@ export function ComponentPreview({
           <div className="p-3 rounded-full bg-red-500/10 text-red-500">
             <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
           </div>
-          <div>
-            <h3 className="text-sm font-semibold text-white">Failed to load component</h3>
-            <p className="text-xs text-zinc-500 mt-1 max-w-xs">{error}</p>
-          </div>
-          <button
-            onClick={handleRetry}
-            className="mt-2 px-4 py-2 text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors flex items-center gap-2"
-          >
+            <div>
+              <h3 className="text-sm font-medium text-white">Failed to load component</h3>
+              <p className="text-xs text-zinc-500 mt-1 max-w-xs">{error}</p>
+            </div>
+            <button
+              onClick={handleRetry}
+              className="mt-2 px-4 py-2 text-xs font-normal bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors flex items-center gap-2"
+            >
+
             <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
             Retry
           </button>

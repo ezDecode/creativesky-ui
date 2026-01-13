@@ -37,14 +37,15 @@ export function PropsTable({ props, className }: PropsTableProps) {
     )}>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-muted/20 border-b border-border/10">
-            <tr>
-              <th className="px-4 py-3 text-left font-medium text-foreground/80">Prop</th>
-              <th className="px-4 py-3 text-left font-medium text-foreground/80">Type</th>
-              <th className="px-4 py-3 text-left font-medium text-foreground/80">Default</th>
-              <th className="px-4 py-3 text-left font-medium text-foreground/80">Description</th>
-            </tr>
-          </thead>
+            <thead className="bg-muted/20 border-b border-border/10">
+              <tr>
+                <th className="px-4 py-3 text-left font-normal text-foreground/80">Prop</th>
+                <th className="px-4 py-3 text-left font-normal text-foreground/80">Type</th>
+                <th className="px-4 py-3 text-left font-normal text-foreground/80">Default</th>
+                <th className="px-4 py-3 text-left font-normal text-foreground/80">Description</th>
+              </tr>
+            </thead>
+
           <tbody className="divide-y divide-border/10">
             {props.map((prop) => (
               <tr key={prop.name} className="hover:bg-muted/10 transition-colors">
@@ -91,9 +92,9 @@ export function PropItem({
   return (
     <div className="my-4 p-4 rounded-lg bg-muted/10 border border-border/10">
       <div className="flex items-center gap-3 mb-2">
-        <code className="text-primary font-semibold">{name}</code>
+        <code className="text-primary font-medium">{name}</code>
         <code className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{type}</code>
-        {required && <span className="text-xs text-red-500 font-medium">Required</span>}
+        {required && <span className="text-xs text-red-500 font-normal">Required</span>}
         {defaultValue && (
           <span className="text-xs text-muted-foreground">
             Default: <code className="text-foreground/70">{defaultValue}</code>
