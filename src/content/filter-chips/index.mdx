@@ -10,27 +10,48 @@ source: "src/content/filter-chips/index.mdx"
 
 Animated filter chips with spring-based shared layout transitions. Great for category filters and segmented controls.
 
+## Installation
+
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install framer-motion
+    ```
+  </Step>
+  <Step>
+    Copy the component code into your project.
+  </Step>
+</Steps>
+
 ## Usage
 
 ```tsx
-<FilterChips
-  filters={["All", "Design", "Development"]}
-  activeFilter={active}
-  onFilterChange={setActive}
-/>
+import { FilterChips } from "@/components/craft/filter-chips";
+import { useState } from "react";
+
+export default function Demo() {
+  const [active, setActive] = useState("All");
+  
+  return (
+    <FilterChips
+      filters={["All", "Design", "Development"]}
+      activeFilter={active}
+      onFilterChange={setActive}
+    />
+  );
+}
 ```
 
 ## Props
 
-**`filters`** `string[]` — Array of filter labels to display.
-
-**`activeFilter`** `string` — The currently selected filter value.
-
-**`onFilterChange`** `function` — Callback triggered when a new filter is selected.
-
-**`variant`** `"pill" | "outline"` — The visual style of the chips (default: `"pill"`).
-
-**`activeColor`** `string` — Custom background color for the active chip.
+<PropsTable props={[
+  { name: "filters", type: "string[]", required: true, description: "Array of filter labels to display." },
+  { name: "activeFilter", type: "string", required: true, description: "The currently selected filter value." },
+  { name: "onFilterChange", type: "(filter: string) => void", required: true, description: "Callback triggered when a new filter is selected." },
+  { name: "variant", type: "'pill' | 'outline'", default: "'pill'", description: "The visual style of the chips." },
+  { name: "activeColor", type: "string", description: "Custom background color for the active chip." }
+]} />
 
 ## Source Code
 

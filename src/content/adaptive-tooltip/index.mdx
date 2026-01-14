@@ -10,23 +10,38 @@ source: "src/content/adaptive-tooltip/index.mdx"
 
 An intelligent tooltip system that adapts to user intent. The tooltip delay decreases as the user hovers over multiple items, showing confidence in their intent to explore.
 
+## Installation
+
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install framer-motion animejs clsx
+    ```
+  </Step>
+  <Step>
+    Copy the component code into your project.
+  </Step>
+</Steps>
+
 ## Usage
 
 <DemoCode name="adaptive-tooltip" title="Demo Implementation" />
 
 ## Props
 
-**`items`** `AdaptiveTooltipItem[]` — Array of tooltip items to display.
-
-**`enablePinning`** `boolean` — Enable keyboard pinning functionality (default: `false`).
+<PropsTable props={[
+  { name: "items", type: "AdaptiveTooltipItem[]", required: true, description: "Array of tooltip items to display." },
+  { name: "enablePinning", type: "boolean", default: "false", description: "Enable keyboard pinning functionality." }
+]} />
 
 ### AdaptiveTooltipItem
 
-**`icon`** `ReactNode` — Icon element to display.
-
-**`label`** `string` — Tooltip text label.
-
-**`hasBadge`** `boolean` — Show a notification badge on the icon.
+<PropsTable props={[
+  { name: "icon", type: "ReactNode", required: true, description: "Icon element to display." },
+  { name: "label", type: "string", required: true, description: "Tooltip text label." },
+  { name: "hasBadge", type: "boolean", description: "Show a notification badge on the icon." }
+]} />
 
 ## Source Code
 

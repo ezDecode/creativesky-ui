@@ -5,6 +5,7 @@ description: "A scroll-locked text reveal animation with glassmorphic pill overl
 category: "Animation"
 version: "3.0.0"
 dependencies: ["framer-motion"]
+source: "src/content/scroll-reveal-text/index.mdx"
 ---
 
 A production-ready, scroll-locked text reveal animation. Words are hidden behind animated glassmorphic pill overlays that emerge, glow, then dissolve to reveal the text underneath.
@@ -13,11 +14,17 @@ A production-ready, scroll-locked text reveal animation. Words are hidden behind
 
 ## Installation
 
-```bash
-npm install framer-motion
-```
-
-Copy `scroll-reveal-text.framer.tsx` and `scroll-reveal-text.module.css` to your project.
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install framer-motion
+    ```
+  </Step>
+  <Step>
+    Copy the component code and CSS modules into your project.
+  </Step>
+</Steps>
 
 ## Usage
 
@@ -37,20 +44,14 @@ export default function Hero() {
 
 ## Props
 
-**`phrase`** `string` — The text content to be revealed word by word.
+<PropsTable props={[
+  { name: "phrase", type: "string", required: true, description: "The text content to be revealed word by word." },
+  { name: "title", type: "string", description: "Optional heading displayed above the text." },
+  { name: "highlightWords", type: "string[]", description: "Words to highlight with the accent color." },
+  { name: "primaryColor", type: "string", default: "'#ff6b00'", description: "Hex color for highlighted words and glows." },
+  { name: "config", type: "ScrollRevealConfig", description: "Animation parameters like leadCount and scrollDistance." }
+]} />
 
-**`title`** `string` — Optional heading displayed above the text.
+## Source Code
 
-**`highlightWords`** `string[]` — Words to highlight with the accent color.
-
-**`primaryColor`** `string` — Hex color for highlighted words and glows.
-
-**`config`** `object` — Animation parameters: `leadCount`, `scrollDistance`, `springStiffness`, `springDamping`.
-
-## Animation Phases
-
-**Emergence** — Box fades in at 25% opacity with slight scale.
-
-**Focus** — Box reaches full opacity with glow effect.
-
-**Reveal** — Box dissolves with blur while text fades in.
+<ComponentCode name="scroll-reveal-text" title="Full Component" />
