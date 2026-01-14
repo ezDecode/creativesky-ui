@@ -223,10 +223,44 @@
 /* UTILITIES                                                                   */
 /* -------------------------------------------------------------------------- */
 @layer utilities {
-  .scrollbar-hide {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
+    .scrollbar-hide {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    /* Documentation typography styles */
+    .docs-h3 {
+      @apply text-lg font-medium tracking-tight mt-10 mb-4 text-foreground;
+    }
+
+    .docs-p {
+      @apply text-[15px] leading-relaxed text-muted-foreground mb-4;
+    }
+
+    .docs-ul {
+      @apply my-4 space-y-2;
+    }
+
+    .docs-li {
+      @apply text-[15px] leading-relaxed text-muted-foreground relative pl-5;
+    }
+
+    .docs-li::before {
+      content: "";
+      @apply absolute left-0 top-2.5 size-1.5 rounded-full bg-foreground/30;
+    }
+
+    .docs-article {
+      @apply mt-8;
+    }
+
+    .docs-code-wrapper {
+      @apply relative my-4 overflow-hidden rounded-xl border border-border/10 bg-zinc-950;
+    }
+
+    .docs-copy-button {
+      @apply absolute right-3 top-3 flex size-8 items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer;
+    }
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
