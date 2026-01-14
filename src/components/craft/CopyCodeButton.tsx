@@ -37,11 +37,11 @@ export function CopyCodeButton({ name }: CopyCodeButtonProps) {
       className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors border border-foreground/10"
       title="Copy component code"
     >
-      <Icon 
-        icon={loading ? "lucide:loader-2" : copied ? "lucide:check" : "lucide:copy"} 
-        className={`size-3.5 ${loading ? "animate-spin" : ""}`} 
-      />
-      <span className="text-[11px] font-mono uppercase tracking-wider">
+        <Icon 
+          icon={loading ? "lucide:loader-2" : copied ? "lucide:check" : "lucide:copy"} 
+          className={`size-4.5 ${loading ? "animate-spin" : ""}`} 
+        />
+        <span className="text-[13px] font-mono uppercase tracking-wider">
         {loading ? "Loading..." : copied ? "Copied" : "Copy Code"}
       </span>
     </button>
