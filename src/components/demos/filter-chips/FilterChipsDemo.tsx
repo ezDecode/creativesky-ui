@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FilterChips } from "@/content/filter-chips/filter-chips";
+import { FilterChips } from "@/content/filter-chips/FilterChips";
 
 const FILTERS = ["All", "Design", "Development", "Marketing"] as const;
 

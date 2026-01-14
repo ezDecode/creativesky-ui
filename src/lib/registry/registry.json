@@ -5,7 +5,7 @@
       "id": "adaptive-tooltip",
       "title": "Adaptive Tooltip",
       "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays.",
-      "subDescription": "Built for high-density interfaces where traditional tooltips often trigger accidentally. It uses a custom confidence algorithm to ensure the user actually wants to see the information before displaying it.",
+      "subDescription": "Engineered for high-density information environments where accidental triggers disrupt the user flow. This component implements a sophisticated confidence algorithm that monitors hover duration and intent, ensuring that supplementary information is only revealed when truly desired, reducing interface noise significantly.",
       "category": "ui",
       "status": "stable",
       "pricing": "free",
@@ -41,7 +41,7 @@
       "id": "magnetic-button",
       "title": "Magnetic Button",
       "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation.",
-      "subDescription": "Enhances user engagement by physically drawing the cursor toward important actions. Features a smooth spring-based return and a secondary 'flair' animation that reacts to the entrance angle.",
+      "subDescription": "A high-conversion call-to-action component that leverages physics-based magnetism to draw user attention. It features a refined spring-based return mechanism and a secondary 'flair' animation that dynamically responds to the cursor's entrance angle, creating a deeply tactile and responsive experience for critical interactions.",
       "category": "ui",
       "status": "experimental",
       "pricing": "free",
@@ -76,7 +76,7 @@
       "id": "filter-chips",
       "title": "Filter Chips",
       "description": "Animated filter chips with smooth shared layout transitions for selection feedback.",
-      "subDescription": "Perfect for complex filtering systems. Uses Framer Motion's layoutId to smoothly animate the selection pill between chips, providing a tactile feel to data filtering.",
+      "subDescription": "Designed for complex data manipulation where visual clarity is paramount. This component utilizes Framer Motion's shared layout capabilities to seamlessly transition a selection pill between active states. The result is a smooth, continuous animation that provides immediate and satisfying visual feedback to user-driven filtering actions.",
       "category": "ui",
       "status": "stable",
       "pricing": "paid",
@@ -111,7 +111,7 @@
       "id": "scroll-reveal-text",
       "title": "Scroll Reveal Text",
       "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
-      "subDescription": "An immersive storytelling component that reveals content as the user scrolls. Uses custom spring physics for the glass shards and integrated glow effects for a high-end editorial feel.",
+      "subDescription": "An immersive storytelling component optimized for editorial excellence. As the user scrolls, text is revealed through a series of glassmorphic layers that utilize custom spring physics and integrated glow effects. This creates a premium, cinematic feel that guides the reader through content with intentionality and elegance.",
       "category": "animation",
       "status": "stable",
       "pricing": "free",
@@ -129,15 +129,15 @@
         "type": "mdx",
         "path": "src/content/scroll-reveal-text/index.mdx"
       },
-        "demo": {
-          "external": "https://text-box-scroll.vercel.app/",
-          "variants": [
-            "default"
-          ],
-          "defaultProps": {},
-          "scrollable": true,
-          "minHeight": "700px"
-        },
+      "demo": {
+        "external": "https://text-box-scroll.vercel.app/",
+        "variants": [
+          "default"
+        ],
+        "defaultProps": {},
+        "scrollable": true,
+        "minHeight": "700px"
+      },
       "design": {
         "surface": "glassmorphic",
         "motion": "scroll-locked"

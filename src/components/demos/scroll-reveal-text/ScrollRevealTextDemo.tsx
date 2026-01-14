@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { ScrollRevealTextFramer } from '@/content/scroll-reveal-text/scroll-reveal-text.framer';
+import { ScrollRevealTextFramer } from "@/content/scroll-reveal-text/ScrollRevealText";
 
 /**
  * ScrollRevealTextDemo

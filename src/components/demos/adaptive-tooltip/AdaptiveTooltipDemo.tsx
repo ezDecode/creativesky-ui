@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { AdaptiveTooltip } from "@/content/adaptive-tooltip/adaptive-tooltip";
+import { AdaptiveTooltip } from "@/content/adaptive-tooltip/AdaptiveTooltip";
 
 export default function AdaptiveTooltipDemo() {
   return (

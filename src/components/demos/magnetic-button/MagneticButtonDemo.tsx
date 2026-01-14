@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import MagneticButton from '../../../content/magnetic-button/magnetic-button';
+import MagneticButton from "@/content/magnetic-button/MagneticButton";
 
 const MagneticButtonDemo: React.FC = () => {
 	return (

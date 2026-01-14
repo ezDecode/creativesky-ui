@@ -47,16 +47,32 @@ export function getDemoSourceCode(componentId: string): string | null {
  */
 export function getComponentSourceCode(componentId: string): string | null {
   try {
+    const pascalName = componentId
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join("");
+      
     const extensions = [".tsx", ".framer.tsx", ".ts"];
     let componentPath = "";
     
     for (const ext of extensions) {
-      const fullPath = path.join(
+      // Check for PascalCase first (Benchmark)
+      const pascalPath = path.join(
+        process.cwd(),
+        `src/content/${componentId}/${pascalName}${ext}`
+      );
+      if (fs.existsSync(pascalPath)) {
+        componentPath = pascalPath;
+        break;
+      }
+      
+      // Fallback to kebab-case
+      const kebabPath = path.join(
         process.cwd(),
         `src/content/${componentId}/${componentId}${ext}`
       );
-      if (fs.existsSync(fullPath)) {
-        componentPath = fullPath;
+      if (fs.existsSync(kebabPath)) {
+        componentPath = kebabPath;
         break;
       }
     }
