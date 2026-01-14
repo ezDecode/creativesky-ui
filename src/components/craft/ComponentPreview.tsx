@@ -3,11 +3,13 @@
 import * as React from "react";
 import { resolveComponent } from "@/lib/registry/resolver";
 import { DemoContainer } from "./DemoContainer";
+import { PreviewDock } from "./PreviewDock";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
+  onOpenComponents?: () => void;
 }
 
 /**
@@ -23,6 +25,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
 export function ComponentPreview({
   name,
   className,
+  onOpenComponents,
   ...props
 }: ComponentPreviewProps) {
   const [Component, setComponent] = React.useState<React.ComponentType<any> | null>(null);
@@ -31,8 +34,11 @@ export function ComponentPreview({
   const [isLoading, setIsLoading] = React.useState(true);
   const [scrollContainer, setScrollContainer] = React.useState<HTMLDivElement | null>(null);
   const [retryCount, setRetryCount] = React.useState(0);
+  const [showCode, setShowCode] = React.useState(false);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
   
   const scrollContainerRef = React.useRef<HTMLDivElement | null>(null);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const handleScrollContainerRef = React.useCallback((ref: HTMLDivElement | null) => {
     scrollContainerRef.current = ref;
@@ -65,6 +71,26 @@ export function ComponentPreview({
   }, [name, retryCount]);
 
   const handleRetry = () => setRetryCount(c => c + 1);
+
+  const handleFullscreen = React.useCallback(() => {
+    if (!containerRef.current) return;
+    
+    if (!document.fullscreenElement) {
+      containerRef.current.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
 
   // Loading state
   if (isLoading) {
@@ -110,26 +136,32 @@ export function ComponentPreview({
   const minHeight = demo.minHeight;
 
   return (
-    <DemoContainer
-      design={metadata?.design}
-      scrollable={isScrollable}
-      background={background}
-      minHeight={minHeight}
-      onScrollContainerRef={handleScrollContainerRef}
-      className={className}
-      {...props}
-    >
-      {isScrollable ? (
-        // For scrollable components, wait for container ref
-        scrollContainer && (
-          <Component
-            {...(demo.defaultProps || {})}
-            scrollContainerRef={scrollContainerRef}
-          />
-        )
-      ) : (
-        <Component {...(demo.defaultProps || {})} />
-      )}
-    </DemoContainer>
+    <div ref={containerRef} className={cn("relative w-full h-full", className)} {...props}>
+      <PreviewDock
+        onFullscreen={handleFullscreen}
+        onOpenComponents={onOpenComponents}
+        onShowCode={() => setShowCode(!showCode)}
+        showCode={showCode}
+      />
+      <DemoContainer
+        design={metadata?.design}
+        scrollable={isScrollable}
+        background={background}
+        minHeight={minHeight}
+        onScrollContainerRef={handleScrollContainerRef}
+        className="w-full h-full"
+      >
+        {isScrollable ? (
+          scrollContainer && (
+            <Component
+              {...(demo.defaultProps || {})}
+              scrollContainerRef={scrollContainerRef}
+            />
+          )
+        ) : (
+          <Component {...(demo.defaultProps || {})} />
+        )}
+      </DemoContainer>
+    </div>
   );
 }

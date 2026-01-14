@@ -39,8 +39,24 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Right Column: Sticky Preview - First in JSX for mobile top placement */}
           <div className="relative lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
             <div className="sticky top-0 h-[400px] lg:h-screen p-4">
-              {/* Title path in top-right of preview */}
-              <div className="absolute top-4 right-4 z-10 flex items-center gap-2 text-sm">
+              <ComponentPreview name={slug} />
+            </div>
+          </div>
+
+          {/* Left Column: Content */}
+          <div className="lg:order-1">
+            {/* Header: Icon button + Title path */}
+            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-4">
+              <CraftNavDrawer 
+                components={components} 
+                trigger={
+                  <button className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all group shrink-0">
+                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  </button>
+                }
+              />
+              
+              <div className="flex items-center gap-2 text-sm overflow-hidden">
                 <Link href="/craft" className="text-muted-foreground hover:text-foreground transition-colors shrink-0 font-medium">Craft</Link>
                 <span className="text-muted-foreground/40">·</span>
                 <span className={`shrink-0 capitalize ${pricing === "paid" ? "text-amber-500" : "text-emerald-500"}`}>
@@ -51,22 +67,6 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
                   {displayTitle}
                 </span>
               </div>
-              <ComponentPreview name={slug} />
-            </div>
-          </div>
-
-          {/* Left Column: Content */}
-          <div className="lg:order-1">
-            {/* Header: Icon button only */}
-            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center">
-              <CraftNavDrawer 
-                components={components} 
-                trigger={
-                  <button className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all group shrink-0">
-                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </button>
-                }
-              />
             </header>
 
             <div className="px-6 py-10 lg:px-16">
