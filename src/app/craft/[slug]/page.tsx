@@ -45,19 +45,21 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <div className="lg:order-1 relative">
             {/* Header breadcrumb */}
             <header className="sticky top-6 z-30 px-6">
-              <div className="flex h-[46px] items-center justify-between p-1.5 pl-5 bg-muted-2 shadow-glass border border-border/10 rounded-2xl">
-                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight">
-                  <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors">
+              <div className="flex h-[46px] items-center justify-between p-1.5 pl-5 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
+                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-x-auto scrollbar-hide whitespace-nowrap pr-4 mask-fade-right">
+                  <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors shrink-0">
                     Components
                   </Link>
-                  <div className="size-1 rounded-full bg-foreground/20" />
-                  <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"}`}>
+                  <div className="size-1 rounded-full bg-foreground/20 shrink-0" />
+                  <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"} shrink-0`}>
                     {pricing === "paid" ? "Pro" : "Free"}
                   </span>
-                  <div className="size-1 rounded-full bg-foreground/20" />
-                  <span className="text-foreground/50">{title}</span>
+                  <div className="size-1 rounded-full bg-foreground/20 shrink-0" />
+                  <span className="text-foreground/50 shrink-0">{title}</span>
                 </div>
-                <CopyCodeButton name={slug} />
+                <div className="shrink-0">
+                  <CopyCodeButton name={slug} />
+                </div>
               </div>
             </header>
 

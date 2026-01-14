@@ -12,6 +12,7 @@ export const DocsPageConfigSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
+  subDescription: z.string().optional(),
   category: z.string(),
   status: z.string(),
   pricing: z.string(),

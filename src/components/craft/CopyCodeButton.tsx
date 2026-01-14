@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
+import { cn } from "@/lib/utils";
 
 interface CopyCodeButtonProps {
   name: string;
@@ -34,16 +35,29 @@ export function CopyCodeButton({ name }: CopyCodeButtonProps) {
     <button
       onClick={handleCopy}
       disabled={loading}
-      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors border border-foreground/10"
+      className="group relative flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-foreground/[0.03] hover:bg-foreground/[0.06] active:bg-foreground/[0.08] transition-all duration-200 border border-foreground/5 hover:border-foreground/10 shadow-sm overflow-hidden"
       title="Copy component code"
     >
-        <Icon 
-          icon={loading ? "lucide:loader-2" : copied ? "lucide:check" : "lucide:copy"} 
-          className={`size-4.5 ${loading ? "animate-spin" : ""}`} 
-        />
-        <span className="text-[13px] font-mono uppercase tracking-wider">
-        {loading ? "Loading..." : copied ? "Copied" : "Copy Code"}
-      </span>
+        <div className="relative size-4 flex items-center justify-center">
+          <Icon 
+            icon={loading ? "lucide:loader-2" : "lucide:copy"} 
+            className={cn(
+              "size-4 transition-all duration-300",
+              loading ? "animate-spin opacity-100" : "opacity-70 group-hover:opacity-100",
+              copied ? "scale-0 opacity-0" : "scale-100"
+            )} 
+          />
+          <Icon 
+            icon="lucide:check" 
+            className={cn(
+              "absolute inset-0 size-4 text-emerald-500 transition-all duration-300",
+              copied ? "scale-100 opacity-100" : "scale-50 opacity-0"
+            )} 
+          />
+        </div>
+        <span className="text-[12px] font-semibold uppercase tracking-wider text-foreground/60 group-hover:text-foreground/80 transition-colors">
+          {loading ? "Fetching..." : copied ? "Copied!" : "Copy Code"}
+        </span>
     </button>
   );
 }

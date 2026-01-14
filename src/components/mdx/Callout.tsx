@@ -19,29 +19,37 @@ export function Callout({
     return (
         <div
             className={cn(
-                "my-6 flex flex-col gap-2 rounded-xl border p-4 text-sm shadow-sm transition-all hover:shadow-md",
+                "my-6 flex flex-col gap-2 rounded-2xl border p-5 text-[14px] leading-relaxed transition-all shadow-glass backdrop-blur-[6px]",
                 {
-                    "border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50": type === "default",
-                    "border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-900/30 dark:bg-blue-950/20 dark:text-blue-200": type === "info",
-                    "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900/30 dark:bg-amber-950/20 dark:text-amber-200": type === "warning",
-                    "border-red-200 bg-red-50 text-red-900 dark:border-red-900/30 dark:bg-red-950/20 dark:text-red-200": type === "error",
-                    "border-green-200 bg-green-50 text-green-900 dark:border-green-900/30 dark:bg-green-950/20 dark:text-green-200": type === "success",
+                    "border-foreground/10 bg-muted-2/50": type === "default",
+                    "border-blue-500/20 bg-blue-500/5 text-blue-900 dark:text-blue-200": type === "info",
+                    "border-amber-500/20 bg-amber-500/5 text-amber-900 dark:text-amber-200": type === "warning",
+                    "border-red-500/20 bg-red-500/5 text-red-900 dark:text-red-200": type === "error",
+                    "border-green-500/20 bg-green-500/5 text-green-900 dark:text-green-200": type === "success",
                 },
                 className
             )}
             {...props}
         >
             {title && (
-                <div className="flex items-center gap-2 font-medium">
-                    {type === "info" && <InfoIcon className="h-4 w-4" />}
-                    {type === "warning" && <AlertTriangleIcon className="h-4 w-4" />}
-                    {type === "error" && <AlertCircleIcon className="h-4 w-4" />}
-                    {type === "success" && <CheckCircleIcon className="h-4 w-4" />}
-                    {type === "default" && <InfoIcon className="h-4 w-4" />}
+                <div className="flex items-center gap-2.5 font-semibold tracking-tight text-foreground/90">
+                    <div className={cn("rounded-lg p-1", {
+                        "bg-foreground/5": type === "default",
+                        "bg-blue-500/10": type === "info",
+                        "bg-amber-500/10": type === "warning",
+                        "bg-red-500/10": type === "error",
+                        "bg-green-500/10": type === "success",
+                    })}>
+                        {type === "info" && <InfoIcon className="h-3.5 w-3.5" />}
+                        {type === "warning" && <AlertTriangleIcon className="h-3.5 w-3.5" />}
+                        {type === "error" && <AlertCircleIcon className="h-3.5 w-3.5" />}
+                        {type === "success" && <CheckCircleIcon className="h-3.5 w-3.5" />}
+                        {type === "default" && <InfoIcon className="h-3.5 w-3.5" />}
+                    </div>
                     <span>{title}</span>
                 </div>
             )}
-            <div className={cn("overflow-hidden", title && "text-muted-foreground/90")}>
+            <div className={cn("overflow-hidden", title ? "text-foreground/70" : "text-foreground/80")}>
                 {children}
             </div>
         </div>

@@ -26,11 +26,12 @@ export async function buildDocsPage(slug: string): Promise<DocsPageConfig> {
           { type: "hover", description: "Hover for additional effects" }
         ];
   
-    config = {
-      id: metadata.id,
-      title: metadata.title,
-      description: metadata.description,
-      category: metadata.category,
+      config = {
+        id: metadata.id,
+        title: metadata.title,
+        description: metadata.description,
+        subDescription: (metadata as any).subDescription,
+        category: metadata.category,
       status: metadata.status,
       pricing: metadata.pricing,
       dependencies: metadata.dependencies || [],
