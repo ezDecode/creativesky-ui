@@ -1,10 +1,11 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { MDXRemote } from "next-mdx-remote";
 import { DocsPageConfig, Interaction } from "./schema";
 import { getMDXComponents } from "@/lib/mdx/components";
 
 export function SectionRenderer({ config }: { config: DocsPageConfig }) {
-  const { dependencies, interactions, license, showSource, mdxContent: MdxContent } = config;
+  const { dependencies, interactions, license, showSource, mdxContent } = config;
 
   return (
     <>
@@ -53,12 +54,15 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
 
       {/* MDX Content */}
       <article className="docs-article">
-        {MdxContent ? (
-          <MdxContent components={{ 
-            ...getMDXComponents(),
-            ComponentPreview: () => null, 
-            h1: () => null 
-          }} />
+        {mdxContent ? (
+          <MDXRemote 
+            {...mdxContent} 
+            components={{ 
+              ...getMDXComponents(),
+              ComponentPreview: () => null, 
+              h1: () => null 
+            }} 
+          />
         ) : (
           <p className="text-muted-foreground italic">No documentation available.</p>
         )}

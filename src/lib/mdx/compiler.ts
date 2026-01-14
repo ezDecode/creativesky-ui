@@ -1,6 +1,4 @@
-import { type ComponentType } from 'react';
 import matter from 'gray-matter';
-import { getMDXComponents } from './components';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 
@@ -17,22 +15,19 @@ const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour in production
 
 /**
  * Compile MDX content using next-mdx-remote
+ * Returns the serialized source instead of a component to allow RSC boundary crossing
  */
 export async function compileMDX(
   source: string,
   cacheKey?: string
-): Promise<{ default: ComponentType<any> }> {
+): Promise<{ source: any }> {
   // Check cache
   if (cacheKey && compiledMDXCache.has(cacheKey)) {
     const cached = compiledMDXCache.get(cacheKey)!;
     const age = Date.now() - cached.compiledAt;
     
     if (process.env.NODE_ENV === 'development' || age < CACHE_TTL_MS) {
-      const { MDXRemote } = await import('next-mdx-remote');
-      const Component = (props: any) => (
-        <MDXRemote {...cached.source} components={{ ...getMDXComponents(), ...props.components }} />
-      );
-      return { default: Component as any };
+      return { source: cached.source };
     }
   }
 
@@ -57,18 +52,13 @@ export async function compileMDX(
     });
   }
 
-  const { MDXRemote } = await import('next-mdx-remote');
-  const Component = (props: any) => (
-    <MDXRemote {...mdxSource} components={{ ...getMDXComponents(), ...props.components }} />
-  );
-
-  return { default: Component as any };
+  return { source: mdxSource };
 }
 
 export async function compileAndExecuteMDX(
   source: string,
   cacheKey?: string
-): Promise<{ default: ComponentType<any> }> {
+): Promise<{ source: any }> {
   return compileMDX(source, cacheKey);
 }
 

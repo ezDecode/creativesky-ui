@@ -7,22 +7,22 @@ import type { MDXFrontmatter } from './types';
 
 export interface LoadedMDX {
   frontmatter: MDXFrontmatter;
-  Content: ComponentType<{ components?: Record<string, ComponentType<any>> }>;
+  source: any;
   rawContent: string;
 }
 
 export async function loadMDXFile(filePath: string): Promise<LoadedMDX> {
   const rawContent = readFileSync(filePath, 'utf-8');
-  const { data: frontmatter, content: mdxBody } = matter(rawContent);
+  const { data: frontmatter } = matter(rawContent);
 
-  const mdxModule = await compileAndExecuteMDX(
+  const { source } = await compileAndExecuteMDX(
     rawContent,
     filePath
   );
 
   return {
     frontmatter: frontmatter as MDXFrontmatter,
-    Content: mdxModule.default,
+    source,
     rawContent,
   };
 }

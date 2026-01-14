@@ -38,7 +38,7 @@ export async function buildDocsPage(slug: string): Promise<DocsPageConfig> {
       "Attribution to Skiper UI is appreciated but not required."
     ],
     showSource: metadata.source.type === "mdx",
-    mdxContent: mdx?.Content,
+    mdxContent: mdx?.source,
     prev,
     next,
   };
