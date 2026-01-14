@@ -4,8 +4,7 @@
     {
       "id": "adaptive-tooltip",
       "title": "Adaptive Tooltip",
-      "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays.",
-      "subDescription": "Engineered for high-density information environments where accidental triggers disrupt the user flow. This component implements a sophisticated confidence algorithm that monitors hover duration and intent, ensuring that supplementary information is only revealed when truly desired, reducing interface noise significantly.",
+      "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays. Engineered for high-density information environments where accidental triggers disrupt the user flow. This component implements a sophisticated confidence algorithm that monitors hover duration and intent, ensuring that supplementary information is only revealed when truly desired, reducing interface noise significantly.",
       "category": "ui",
       "status": "stable",
       "pricing": "free",
@@ -40,8 +39,7 @@
     {
       "id": "magnetic-button",
       "title": "Magnetic Button",
-      "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation.",
-      "subDescription": "A high-conversion call-to-action component that leverages physics-based magnetism to draw user attention. It features a refined spring-based return mechanism and a secondary 'flair' animation that dynamically responds to the cursor's entrance angle, creating a deeply tactile and responsive experience for critical interactions.",
+      "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation. A high-conversion call-to-action component that leverages physics-based magnetism to draw user attention. It features a refined spring-based return mechanism and a secondary 'flair' animation that dynamically responds to the cursor's entrance angle, creating a deeply tactile and responsive experience for critical interactions.",
       "category": "ui",
       "status": "experimental",
       "pricing": "free",
@@ -75,8 +73,7 @@
     {
       "id": "filter-chips",
       "title": "Filter Chips",
-      "description": "Animated filter chips with smooth shared layout transitions for selection feedback.",
-      "subDescription": "Designed for complex data manipulation where visual clarity is paramount. This component utilizes Framer Motion's shared layout capabilities to seamlessly transition a selection pill between active states. The result is a smooth, continuous animation that provides immediate and satisfying visual feedback to user-driven filtering actions.",
+      "description": "Animated filter chips with smooth shared layout transitions for selection feedback. Designed for complex data manipulation where visual clarity is paramount. This component utilizes Framer Motion's shared layout capabilities to seamlessly transition a selection pill between active states. The result is a smooth, continuous animation that provides immediate and satisfying visual feedback to user-driven filtering actions.",
       "category": "ui",
       "status": "stable",
       "pricing": "paid",
@@ -110,8 +107,7 @@
     {
       "id": "scroll-reveal-text",
       "title": "Scroll Reveal Text",
-      "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
-      "subDescription": "An immersive storytelling component optimized for editorial excellence. As the user scrolls, text is revealed through a series of glassmorphic layers that utilize custom spring physics and integrated glow effects. This creates a premium, cinematic feel that guides the reader through content with intentionality and elegance.",
+      "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve. An immersive storytelling component optimized for editorial excellence. As the user scrolls, text is revealed through a series of glassmorphic layers that utilize custom spring physics and integrated glow effects. This creates a premium, cinematic feel that guides the reader through content with intentionality and elegance.",
       "category": "animation",
       "status": "stable",
       "pricing": "free",
