@@ -167,24 +167,24 @@ export function ComponentPreview({
           trigger={null}
         />
         
-        <PreviewDock
-          onFullscreen={toggleFullscreen}
-          onShowCode={() => setShowCode(!showCode)}
-          onOpenComponents={() => setIsDrawerOpen(true)}
-          showCode={showCode}
-          isFullscreen={isInternalFullscreen}
-            className={isInternalFullscreen ? "top-6 right-6" : ""}
-        />
-
-        <div className="w-full h-full overflow-auto scrollbar-hide">
-          <DemoContainer
-            design={metadata?.design}
-            scrollable={isScrollable}
-            background={background}
-            minHeight={minHeight}
-            onScrollContainerRef={handleScrollContainerRef}
-            className="w-full h-full"
-          >
+          <PreviewDock
+            onFullscreen={toggleFullscreen}
+            onShowCode={() => setShowCode(!showCode)}
+            onOpenComponents={() => setIsDrawerOpen(true)}
+            showCode={showCode}
+            isFullscreen={isInternalFullscreen}
+          />
+  
+          <div className="w-full h-full overflow-auto scrollbar-hide">
+            <DemoContainer
+              design={metadata?.design}
+              scrollable={isScrollable}
+              background={background}
+              minHeight={minHeight}
+              onScrollContainerRef={handleScrollContainerRef}
+              className="w-full h-full"
+              isFullscreen={isInternalFullscreen}
+            >
             {isScrollable ? (
               scrollContainer && (
                 <Component

@@ -11,6 +11,7 @@ interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   background?: "light" | "dark" | "transparent";
   minHeight?: string;
   onScrollContainerRef?: (ref: HTMLDivElement | null) => void;
+  isFullscreen?: boolean;
 }
 
 /**
@@ -30,6 +31,7 @@ export function DemoContainer({
   minHeight,
   onScrollContainerRef,
   className,
+  isFullscreen = false,
   ...props
 }: DemoContainerProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -42,7 +44,8 @@ export function DemoContainer({
 
   const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
   const baseStyles = cn(
-    "relative w-full h-full rounded-xl overflow-hidden border border-white/5 shadow-2xl ring-1 ring-white/5",
+    "relative w-full h-full rounded-xl overflow-hidden",
+    !isFullscreen && "border border-white/5 shadow-2xl ring-1 ring-white/5",
     surfaceStyles,
     className
   );

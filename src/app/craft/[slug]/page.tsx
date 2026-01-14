@@ -35,27 +35,27 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
       <div className="w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
-          <div className="relative lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
+          <div className="relative order-1 lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
             <div className="sticky top-0 h-[400px] lg:h-screen p-2">
               <ComponentPreview name={slug} />
             </div>
           </div>
 
           {/* Left Column: Docs Content */}
-          <div className="lg:order-1 relative">
+          <div className="order-2 lg:order-1 relative">
             {/* Header breadcrumb */}
             <header className="sticky top-6 z-30 px-6">
-              <div className="flex h-[46px] items-center justify-between p-1.5 pl-5 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
-                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-x-auto scrollbar-hide whitespace-nowrap pr-4 mask-fade-right">
+              <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
+                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
                   <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors shrink-0">
                     Components
                   </Link>
-                  <div className="size-1 rounded-full bg-foreground/20 shrink-0" />
+                  <div className="size-1.5 rounded-full bg-primary/40 shrink-0" />
                   <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"} shrink-0`}>
                     {pricing === "paid" ? "Pro" : "Free"}
                   </span>
-                  <div className="size-1 rounded-full bg-foreground/20 shrink-0" />
-                  <span className="text-foreground/50 shrink-0">{title}</span>
+                  <div className="size-1.5 rounded-full bg-primary/40 shrink-0" />
+                  <span className="text-foreground/50 shrink-0 truncate max-w-[120px] md:max-w-[200px]">{title}</span>
                 </div>
                 <div className="shrink-0">
                   <CopyCodeButton name={slug} />
@@ -64,7 +64,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             </header>
 
             {/* Main docs content */}
-            <div className="mt-[19vh] mb-[9vh] px-5 lg:px-8">
+            <div className="mt-24 mb-[9vh] px-5 lg:px-8">
               <SectionRenderer config={config} />
 
               {/* Navigation */}
