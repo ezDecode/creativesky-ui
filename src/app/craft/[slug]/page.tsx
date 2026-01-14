@@ -44,17 +44,17 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Docs Content */}
           <div className="lg:order-1 relative h-full lg:overflow-x-hidden lg:overflow-y-auto">
             {/* Header breadcrumb */}
-            <header className="sticky top-0 z-30 bg-background/70 backdrop-blur-xl border-b border-border/5">
-              <div className="flex items-center justify-between py-4 px-6 lg:px-8">
-                <div className="flex items-center gap-2 text-[15px] font-medium capitalize tracking-tight">
+            <header className="sticky top-0 z-30 p-2">
+              <div className="flex items-center justify-between py-3 px-6 lg:px-8 bg-background/50 backdrop-blur-xl border border-border/10 rounded-2xl">
+                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight">
                   <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors">
                     Components
                   </Link>
-                  <Icon icon="lucide:chevron-right" className="size-4 text-foreground/20" />
+                  <div className="size-1 rounded-full bg-foreground/20" />
                   <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"}`}>
                     {pricing === "paid" ? "Pro" : "Free"}
                   </span>
-                  <Icon icon="lucide:chevron-right" className="size-4 text-foreground/20" />
+                  <div className="size-1 rounded-full bg-foreground/20" />
                   <span className="text-foreground/50">{title}</span>
                 </div>
                 <CopyCodeButton name={slug} />
