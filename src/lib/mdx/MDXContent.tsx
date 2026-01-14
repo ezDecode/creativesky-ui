@@ -1,7 +1,7 @@
 'use client';
 
 import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface MDXContentProps {
   source: MDXRemoteSerializeResult;
@@ -9,6 +9,13 @@ interface MDXContentProps {
 }
 
 export function MDXContent({ source, components }: MDXContentProps) {
-  if (!source) return null;
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!source || !isMounted) return null;
+  
   return <MDXRemote {...source} components={components} />;
 }
