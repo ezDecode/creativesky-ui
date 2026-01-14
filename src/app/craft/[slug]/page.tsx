@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllComponentsMetadata, resolveComponent } from "@/lib/registry/resolver";
+import { getAllComponentsMetadata, resolveComponent, getComponentMetadata } from "@/lib/registry/resolver";
 import { loadComponentMDX } from "@/lib/mdx/loader";
 import { getMDXComponents } from "@/lib/mdx/components";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
@@ -27,8 +27,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
     notFound();
   }
 
+  const metadata = getComponentMetadata(slug);
   const mdxContent = await loadComponentMDX(slug);
   const displayTitle = mdxContent?.frontmatter.title || slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const pricing = metadata?.pricing || "free";
 
     return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
@@ -43,27 +45,28 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
           {/* Left Column: Content */}
           <div className="lg:order-1">
-            {/* Header Group: Sidebar Trigger + Breadcrumbs */}
-            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-6">
+            {/* Header: Icon button + Title path */}
+            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-4">
               <CraftNavDrawer 
                 components={components} 
                 trigger={
-                  <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all w-fit group shrink-0">
+                  <button className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all group shrink-0">
                     <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium">Components</span>
                   </button>
                 }
               />
               
-              <nav className="flex items-center gap-2 text-sm text-muted-foreground overflow-hidden">
-                <Link href="/" className="hover:text-foreground transition-colors shrink-0">Home</Link>
-                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
-                <Link href="/craft" className="hover:text-foreground transition-colors shrink-0">Craft</Link>
-                <Icon icon="lucide:chevron-right" className="w-3.5 h-3.5 shrink-0" />
-                <span className="text-foreground font-normal truncate">
+              <div className="flex items-center gap-2 text-sm overflow-hidden">
+                <Link href="/craft" className="text-muted-foreground hover:text-foreground transition-colors shrink-0 font-medium">Craft</Link>
+                <span className="text-muted-foreground/40">·</span>
+                <span className={`shrink-0 capitalize ${pricing === "paid" ? "text-amber-500" : "text-emerald-500"}`}>
+                  {pricing}
+                </span>
+                <span className="text-muted-foreground/40">·</span>
+                <span className="text-foreground font-medium truncate">
                   {displayTitle}
                 </span>
-              </nav>
+              </div>
             </header>
 
             <div className="px-6 py-10 lg:px-16">

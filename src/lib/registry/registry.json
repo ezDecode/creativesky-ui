@@ -1,142 +1,146 @@
 {
-  "version": "1.0.0",
-  "components": [
-    {
-      "id": "adaptive-tooltip",
-      "title": "Adaptive Tooltip",
-      "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays.",
-      "category": "ui",
-      "status": "stable",
-      "tags": [
-        "framer-motion",
-        "animejs",
-        "clsx"
-      ],
-      "date": "2025-12-31",
-      "featured": false,
-      "new": false,
-      "source": {
-        "type": "mdx",
-        "path": "src/content/adaptive-tooltip/index.mdx"
-      },
-      "demo": {
-        "variants": [
-          "default"
+    "version": "1.0.0",
+    "components": [
+      {
+        "id": "adaptive-tooltip",
+        "title": "Adaptive Tooltip",
+        "description": "An intelligent tooltip system that adapts to user intent with confidence-based delays.",
+        "category": "ui",
+        "status": "stable",
+        "pricing": "free",
+        "tags": [
+          "framer-motion",
+          "animejs",
+          "clsx"
         ],
-        "defaultProps": {}
-      },
-      "design": {
-        "surface": "flat",
-        "motion": "spring"
-      },
-      "dependencies": [
-        "framer-motion",
-        "animejs",
-        "clsx"
-      ]
-    },
-    {
-      "id": "magnetic-button",
-      "title": "Magnetic Button",
-      "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation.",
-      "category": "ui",
-      "status": "experimental",
-      "tags": [
-        "gsap",
-        "animation",
-        "ui"
-      ],
-      "date": "2026-01-07",
-      "featured": false,
-      "new": true,
-      "source": {
-        "type": "mdx",
-        "path": "src/content/magnetic-button/index.mdx"
-      },
-      "demo": {
-        "variants": [
-          "default"
-        ],
-        "defaultProps": {}
-      },
-      "design": {
-        "surface": "flat",
-        "motion": "spring"
-      },
-      "dependencies": [
-        "gsap",
-        "react"
-      ]
-    },
-    {
-      "id": "filter-chips",
-      "title": "Filter Chips",
-      "description": "Animated filter chips with smooth shared layout transitions for selection feedback.",
-      "category": "ui",
-      "status": "stable",
-      "tags": [
-        "framer-motion",
-        "animation",
-        "ui",
-        "filter"
-      ],
-      "date": "2026-01-08",
-      "featured": false,
-      "new": true,
-      "source": {
-        "type": "mdx",
-        "path": "src/content/filter-chips/index.mdx"
-      },
-      "demo": {
-        "variants": [
-          "default"
-        ],
-        "defaultProps": {}
-      },
-      "design": {
-        "surface": "flat",
-        "motion": "spring"
-      },
-      "dependencies": [
-        "framer-motion"
-      ]
-    },
-    {
-      "id": "scroll-reveal-text",
-      "title": "Scroll Reveal Text",
-      "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
-      "category": "animation",
-      "status": "stable",
-      "tags": [
-        "framer-motion",
-        "scroll",
-        "animation",
-        "text",
-        "spring-physics"
-      ],
-      "date": "2026-01-11",
-      "featured": false,
-      "new": true,
-      "source": {
-        "type": "mdx",
-        "path": "src/content/scroll-reveal-text/index.mdx"
-      },
+        "date": "2025-12-31",
+        "featured": false,
+        "new": false,
+        "source": {
+          "type": "mdx",
+          "path": "src/content/adaptive-tooltip/index.mdx"
+        },
         "demo": {
-          "external": "https://text-box-scroll.vercel.app/",
           "variants": [
             "default"
           ],
-          "defaultProps": {},
-          "scrollable": true,
-          "minHeight": "700px"
+          "defaultProps": {}
         },
-      "design": {
-        "surface": "glassmorphic",
-        "motion": "scroll-locked"
+        "design": {
+          "surface": "flat",
+          "motion": "spring"
+        },
+        "dependencies": [
+          "framer-motion",
+          "animejs",
+          "clsx"
+        ]
       },
-      "dependencies": [
-        "framer-motion"
-      ]
-    }
-  ]
-}
+      {
+        "id": "magnetic-button",
+        "title": "Magnetic Button",
+        "description": "A magnetic, cursor-following CTA with GSAP-powered flair animation.",
+        "category": "ui",
+        "status": "experimental",
+        "pricing": "free",
+        "tags": [
+          "gsap",
+          "animation",
+          "ui"
+        ],
+        "date": "2026-01-07",
+        "featured": false,
+        "new": true,
+        "source": {
+          "type": "mdx",
+          "path": "src/content/magnetic-button/index.mdx"
+        },
+        "demo": {
+          "variants": [
+            "default"
+          ],
+          "defaultProps": {}
+        },
+        "design": {
+          "surface": "flat",
+          "motion": "spring"
+        },
+        "dependencies": [
+          "gsap",
+          "react"
+        ]
+      },
+      {
+        "id": "filter-chips",
+        "title": "Filter Chips",
+        "description": "Animated filter chips with smooth shared layout transitions for selection feedback.",
+        "category": "ui",
+        "status": "stable",
+        "pricing": "paid",
+        "tags": [
+          "framer-motion",
+          "animation",
+          "ui",
+          "filter"
+        ],
+        "date": "2026-01-08",
+        "featured": false,
+        "new": true,
+        "source": {
+          "type": "mdx",
+          "path": "src/content/filter-chips/index.mdx"
+        },
+        "demo": {
+          "variants": [
+            "default"
+          ],
+          "defaultProps": {}
+        },
+        "design": {
+          "surface": "flat",
+          "motion": "spring"
+        },
+        "dependencies": [
+          "framer-motion"
+        ]
+      },
+      {
+        "id": "scroll-reveal-text",
+        "title": "Scroll Reveal Text",
+        "description": "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve.",
+        "category": "animation",
+        "status": "stable",
+        "pricing": "free",
+        "tags": [
+          "framer-motion",
+          "scroll",
+          "animation",
+          "text",
+          "spring-physics"
+        ],
+        "date": "2026-01-11",
+        "featured": false,
+        "new": true,
+        "source": {
+          "type": "mdx",
+          "path": "src/content/scroll-reveal-text/index.mdx"
+        },
+          "demo": {
+            "external": "https://text-box-scroll.vercel.app/",
+            "variants": [
+              "default"
+            ],
+            "defaultProps": {},
+            "scrollable": true,
+            "minHeight": "700px"
+          },
+        "design": {
+          "surface": "glassmorphic",
+          "motion": "scroll-locked"
+        },
+        "dependencies": [
+          "framer-motion"
+        ]
+      }
+    ]
+  }

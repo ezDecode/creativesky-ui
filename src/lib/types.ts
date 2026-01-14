@@ -13,6 +13,8 @@ export type ComponentCategory =
 
 export type ComponentStatus = "stable" | "experimental" | "deprecated";
 
+export type ComponentPricing = "free" | "paid";
+
 export type ComponentSourceType = "local" | "remote" | "user-uploaded" | "mdx";
 
 export interface ComponentSource {
@@ -45,6 +47,7 @@ export interface RegistryComponent {
   description: string;
   category: ComponentCategory;
   status: ComponentStatus;
+  pricing: ComponentPricing;
   tags: string[];
   date: string;
   featured?: boolean;
@@ -54,7 +57,6 @@ export interface RegistryComponent {
   design: ComponentDesign;
   readme?: string;
   dependencies?: string[];
-  /** Author information */
   author?: {
     name: string;
     url?: string;
