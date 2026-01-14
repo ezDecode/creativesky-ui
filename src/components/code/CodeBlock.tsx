@@ -67,14 +67,14 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl bg-muted/10",
+        "relative overflow-hidden rounded-xl",
         showBorder && "border"
       )}
     >
       {/* Header */}
       <div
         className={cn(
-          "flex items-center justify-between bg-muted/20 px-4 py-2",
+          "flex items-center justify-between px-4 py-2",
           showBorder && "border-b border-border/50"
         )}
       >

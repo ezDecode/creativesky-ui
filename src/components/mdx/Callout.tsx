@@ -21,7 +21,7 @@ export function Callout({
             className={cn(
                 "my-6 flex flex-col gap-2 rounded-2xl border p-5 text-[14px] leading-relaxed transition-all shadow-glass backdrop-blur-[6px]",
                 {
-                    "border-foreground/10 bg-muted-2/50": type === "default",
+                    "border-foreground/10": type === "default",
                     "border-blue-500/20 bg-blue-500/5 text-blue-900 dark:text-blue-200": type === "info",
                     "border-amber-500/20 bg-amber-500/5 text-amber-900 dark:text-amber-200": type === "warning",
                     "border-red-500/20 bg-red-500/5 text-red-900 dark:text-red-200": type === "error",

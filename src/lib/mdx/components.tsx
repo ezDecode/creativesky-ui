@@ -134,7 +134,7 @@ function Ol({ children, ...props }: any) {
 function Blockquote({ children, ...props }: any) {
   return (
     <blockquote
-      className="my-6 pl-6 py-3 border-l-2 border-primary/30 text-muted-foreground italic bg-muted/20 rounded-r-lg"
+      className="my-6 pl-6 py-3 border-l-2 border-primary/30 text-muted-foreground italic rounded-r-lg"
       {...props}
     >
       {children}
@@ -245,7 +245,7 @@ function Table({ children, ...props }: any) {
 
 function Thead({ children, ...props }: any) {
   return (
-    <thead className="bg-muted/20 border-b border-border/10" {...props}>
+    <thead className="border-b border-border/10" {...props}>
       {children}
     </thead>
   );
