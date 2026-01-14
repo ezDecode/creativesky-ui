@@ -44,7 +44,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Docs Content */}
           <div className="order-2 lg:order-1 relative">
             {/* Header breadcrumb */}
-            <header className="sticky top-6 z-130 px-5 lg:px-8">
+            <header className="fixed top-8 left-5 lg:left-8 z-[150]">
               <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
                 <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
                   <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors shrink-0">

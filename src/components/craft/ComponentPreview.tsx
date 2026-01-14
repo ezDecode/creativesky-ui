@@ -148,10 +148,10 @@ export function ComponentPreview({
         )}
       </AnimatePresence>
 
-        <div className={cn(
-          "top-6 right-5 lg:right-8",
-          isInternalFullscreen ? "fixed z-[140]" : "absolute z-[110]"
-        )}>
+          <div className={cn(
+            "top-8 right-5 lg:right-8",
+            isInternalFullscreen ? "fixed z-[140]" : "absolute z-[110]"
+          )}>
         <CraftNavDrawer
           components={allComponents}
           open={isDrawerOpen}
