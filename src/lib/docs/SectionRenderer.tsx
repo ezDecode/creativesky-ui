@@ -92,19 +92,21 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
         )}
       </article>
 
-      {/* Source Code Section info */}
-      {showSource && (
-        <section className="mb-12">
-          <h3 className="docs-h3 text-foreground font-medium mb-4">Source code</h3>
-          <p className="docs-p flex items-center gap-2 flex-wrap text-muted-foreground text-sm">
-            Click on the top right
-            <span className="flex items-center justify-center bg-muted size-8 rounded-xl border border-border/10">
-              <Icon icon="lucide:code-2" className="size-4" />
-            </span>
-            to view the source code implementation.
-          </p>
-        </section>
-      )}
+        {/* Source Code Section info */}
+        {showSource && (
+          <section className="mb-12">
+            <h3 className="docs-h3 text-foreground font-medium mb-4">Source code</h3>
+            <div className="flex items-center gap-2 flex-wrap text-muted-foreground text-sm">
+              <span>Click on the top right</span>
+              <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-muted border border-border/10">
+                <Icon icon="lucide:file-code" className="size-3.5 text-foreground/40" />
+                <div className="w-px h-2.5 bg-foreground/10" />
+                <Icon icon="lucide:copy" className="size-3.5 text-foreground/40" />
+              </div>
+              <span>to view the source code implementation.</span>
+            </div>
+          </section>
+        )}
 
       {/* License Section */}
       {license && license.length > 0 && (

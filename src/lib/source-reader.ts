@@ -10,16 +10,17 @@ import path from "path";
  * @param componentId - The component ID (e.g., "adaptive-tooltip")
  * @returns The source code string or null if not found
  */
-export function getDemoSourceCode(componentId: string): string | null {
+export function getDemoSourceCode(componentId: string): { code: string; fileName: string } | null {
   try {
     const pascalName = componentId
       .split("-")
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join("");
     
+    const fileName = `${pascalName}Demo.tsx`;
     const demoPath = path.join(
       process.cwd(),
-      `src/components/demos/${componentId}/${pascalName}Demo.tsx`
+      `src/components/demos/${componentId}/${fileName}`
     );
     
     if (!fs.existsSync(demoPath)) {
@@ -27,10 +28,8 @@ export function getDemoSourceCode(componentId: string): string | null {
       return null;
     }
     
-    const sourceCode = fs.readFileSync(demoPath, "utf8");
-    
-    // Return the full source code
-    return sourceCode;
+    const code = fs.readFileSync(demoPath, "utf8");
+    return { code, fileName };
   } catch (error) {
     console.error(`[getDemoSourceCode] Error reading demo for ${componentId}:`, error);
     return null;
@@ -45,18 +44,21 @@ export function getDemoSourceCode(componentId: string): string | null {
  * @param componentId - The component ID (e.g., "adaptive-tooltip")
  * @returns The source code string or null if not found
  */
-export function getComponentSourceCode(componentId: string): string | null {
+export function getComponentSourceCode(componentId: string): { code: string; fileName: string } | null {
   try {
     const extensions = [".tsx", ".framer.tsx", ".ts"];
     let componentPath = "";
+    let fileName = "";
     
     for (const ext of extensions) {
+      const name = `${componentId}${ext}`;
       const fullPath = path.join(
         process.cwd(),
-        `src/content/${componentId}/${componentId}${ext}`
+        `src/content/${componentId}/${name}`
       );
       if (fs.existsSync(fullPath)) {
         componentPath = fullPath;
+        fileName = name;
         break;
       }
     }
@@ -66,7 +68,8 @@ export function getComponentSourceCode(componentId: string): string | null {
       return null;
     }
     
-    return fs.readFileSync(componentPath, "utf8");
+    const code = fs.readFileSync(componentPath, "utf8");
+    return { code, fileName };
   } catch (error) {
     console.error(`[getComponentSourceCode] Error reading component ${componentId}:`, error);
     return null;
