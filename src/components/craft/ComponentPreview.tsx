@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
+  backgroundClassName?: string;
 }
 
 /**
@@ -20,6 +21,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
 export function ComponentPreview({
   name,
   className,
+  backgroundClassName,
   ...props
 }: ComponentPreviewProps) {
   const [Component, setComponent] = React.useState<React.ComponentType<any> | null>(null);
@@ -179,7 +181,7 @@ export function ComponentPreview({
                   "relative rounded-xl overflow-hidden",
                 isInternalFullscreen 
                   ? "fixed inset-1 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center" 
-                  : "w-full h-full bg-muted/50"
+                  : cn("w-full h-full bg-muted/50", backgroundClassName)
               )}
             >
           {isInternalFullscreen ? (

@@ -39,7 +39,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Right Column: Sticky Preview */}
           <div className="relative order-1 lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10 z-40">
             <div className="sticky top-0 h-[400px] lg:h-screen p-1">
-              <ComponentPreview name={slug} />
+              <ComponentPreview 
+                name={slug} 
+                backgroundClassName="bg-zinc-950 dark:bg-zinc-900"
+              />
             </div>
           </div>
 
