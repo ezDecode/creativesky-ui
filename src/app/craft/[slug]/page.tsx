@@ -94,14 +94,6 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
             {/* Main docs content */}
             <div className="my-[9vh] px-5 lg:px-8">
-              {/* Title */}
-              <h3 className="docs-h3">{displayTitle}</h3>
-              
-              {/* Description */}
-              {description && (
-                <p className="docs-p">{description}</p>
-              )}
-
               {/* Dependencies */}
               {dependencies.length > 0 && (
                 <>

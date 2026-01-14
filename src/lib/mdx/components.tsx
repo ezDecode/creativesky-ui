@@ -111,7 +111,7 @@ function Ul({ children, ...props }: any) {
 function Li({ children, ...props }: any) {
   return (
     <li className="relative pl-2" {...props}>
-      <span className="absolute left-[-1.5rem] top-2.5 h-1.5 w-1.5 rounded-full bg-primary/60 content-['']" />
+      <span className="absolute -left-6 top-2.5 h-1.5 w-1.5 rounded-full bg-primary/60 content-['']" />
       <span className="text-muted-foreground leading-7">{children}</span>
     </li>
   );
