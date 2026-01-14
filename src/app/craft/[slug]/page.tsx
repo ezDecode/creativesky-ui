@@ -62,7 +62,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             </header>
 
             {/* Main docs content */}
-            <div className="my-[9vh] px-5 lg:px-8">
+            <div className="mt-[19vh] mb-[9vh] px-5 lg:px-8">
               <SectionRenderer config={config} />
 
               {/* Navigation */}
