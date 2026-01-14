@@ -35,10 +35,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <div className="w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="flex flex-col lg:grid lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
-          <div className="relative order-1 lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10 z-40">
-            <div className="sticky top-0 h-[400px] lg:h-screen p-1">
+          <div className="relative border-b lg:border-b-0 lg:border-l border-border/10 z-40 lg:order-2">
+            <div className="sticky top-0 h-[50vh] min-h-[400px] lg:h-screen p-1">
               <ComponentPreview 
                 name={slug} 
                 backgroundClassName="bg-zinc-950 dark:bg-zinc-900"
@@ -47,20 +47,20 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </div>
 
           {/* Left Column: Docs Content */}
-          <div className="order-2 lg:order-1 relative">
+          <div className="relative lg:order-1">
             {/* Header breadcrumb */}
-            <header className="fixed top-9 left-5 lg:left-8 z-[150]">
-              <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
-                <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
-                  <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors shrink-0">
+            <header className="sticky lg:fixed top-0 lg:top-9 left-0 lg:left-8 z-[150] w-full lg:w-auto p-4 lg:p-0 bg-background/80 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border-b lg:border-none border-border/10">
+              <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 lg:bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden max-w-full">
+                <div className="flex items-center gap-3 text-[14px] lg:text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
+                  <Link href="/craft" className="hidden md:block text-foreground/50 hover:text-foreground transition-colors shrink-0">
                     Components
                   </Link>
-                  <div className="size-1.5 rounded-full bg-primary/40 shrink-0" />
+                  <div className="hidden md:block size-1.5 rounded-full bg-primary/40 shrink-0" />
                   <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"} shrink-0`}>
                     {pricing === "paid" ? "Pro" : "Free"}
                   </span>
                   <div className="size-1.5 rounded-full bg-primary/40 shrink-0" />
-                  <span className="text-foreground/50 shrink-0 truncate max-w-[120px] md:max-w-[200px]">{title}</span>
+                  <span className="text-foreground/50 shrink-0 truncate max-w-[100px] md:max-w-[200px]">{title}</span>
                 </div>
                 <div className="shrink-0">
                   <CopyCodeButton name={slug} />
@@ -69,13 +69,13 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             </header>
 
             {/* Main docs content */}
-            <div className="mt-32 mb-[9vh] px-5 lg:px-8">
+            <div className="mt-8 lg:mt-32 mb-[9vh] px-5 lg:px-8">
               <SectionRenderer config={config} />
 
               {/* Navigation */}
-              <div className="relative z-10 mb-[10vh] mt-[20vh]">
+              <div className="relative z-10 mb-[10vh] mt-20 lg:mt-[20vh]">
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent mb-12" />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {prev ? (
                     <Link 
                       href={`/craft/${prev.id}`} 
