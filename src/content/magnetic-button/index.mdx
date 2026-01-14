@@ -8,24 +8,40 @@ dependencies: ["gsap"]
 source: "src/content/magnetic-button/index.mdx"
 ---
 
-A magnetic, cursor-following call-to-action with a GSAP-powered flair animation. Tracks cursor movement for an engaging visual experience without layout shift.
+## Installation
+
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install gsap
+    ```
+  </Step>
+  <Step>
+    Copy the component code into your project.
+  </Step>
+</Steps>
 
 ## Usage
 
-<DemoCode name="magnetic-button" title="Demo Implementation" />
+```tsx
+import { MagneticButton } from "@/components/craft/magnetic-button";
+
+export default function Demo() {
+  return (
+    <MagneticButton onClick={() => console.log("clicked")}>
+      Get Started
+    </MagneticButton>
+  );
+}
+```
 
 ## Props
 
-**`children`** `ReactNode` — Content to display inside the button.
-
-**`className`** `string` — Additional CSS classes for styling.
-
-**`onClick`** `function` — Click handler function.
-
-**`hoverVariant`** `"light" | "dark"` — Predefined color variant for the flair.
-
-**`customColor`** `string` — Custom hex/rgb color (overrides hoverVariant).
-
-## Source Code
-
-<ComponentCode name="magnetic-button" title="Full Component" />
+<PropsTable props={[
+  { name: "children", type: "ReactNode", required: true, description: "Content to display inside the button." },
+  { name: "className", type: "string", description: "Additional CSS classes for styling." },
+  { name: "onClick", type: "() => void", description: "Click handler function." },
+  { name: "hoverVariant", type: "'light' | 'dark'", default: "'dark'", description: "Predefined color variant for the flair." },
+  { name: "customColor", type: "string", description: "Custom hex/rgb color (overrides hoverVariant)." }
+]} />

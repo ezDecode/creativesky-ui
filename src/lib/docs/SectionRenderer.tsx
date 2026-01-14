@@ -11,14 +11,14 @@ import { PropsTable, PropItem } from "@/components/mdx/PropsTable";
 import { Callout } from "@/components/mdx/Callout";
 
 export function SectionRenderer({ config }: { config: DocsPageConfig }) {
-  const { dependencies, interactions, license, showSource, mdxContent } = config;
+  const { description, dependencies, interactions, license, showSource, mdxContent } = config;
 
   const mdxComponents = {
     ...getMDXComponents(),
-    ComponentCode: ComponentCodeWrapper,
-    DemoCode: DemoCodeWrapper,
-    Steps,
-    Step,
+    ComponentCode: () => null,
+    DemoCode: () => null,
+    Steps: ({ children }: { children: React.ReactNode }) => <div className="space-y-4">{children}</div>,
+    Step: ({ children }: { children: React.ReactNode }) => <div className="docs-step-plain">{children}</div>,
     PropsTable,
     PropItem,
     Callout,
@@ -28,11 +28,20 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
 
   return (
     <>
+      {/* Description Section */}
+      {description && (
+        <section className="mb-12">
+          <p className="text-lg text-muted-foreground leading-relaxed tracking-tight">
+            {description}
+          </p>
+        </section>
+      )}
+
       {/* Dependencies Section */}
       {dependencies && dependencies.length > 0 && (
-        <section>
+        <section className="mb-12">
           <h3 className="docs-h3 flex items-center gap-2 text-foreground font-medium mb-4">Dependencies</h3>
-          <div className="flex flex-wrap items-center gap-2 mb-12">
+          <div className="flex flex-wrap items-center gap-2">
             {dependencies.map((dep) => (
               <a
                 key={dep}
@@ -71,7 +80,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
         </section>
       )}
 
-      {/* MDX Content */}
+      {/* MDX Content (Installation, Usage, Props) */}
       <article className="docs-article prose prose-zinc dark:prose-invert max-w-none mb-12">
         {mdxContent ? (
           <MDXRemote 

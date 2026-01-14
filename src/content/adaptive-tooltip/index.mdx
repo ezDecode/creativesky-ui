@@ -8,8 +8,6 @@ dependencies: ["framer-motion", "animejs", "clsx"]
 source: "src/content/adaptive-tooltip/index.mdx"
 ---
 
-An intelligent tooltip system that adapts to user intent. The tooltip delay decreases as the user hovers over multiple items, showing confidence in their intent to explore.
-
 ## Installation
 
 <Steps>
@@ -26,7 +24,18 @@ An intelligent tooltip system that adapts to user intent. The tooltip delay decr
 
 ## Usage
 
-<DemoCode name="adaptive-tooltip" title="Demo Implementation" />
+```tsx
+import { AdaptiveTooltip } from '@/components/adaptive-tooltip';
+
+const items = [
+  { icon: <Home />, label: "Home" },
+  { icon: <Settings />, label: "Settings" }
+];
+
+export default function App() {
+  return <AdaptiveTooltip items={items} />;
+}
+```
 
 ## Props
 
@@ -42,7 +51,3 @@ An intelligent tooltip system that adapts to user intent. The tooltip delay decr
   { name: "label", type: "string", required: true, description: "Tooltip text label." },
   { name: "hasBadge", type: "boolean", description: "Show a notification badge on the icon." }
 ]} />
-
-## Source Code
-
-<ComponentCode name="adaptive-tooltip" title="Full Component" />

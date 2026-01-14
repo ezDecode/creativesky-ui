@@ -8,8 +8,6 @@ dependencies: ["framer-motion"]
 source: "src/content/filter-chips/index.mdx"
 ---
 
-Animated filter chips with spring-based shared layout transitions. Great for category filters and segmented controls.
-
 ## Installation
 
 <Steps>
@@ -20,10 +18,7 @@ Animated filter chips with spring-based shared layout transitions. Great for cat
     ```
   </Step>
   <Step title="Copy implementation">
-    Copy the component code from the source section below into your project at `src/components/craft/filter-chips.tsx`.
-  </Step>
-  <Step title="Usage">
-    Import and use the component in your pages or other components.
+    Copy the component code into your project.
   </Step>
 </Steps>
 
@@ -55,7 +50,3 @@ export default function Demo() {
   { name: "variant", type: "'pill' | 'outline'", default: "'pill'", description: "The visual style of the chips." },
   { name: "activeColor", type: "string", description: "Custom background color for the active chip." }
 ]} />
-
-## Source Code
-
-<ComponentCode name="filter-chips" title="Component Code" />
