@@ -147,13 +147,18 @@ export function ComponentPreview({
         )}
       </AnimatePresence>
 
-      <motion.div 
-        layout
-        className={cn(
-          "relative w-full h-full rounded-xl overflow-hidden transition-all duration-500 ease-in-out",
-          isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50" : "bg-muted/50"
-        )}
-      >
+        <motion.div 
+          layout
+          transition={{
+            type: "spring",
+            bounce: 0,
+            duration: 0.6
+          }}
+          className={cn(
+            "relative w-full h-full rounded-2xl overflow-hidden p-2",
+            isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50" : "bg-muted/50"
+          )}
+        >
         <CraftNavDrawer
           components={allComponents}
           open={isDrawerOpen}
