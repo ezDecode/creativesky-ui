@@ -149,14 +149,15 @@ export function ComponentPreview({
 
         <motion.div 
           layout
-          transition={{
-            type: "spring",
-            bounce: 0,
-            duration: 0.6
+          transition={{ 
+            type: "spring", 
+            damping: 30, 
+            stiffness: 300,
+            layout: { duration: 0.4, ease: "easeInOut" }
           }}
           className={cn(
-            "relative w-full h-full rounded-2xl overflow-hidden p-2",
-            isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50" : "bg-muted/50"
+            "relative w-full h-full rounded-xl overflow-hidden",
+            isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50 p-2" : "bg-muted/50"
           )}
         >
         <CraftNavDrawer
@@ -172,7 +173,7 @@ export function ComponentPreview({
           onOpenComponents={() => setIsDrawerOpen(true)}
           showCode={showCode}
           isFullscreen={isInternalFullscreen}
-          className={isInternalFullscreen ? "top-8 right-8" : ""}
+            className={isInternalFullscreen ? "top-6 right-6" : ""}
         />
 
         <div className="w-full h-full overflow-auto scrollbar-hide">
