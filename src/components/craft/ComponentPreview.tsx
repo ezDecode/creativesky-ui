@@ -171,36 +171,33 @@ export function ComponentPreview({
         transition={{ 
           type: "spring", 
           damping: 30, 
-          stiffness: 300,
-          layout: { duration: 0.4, ease: "easeInOut" }
+          stiffness: 300
         }}
         className={cn(
           "relative w-full h-full rounded-xl overflow-hidden",
           isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50 p-2" : "bg-muted/50"
         )}
       >
-          <div className="w-full h-full overflow-auto scrollbar-hide">
-            <DemoContainer
-              design={metadata?.design}
-              scrollable={isScrollable}
-              background={background}
-              minHeight={minHeight}
-              onScrollContainerRef={handleScrollContainerRef}
-              className="w-full h-full"
-              isFullscreen={isInternalFullscreen}
-            >
-            {isScrollable ? (
-              scrollContainer && (
-                <Component
-                  {...(demo.defaultProps || {})}
-                  scrollContainerRef={scrollContainerRef}
-                />
-              )
-            ) : (
-              <Component {...(demo.defaultProps || {})} />
-            )}
-          </DemoContainer>
-        </div>
+        <DemoContainer
+          design={metadata?.design}
+          scrollable={isScrollable}
+          background="transparent"
+          minHeight={minHeight}
+          onScrollContainerRef={handleScrollContainerRef}
+          className="w-full h-full border-none shadow-none ring-0"
+          isFullscreen={isInternalFullscreen}
+        >
+          {isScrollable ? (
+            scrollContainer && (
+              <Component
+                {...(demo.defaultProps || {})}
+                scrollContainerRef={scrollContainerRef}
+              />
+            )
+          ) : (
+            <Component {...(demo.defaultProps || {})} />
+          )}
+        </DemoContainer>
       </motion.div>
     </div>
   );

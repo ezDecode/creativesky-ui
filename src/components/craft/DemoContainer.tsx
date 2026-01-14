@@ -44,8 +44,9 @@ export function DemoContainer({
 
   const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
   const baseStyles = cn(
-    "relative w-full h-full rounded-xl overflow-hidden",
-    !isFullscreen && "border border-white/5 shadow-2xl ring-1 ring-white/5",
+    "relative w-full h-full overflow-hidden",
+    !isFullscreen && "rounded-xl border border-white/5 shadow-2xl ring-1 ring-white/5",
+    isFullscreen && "rounded-none",
     surfaceStyles,
     className
   );
