@@ -38,7 +38,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <div className="flex flex-col lg:grid lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative border-b lg:border-b-0 lg:border-l border-border/10 z-40 lg:order-2">
-            <div className="sticky top-0 h-[50vh] min-h-[400px] lg:h-screen p-1">
+            <div className="sticky top-0 h-[100dvh] lg:h-screen p-1">
               <ComponentPreview 
                 name={slug} 
                 backgroundClassName="bg-zinc-950 dark:bg-zinc-900"
