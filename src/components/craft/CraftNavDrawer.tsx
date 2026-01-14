@@ -11,11 +11,20 @@ import { Icon } from "@iconify/react";
 interface CraftNavDrawerProps {
     components: RegistryComponent[];
     trigger?: React.ReactNode;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 
-export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
+export function CraftNavDrawer({ components, trigger, open: externalOpen, onOpenChange }: CraftNavDrawerProps) {
     const pathname = usePathname();
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [internalOpen, setInternalOpen] = React.useState(false);
+    
+    const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
+    const setIsOpen = (value: boolean) => {
+        if (onOpenChange) onOpenChange(value);
+        setInternalOpen(value);
+    };
+
     const containerRef = React.useRef<HTMLDivElement>(null);
 
     // Close on escape key
@@ -53,14 +62,16 @@ export function CraftNavDrawer({ components, trigger }: CraftNavDrawerProps) {
     return (
         <div className="relative" ref={containerRef}>
             {/* Trigger Button */}
-            <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
-                {trigger || (
-                    <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
-                        <Icon icon="lucide:layout-grid" className="w-4 h-4" />
-                        <span className="text-sm font-medium">Explore Components</span>
-                    </button>
-                )}
-            </div>
+            {trigger !== null && (
+                <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
+                    {trigger || (
+                        <button className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
+                            <Icon icon="lucide:layout-grid" className="w-4 h-4" />
+                            <span className="text-sm font-medium">Explore Components</span>
+                        </button>
+                    )}
+                </div>
+            )}
 
             {/* Expanded Menu */}
             <AnimatePresence>

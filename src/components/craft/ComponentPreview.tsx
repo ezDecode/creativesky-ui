@@ -1,31 +1,23 @@
 "use client";
 
 import * as React from "react";
-import { resolveComponent } from "@/lib/registry/resolver";
+import { resolveComponent, getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { DemoContainer } from "./DemoContainer";
 import { PreviewDock } from "./PreviewDock";
+import { CraftNavDrawer } from "./CraftNavDrawer";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
-  onOpenComponents?: () => void;
 }
 
 /**
  * ComponentPreview - Universal Component Renderer
- * 
- * Dynamically loads and renders any component from the registry.
- * Handles:
- * - Loading states with skeleton
- * - Error states with retry
- * - Scroll container references for scroll-based components
- * - Design tokens (surface, background, motion)
  */
 export function ComponentPreview({
   name,
   className,
-  onOpenComponents,
   ...props
 }: ComponentPreviewProps) {
   const [Component, setComponent] = React.useState<React.ComponentType<any> | null>(null);
@@ -35,10 +27,12 @@ export function ComponentPreview({
   const [scrollContainer, setScrollContainer] = React.useState<HTMLDivElement | null>(null);
   const [retryCount, setRetryCount] = React.useState(0);
   const [showCode, setShowCode] = React.useState(false);
-  const [isFullscreen, setIsFullscreen] = React.useState(false);
+  const [isInternalFullscreen, setIsInternalFullscreen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   
   const scrollContainerRef = React.useRef<HTMLDivElement | null>(null);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const allComponents = React.useMemo(() => getAllComponentsMetadata(), []);
 
   const handleScrollContainerRef = React.useCallback((ref: HTMLDivElement | null) => {
     scrollContainerRef.current = ref;
@@ -72,25 +66,20 @@ export function ComponentPreview({
 
   const handleRetry = () => setRetryCount(c => c + 1);
 
-  const handleFullscreen = React.useCallback(() => {
-    if (!containerRef.current) return;
-    
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
+  const toggleFullscreen = React.useCallback(() => {
+    setIsInternalFullscreen(prev => !prev);
   }, []);
 
+  // Close fullscreen on escape
   React.useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isInternalFullscreen) {
+        setIsInternalFullscreen(false);
+      }
     };
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
-  }, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isInternalFullscreen]);
 
   // Loading state
   if (isLoading) {
@@ -136,32 +125,48 @@ export function ComponentPreview({
   const minHeight = demo.minHeight;
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-full", className)} {...props}>
-      <PreviewDock
-        onFullscreen={handleFullscreen}
-        onOpenComponents={onOpenComponents}
-        onShowCode={() => setShowCode(!showCode)}
-        showCode={showCode}
-      />
-      <DemoContainer
-        design={metadata?.design}
-        scrollable={isScrollable}
-        background={background}
-        minHeight={minHeight}
-        onScrollContainerRef={handleScrollContainerRef}
-        className="w-full h-full"
-      >
-        {isScrollable ? (
-          scrollContainer && (
-            <Component
-              {...(demo.defaultProps || {})}
-              scrollContainerRef={scrollContainerRef}
-            />
-          )
-        ) : (
-          <Component {...(demo.defaultProps || {})} />
-        )}
-      </DemoContainer>
+    <div 
+      ref={containerRef} 
+      className={cn(
+        "relative w-full h-full transition-all duration-300",
+        isInternalFullscreen ? "fixed inset-0 z-[100] bg-background p-4" : className
+      )} 
+      {...props}
+    >
+      <div className={cn("relative w-full h-full rounded-xl overflow-hidden", isInternalFullscreen && "border border-border/40 shadow-2xl")}>
+        <CraftNavDrawer
+          components={allComponents}
+          open={isDrawerOpen}
+          onOpenChange={setIsDrawerOpen}
+          trigger={null}
+        />
+        <PreviewDock
+          onFullscreen={toggleFullscreen}
+          onShowCode={() => setShowCode(!showCode)}
+          onOpenComponents={() => setIsDrawerOpen(true)}
+          showCode={showCode}
+          isFullscreen={isInternalFullscreen}
+        />
+        <DemoContainer
+          design={metadata?.design}
+          scrollable={isScrollable}
+          background={background}
+          minHeight={minHeight}
+          onScrollContainerRef={handleScrollContainerRef}
+          className="w-full h-full"
+        >
+          {isScrollable ? (
+            scrollContainer && (
+              <Component
+                {...(demo.defaultProps || {})}
+                scrollContainerRef={scrollContainerRef}
+              />
+            )
+          ) : (
+            <Component {...(demo.defaultProps || {})} />
+          )}
+        </DemoContainer>
+      </div>
     </div>
   );
 }
