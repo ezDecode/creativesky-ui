@@ -4,8 +4,7 @@ import { getAllComponentsMetadata, resolveComponent, getComponentMetadata } from
 import { loadComponentMDX } from "@/lib/mdx/loader";
 import { getMDXComponents } from "@/lib/mdx/components";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
-import { CraftNavDrawer } from "@/components/craft/CraftNavDrawer";
-import { Icon } from "@iconify/react";
+
 
 interface ComponentPageProps {
   params: Promise<{ slug: string }>;
@@ -45,18 +44,9 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
           {/* Left Column: Content */}
           <div className="lg:order-1">
-            {/* Header: Icon button + Title path */}
-            <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-4">
-              <CraftNavDrawer 
-                components={components} 
-                trigger={
-                  <button className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-border/10 bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all group shrink-0">
-                    <Icon icon="lucide:layout-grid" className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </button>
-                }
-              />
-              
-              <div className="flex items-center gap-2 text-sm overflow-hidden">
+            {/* Header: Title path */}
+              <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-3 px-6 lg:px-16 border-b border-border/5 flex items-center gap-4">
+                <div className="flex items-center gap-2 text-sm overflow-hidden">
                 <Link href="/craft" className="text-muted-foreground hover:text-foreground transition-colors shrink-0 font-medium">Craft</Link>
                 <span className="text-muted-foreground/40">·</span>
                 <span className={`shrink-0 capitalize ${pricing === "paid" ? "text-amber-500" : "text-emerald-500"}`}>
