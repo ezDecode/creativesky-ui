@@ -190,12 +190,14 @@ export function ComponentPreview({
                   scrollbarWidth: "none",
                   msOverflowStyle: "none",
                 }}
-              >
-                <Component
-                  {...(demo.defaultProps || {})}
-                  scrollContainerRef={scrollContainerRef}
-                />
-              </div>
+                >
+                  {scrollContainer && (
+                    <Component
+                      {...(demo.defaultProps || {})}
+                      scrollContainerRef={scrollContainerRef}
+                    />
+                  )}
+                </div>
             ) : (
               <Component {...(demo.defaultProps || {})} />
             )

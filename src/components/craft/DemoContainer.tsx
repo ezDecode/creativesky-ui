@@ -40,6 +40,11 @@ export function DemoContainer({
     if (onScrollContainerRef) {
       onScrollContainerRef(scrollRef.current);
     }
+    return () => {
+      if (onScrollContainerRef) {
+        onScrollContainerRef(null);
+      }
+    };
   }, [onScrollContainerRef]);
 
   const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
