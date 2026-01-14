@@ -70,6 +70,7 @@ export function ComponentPreview({
 
   const toggleFullscreen = React.useCallback(() => {
     setIsInternalFullscreen(prev => !prev);
+    setScrollContainer(null);
   }, []);
 
   // Close fullscreen on escape
@@ -191,12 +192,13 @@ export function ComponentPreview({
                   msOverflowStyle: "none",
                 }}
                 >
-                  {scrollContainer && (
-                    <Component
-                      {...(demo.defaultProps || {})}
-                      scrollContainerRef={scrollContainerRef}
-                    />
-                  )}
+                    {scrollContainer && (
+                      <Component
+                        key={isInternalFullscreen ? "fullscreen" : "normal"}
+                        {...(demo.defaultProps || {})}
+                        scrollContainerRef={scrollContainerRef}
+                      />
+                    )}
                 </div>
             ) : (
               <Component {...(demo.defaultProps || {})} />

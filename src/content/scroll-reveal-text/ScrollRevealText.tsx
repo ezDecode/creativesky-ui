@@ -313,7 +313,7 @@ export function ScrollRevealTextFramer({
     // Track scroll progress using the container as target
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        container: scrollContainerRef,
+        container: (scrollContainerRef && scrollContainerRef.current) ? scrollContainerRef : undefined,
         offset: ["start start", "end end"]
     });
 
