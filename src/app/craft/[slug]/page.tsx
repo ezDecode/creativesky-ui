@@ -7,6 +7,8 @@ import { buildDocsPage } from "@/lib/docs/engine";
 import { SectionRenderer } from "@/lib/docs/SectionRenderer";
 import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
 
+export const dynamic = 'force-dynamic';
+
 interface ComponentPageProps {
   params: Promise<{ slug: string }>;
 }

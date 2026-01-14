@@ -43,3 +43,20 @@ export async function loadComponentMDX(slug: string): Promise<LoadedMDX | null> 
     return null;
   }
 }
+
+export async function preloadComponentMDX(slugs: string[]): Promise<Map<string, LoadedMDX>> {
+  const loaded = new Map<string, LoadedMDX>();
+  
+  for (const slug of slugs) {
+    try {
+      const mdx = await loadComponentMDX(slug);
+      if (mdx) {
+        loaded.set(slug, mdx);
+      }
+    } catch (error) {
+      console.error(`Failed to preload MDX for "${slug}":`, error);
+    }
+  }
+  
+  return loaded;
+}

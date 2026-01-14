@@ -65,3 +65,11 @@ export async function compileAndExecuteMDX(
 export function clearMDXCache(): void {
   compiledMDXCache.clear();
 }
+
+export function getMDXCacheStats() {
+  return {
+    size: compiledMDXCache.size,
+    limit: CACHE_SIZE_LIMIT,
+    ttl: CACHE_TTL_MS,
+  };
+}

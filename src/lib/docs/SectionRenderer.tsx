@@ -2,13 +2,13 @@
 
 import React from "react";
 import { Icon } from "@iconify/react";
-import { MDXRemote } from "next-mdx-remote";
 import { DocsPageConfig, Interaction } from "./schema";
 import { getMDXComponents } from "@/lib/mdx/components";
 import { ComponentCodeWrapper, DemoCodeWrapper } from "@/lib/mdx/SourceCodeWrapper";
 import { Steps, Step } from "@/components/mdx/Steps";
 import { PropsTable, PropItem } from "@/components/mdx/PropsTable";
 import { Callout } from "@/components/mdx/Callout";
+import { MDXContent } from "@/lib/mdx/MDXContent";
 
 export function SectionRenderer({ config }: { config: DocsPageConfig }) {
   const { description, dependencies, interactions, license, showSource, mdxContent } = config;
@@ -88,8 +88,8 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
       {/* MDX Content (Installation, Usage, Props) */}
       <article className="docs-article prose prose-zinc dark:prose-invert max-w-none mb-12">
         {mdxContent ? (
-          <MDXRemote 
-            {...mdxContent} 
+          <MDXContent 
+            source={mdxContent} 
             components={mdxComponents} 
           />
         ) : (
