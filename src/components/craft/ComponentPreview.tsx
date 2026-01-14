@@ -147,19 +147,9 @@ export function ComponentPreview({
         )}
       </AnimatePresence>
 
-        <motion.div 
-          layout
-          transition={{ 
-            type: "spring", 
-            damping: 30, 
-            stiffness: 300,
-            layout: { duration: 0.4, ease: "easeInOut" }
-          }}
-          className={cn(
-            "relative w-full h-full rounded-xl overflow-hidden",
-            isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50 p-2" : "bg-muted/50"
-          )}
-        >
+      <div className={cn(
+        isInternalFullscreen ? "fixed right-8 top-8 z-[110]" : "absolute right-4 top-4 z-[110]"
+      )}>
         <CraftNavDrawer
           components={allComponents}
           open={isDrawerOpen}
@@ -167,14 +157,28 @@ export function ComponentPreview({
           trigger={null}
         />
         
-          <PreviewDock
-            onFullscreen={toggleFullscreen}
-            onShowCode={() => setShowCode(!showCode)}
-            onOpenComponents={() => setIsDrawerOpen(true)}
-            showCode={showCode}
-            isFullscreen={isInternalFullscreen}
-          />
-  
+        <PreviewDock
+          onFullscreen={toggleFullscreen}
+          onShowCode={() => setShowCode(!showCode)}
+          onOpenComponents={() => setIsDrawerOpen(true)}
+          showCode={showCode}
+          isFullscreen={isInternalFullscreen}
+        />
+      </div>
+
+      <motion.div 
+        layout
+        transition={{ 
+          type: "spring", 
+          damping: 30, 
+          stiffness: 300,
+          layout: { duration: 0.4, ease: "easeInOut" }
+        }}
+        className={cn(
+          "relative w-full h-full rounded-xl overflow-hidden",
+          isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50 p-2" : "bg-muted/50"
+        )}
+      >
           <div className="w-full h-full overflow-auto scrollbar-hide">
             <DemoContainer
               design={metadata?.design}

@@ -21,10 +21,10 @@ export function PreviewDock({
   isFullscreen = false,
   className,
 }: PreviewDockProps) {
-  return (
+    return (
     <section 
       className={cn(
-        "flex items-center border-foreground/5 bg-muted-2 shadow-glass absolute right-4 top-4 z-[99] select-none gap-1 rounded-2xl border p-1.5 transition-all duration-300",
+        "flex items-center border-foreground/5 bg-muted-2 shadow-glass z-[99] select-none gap-1 rounded-2xl border p-1.5 transition-all duration-300",
         className
       )}
     >
