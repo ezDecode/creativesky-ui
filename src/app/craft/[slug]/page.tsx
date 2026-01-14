@@ -44,8 +44,8 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Docs Content */}
           <div className="lg:order-1 relative h-full lg:overflow-x-hidden lg:overflow-y-auto">
             {/* Header breadcrumb */}
-            <header className="sticky top-0 z-30 p-2">
-              <div className="flex items-center justify-between py-3 px-6 lg:px-8 bg-background/50 backdrop-blur-xl border border-border/10 rounded-2xl">
+            <header className="sticky top-6 z-30 px-5 lg:px-8">
+              <div className="flex h-[46px] items-center justify-between p-1.5 pl-5 bg-muted-2 shadow-glass border border-border/10 rounded-2xl">
                 <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight">
                   <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors">
                     Components
