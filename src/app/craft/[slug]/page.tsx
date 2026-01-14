@@ -38,7 +38,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <div className="flex flex-col lg:grid lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative border-b lg:border-b-0 lg:border-l border-border/10 z-40 lg:order-2">
-            <div className="sticky top-0 h-[100dvh] lg:h-screen p-10 lg:p-20">
+            <div className="sticky top-0 h-[100dvh] lg:h-screen p-2 md:p-3">
               <ComponentPreview 
                 name={slug} 
                 backgroundClassName="bg-zinc-950 dark:bg-zinc-900"
@@ -49,7 +49,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Docs Content */}
           <div className="relative lg:order-1">
             {/* Header breadcrumb */}
-            <header className="sticky lg:fixed top-0 lg:top-9 left-0 lg:left-8 z-[150] w-full lg:w-auto p-4 lg:p-0 bg-background/80 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border-b lg:border-none border-border/10">
+            <header className="sticky lg:fixed top-0 lg:top-9 left-0 lg:left-8 z-[150] w-full lg:w-auto p-2 md:p-3 lg:p-0 bg-transparent lg:bg-transparent backdrop-blur-none lg:backdrop-blur-none border-none lg:border-none">
               <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 lg:bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden max-w-full">
                 <div className="flex items-center gap-3 text-[14px] lg:text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
                   <Link href="/craft" className="hidden md:block text-foreground/50 hover:text-foreground transition-colors shrink-0">
