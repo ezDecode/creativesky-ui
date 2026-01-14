@@ -31,45 +31,39 @@ interface PropsTableProps {
  */
 export function PropsTable({ props, className }: PropsTableProps) {
   return (
-    <div className={cn(
-      "my-6 w-full overflow-hidden rounded-xl border border-border/10 bg-background/50 shadow-sm",
-      className
-    )}>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-            <thead className="bg-muted/20 border-b border-border/10">
-              <tr>
-                <th className="px-4 py-3 text-left font-normal text-foreground/80">Prop</th>
-                <th className="px-4 py-3 text-left font-normal text-foreground/80">Type</th>
-                <th className="px-4 py-3 text-left font-normal text-foreground/80">Default</th>
-                <th className="px-4 py-3 text-left font-normal text-foreground/80">Description</th>
-              </tr>
-            </thead>
-
-          <tbody className="divide-y divide-border/10">
-            {props.map((prop) => (
-              <tr key={prop.name} className="hover:bg-muted/10 transition-colors">
-                <td className="px-4 py-3 font-mono text-primary">
-                  {prop.name}
-                  {prop.required && <span className="text-red-500 ml-1">*</span>}
-                </td>
-                  <td className="px-4 py-3 font-mono text-xs">
-                    <span className="px-2 py-1 rounded bg-muted/50 text-muted-foreground border border-border/5">
-                      {prop.type}
-                    </span>
-                  </td>
-
-                <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
-                  {prop.default ?? <span className="text-muted-foreground/50">—</span>}
-                </td>
-                <td className="px-4 py-3 text-muted-foreground">
-                  {prop.description}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className={cn("my-6 w-full overflow-x-auto", className)}>
+      <table className="w-full text-left border-collapse">
+        <tbody className="divide-y-0">
+          {props.map((prop) => (
+            <tr key={prop.name} className="border-foreground/10 border-t last:border-b group">
+              <td className="py-5 pr-4 align-top w-1/4 sm:w-1/3">
+                <div className="flex flex-col gap-1">
+                  <span className="font-semibold text-foreground tracking-tight flex items-center gap-1">
+                    {prop.name}
+                    {prop.required && <span className="text-red-500/80 text-[10px] font-bold select-none">*</span>}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
+                    {prop.type}
+                  </span>
+                </div>
+              </td>
+              <td className="py-5 align-top">
+                <div className="flex flex-col gap-2">
+                  <p className="text-[15px] text-muted-foreground leading-relaxed">
+                    {prop.description}
+                  </p>
+                  {prop.default && (
+                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/50">
+                      <span className="uppercase tracking-widest text-[9px]">Default:</span>
+                      <code className="text-foreground/40">{prop.default}</code>
+                    </div>
+                  )}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -93,18 +87,29 @@ export function PropItem({
   children: React.ReactNode;
 }) {
   return (
-    <div className="my-4 p-4 rounded-lg bg-muted/10 border border-border/10">
-      <div className="flex items-center gap-3 mb-2">
-        <code className="text-primary font-medium">{name}</code>
-        <code className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">{type}</code>
-        {required && <span className="text-xs text-red-500 font-normal">Required</span>}
-        {defaultValue && (
-          <span className="text-xs text-muted-foreground">
-            Default: <code className="text-foreground/70">{defaultValue}</code>
+    <div className="my-8 border-foreground/10 border-t last:border-b py-6 group">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-4">
+        <div className="flex flex-col gap-1">
+          <span className="font-semibold text-foreground tracking-tight flex items-center gap-1">
+            {name}
+            {required && <span className="text-red-500/80 text-[10px] font-bold select-none">*</span>}
           </span>
-        )}
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
+            {type}
+          </span>
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="text-[15px] text-muted-foreground leading-relaxed">
+            {children}
+          </div>
+          {defaultValue && (
+            <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/50">
+              <span className="uppercase tracking-widest text-[9px]">Default:</span>
+              <code className="text-foreground/40">{defaultValue}</code>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="text-sm text-muted-foreground">{children}</div>
     </div>
   );
 }
