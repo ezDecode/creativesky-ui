@@ -70,20 +70,20 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
         {interactions && interactions.length > 0 && (
           <section className="mb-12">
             <h3 className="docs-h3 text-foreground font-medium mb-4">Interaction</h3>
-            <div className="space-y-0 border-t border-border/10">
-              {interactions.map((interaction: Interaction, i: number) => (
-                <div key={i} className="flex items-center gap-4 py-4 border-b border-border/10">
-                  <div className="flex-shrink-0 w-6 flex justify-center text-foreground/70">
+            <table className="w-full">
+              <tbody>
+                {interactions.map((interaction: Interaction, i: number) => (
+                  <tr key={i} className="border-foreground/10 h-12 border-t tracking-tight last:border-b">
+                  <td className="w-1/4">
                     <InteractionIcon type={interaction.type} />
-                  </div>
-                  <div className="text-[15px] text-muted-foreground tracking-tight">
-                    {interaction.description}
-                  </div>
-                </div>
+                  </td>
+                  <td className="text-muted-foreground">{interaction.description}</td>
+                </tr>
               ))}
-            </div>
-          </section>
-        )}
+            </tbody>
+          </table>
+        </section>
+      )}
 
       {/* MDX Content (Installation, Usage, Props) */}
       <article className="docs-article prose prose-zinc dark:prose-invert max-w-none mb-12">
