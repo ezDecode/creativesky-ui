@@ -5,7 +5,7 @@ import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
 import { buildDocsPage } from "@/lib/docs/engine";
 import { SectionRenderer } from "@/lib/docs/SectionRenderer";
-import { CraftPageLayout } from "@/components/craft/CraftPageLayout";
+import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
 
 interface ComponentPageProps {
   params: Promise<{ slug: string }>;
@@ -31,8 +31,31 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const { title, pricing, prev, next } = config;
 
   return (
-    <CraftPageLayout title={title} slug={slug} pricing={pricing}>
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <div className="w-full">
+        {/* Global Sticky Header */}
+        <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/5">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left Header: Breadcrumb & Copy */}
+            <div className="flex h-16 items-center justify-between px-6 lg:px-8">
+              <div className="flex items-center gap-2 text-sm font-medium capitalize tracking-tight">
+                <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors">
+                  Components
+                </Link>
+                <span className="size-[3px] rounded-full bg-foreground/50" />
+                <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"}`}>
+                  {pricing === "paid" ? "Pro" : "Free"}
+                </span>
+                <span className="size-[3px] rounded-full bg-foreground/50" />
+                <span className="text-foreground/50">{title}</span>
+              </div>
+              <CopyCodeButton name={slug} />
+            </div>
+            {/* Right Header: Alignment placeholder */}
+            <div className="hidden lg:block border-l border-border/10 h-16" />
+          </div>
+        </header>
+
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
@@ -43,7 +66,8 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
           {/* Left Column: Docs Content */}
           <div className="lg:order-1 relative h-full">
-            <div className="my-[8vh] px-5 lg:px-12 max-w-3xl mx-auto">
+            {/* Main docs content */}
+            <div className="my-[9vh] px-5 lg:px-8">
               <SectionRenderer config={config} />
 
               {/* Navigation */}
@@ -85,6 +109,6 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </div>
         </div>
       </div>
-    </CraftPageLayout>
+    </main>
   );
 }
