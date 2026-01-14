@@ -38,7 +38,7 @@ export async function buildDocsPage(slug: string): Promise<DocsPageConfig> {
       interactions: (metadata as any).interactions || interactions,
       license: (metadata as any).license || [
         "Free to use and modify in both personal and commercial projects.",
-        "Attribution to Skiper UI is appreciated but not required."
+        "Attribution to Skie Media is appreciated but not required."
       ],
       showSource: metadata.source.type === "mdx",
       mdxContent: mdx?.source,
