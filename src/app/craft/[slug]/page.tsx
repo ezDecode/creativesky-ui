@@ -36,7 +36,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative order-1 lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
-            <div className="sticky top-0 h-[400px] lg:h-screen p-2">
+            <div className="sticky top-0 h-[400px] lg:h-screen p-4 lg:p-6">
               <ComponentPreview name={slug} />
             </div>
           </div>
@@ -44,7 +44,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           {/* Left Column: Docs Content */}
           <div className="order-2 lg:order-1 relative">
             {/* Header breadcrumb */}
-            <header className="sticky top-6 z-30 px-6">
+            <header className="sticky top-6 z-30 px-5 lg:px-8">
               <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden">
                 <div className="flex items-center gap-3 text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
                   <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors shrink-0">
