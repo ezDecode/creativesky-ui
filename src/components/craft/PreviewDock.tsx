@@ -9,6 +9,7 @@ interface PreviewDockProps {
   onOpenComponents?: () => void;
   onShowCode?: () => void;
   showCode?: boolean;
+  isFullscreen?: boolean;
   className?: string;
 }
 
@@ -17,52 +18,69 @@ export function PreviewDock({
   onOpenComponents,
   onShowCode,
   showCode = false,
+  isFullscreen = false,
   className,
 }: PreviewDockProps) {
   return (
-    <div
+    <section 
       className={cn(
-        "absolute top-4 right-4 z-[60] flex items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-950/40 backdrop-blur-md border border-white/10 shadow-2xl transition-all duration-300 hover:bg-zinc-950/60",
+        "flex items-center border-foreground/5 bg-muted-2 shadow-glass fixed right-6 top-6 z-[99] select-none gap-1 rounded-2xl border p-1.5 transition-all duration-300",
         className
       )}
     >
-      <button
-        onClick={onFullscreen}
-        className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95 group"
-        title="Fullscreen"
-      >
-        <Icon icon="lucide:maximize-2" className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
-      </button>
+      {/* Maximize / Fullscreen */}
+      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px]">
+        <button 
+          type="button" 
+          onClick={onFullscreen}
+          className="flex items-center justify-center size-full cursor-pointer transition-all ease-in-out active:scale-95 hover:bg-foreground/5 rounded-[16px]"
+        >
+          <Icon icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"} className="size-4" />
+          <span className="sr-only">{isFullscreen ? "Minimize View" : "Maximize View"}</span>
+        </button>
+      </div>
 
-      <button
-        onClick={onOpenComponents}
-        className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95 group"
-        title="Components"
-      >
-        <Icon icon="lucide:component" className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
-      </button>
+      {/* Components Button */}
+      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px]">
+        <button 
+          type="button" 
+          onClick={onOpenComponents}
+          className="flex items-center justify-center size-full cursor-pointer transition-all ease-in-out active:scale-95 hover:bg-foreground/5 rounded-[16px]"
+        >
+          <Icon icon="lucide:component" className="size-4" />
+          <span className="sr-only">Components</span>
+        </button>
+      </div>
 
-      <button
-        onClick={onShowCode}
-        className={cn(
-          "inline-flex items-center justify-center w-9 h-9 rounded-xl transition-all active:scale-95 group",
-          showCode
-            ? "text-white bg-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
-            : "text-zinc-400 hover:text-white hover:bg-white/10"
-        )}
-        title="Show Code"
-      >
-        <Icon icon="lucide:code-2" className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
-      </button>
+      {/* Code Button (with Lock for "Pro" feel as requested) */}
+      <div className="bg-muted-3 relative flex size-8 items-center justify-center rounded-[16px]">
+        <button 
+          type="button" 
+          onClick={onShowCode}
+          className={cn(
+            "flex items-center justify-center size-full cursor-pointer transition-all ease-in-out active:scale-95 hover:bg-foreground/5 rounded-[16px]",
+            showCode && "bg-foreground/10"
+          )}
+        >
+          <Icon icon="lucide:code-2" className="size-4" />
+          <p className="absolute -right-1 -top-2 size-5 rounded-full bg-sky-500/10 p-[4px] text-xs text-sky-500">
+            <Icon icon="lucide:lock" className="size-full" />
+          </p>
+          <span className="sr-only">Show Code</span>
+        </button>
+      </div>
 
-      <div className="w-px h-4 bg-white/10 mx-1" />
-
-      <button
-        className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95 group"
-        title="Command"
-      >
-        <Icon icon="lucide:terminal" className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
-      </button>
-    </div>
+      {/* Command Palette / Terminal */}
+      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px]">
+        <button 
+          type="button" 
+          className="flex items-center justify-center size-full cursor-pointer transition-all ease-in-out active:scale-95 hover:bg-foreground/5 rounded-[16px]"
+        >
+          <Icon icon="lucide:command" className="size-4" />
+          <span className="sr-only">Command Palette</span>
+        </button>
+      </div>
+    </section>
   );
 }
+

@@ -8,6 +8,8 @@ import { CraftNavDrawer } from "./CraftNavDrawer";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
 }
@@ -128,45 +130,68 @@ export function ComponentPreview({
     <div 
       ref={containerRef} 
       className={cn(
-        "relative w-full h-full transition-all duration-300",
-        isInternalFullscreen ? "fixed inset-0 z-[100] bg-background p-4" : className
+        "relative w-full h-full",
+        !isInternalFullscreen && className
       )} 
       {...props}
     >
-      <div className={cn("relative w-full h-full rounded-xl overflow-hidden", isInternalFullscreen && "border border-border/40 shadow-2xl")}>
+      <AnimatePresence>
+        {isInternalFullscreen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-xl"
+            onClick={() => setIsInternalFullscreen(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      <motion.div 
+        layout
+        className={cn(
+          "relative w-full h-full rounded-xl overflow-hidden transition-all duration-500 ease-in-out",
+          isInternalFullscreen ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50" : "bg-muted/50"
+        )}
+      >
         <CraftNavDrawer
           components={allComponents}
           open={isDrawerOpen}
           onOpenChange={setIsDrawerOpen}
           trigger={null}
         />
+        
         <PreviewDock
           onFullscreen={toggleFullscreen}
           onShowCode={() => setShowCode(!showCode)}
           onOpenComponents={() => setIsDrawerOpen(true)}
           showCode={showCode}
           isFullscreen={isInternalFullscreen}
+          className={isInternalFullscreen ? "top-8 right-8" : ""}
         />
-        <DemoContainer
-          design={metadata?.design}
-          scrollable={isScrollable}
-          background={background}
-          minHeight={minHeight}
-          onScrollContainerRef={handleScrollContainerRef}
-          className="w-full h-full"
-        >
-          {isScrollable ? (
-            scrollContainer && (
-              <Component
-                {...(demo.defaultProps || {})}
-                scrollContainerRef={scrollContainerRef}
-              />
-            )
-          ) : (
-            <Component {...(demo.defaultProps || {})} />
-          )}
-        </DemoContainer>
-      </div>
+
+        <div className="w-full h-full overflow-auto scrollbar-hide">
+          <DemoContainer
+            design={metadata?.design}
+            scrollable={isScrollable}
+            background={background}
+            minHeight={minHeight}
+            onScrollContainerRef={handleScrollContainerRef}
+            className="w-full h-full"
+          >
+            {isScrollable ? (
+              scrollContainer && (
+                <Component
+                  {...(demo.defaultProps || {})}
+                  scrollContainerRef={scrollContainerRef}
+                />
+              )
+            ) : (
+              <Component {...(demo.defaultProps || {})} />
+            )}
+          </DemoContainer>
+        </div>
+      </motion.div>
     </div>
   );
 }
