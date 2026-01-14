@@ -21,6 +21,7 @@ interface CodeBlockProps {
   language?: "js" | "jsx" | "ts" | "tsx" | "bash";
   filename?: string;
   showBorder?: boolean;
+  className?: string;
 }
 
 export function CodeBlock({
@@ -28,6 +29,7 @@ export function CodeBlock({
   language = "tsx",
   filename,
   showBorder = false,
+  className,
 }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false);
   const codeRef = React.useRef<HTMLElement>(null);
@@ -67,46 +69,41 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl",
-        showBorder && "border"
+        "relative overflow-hidden rounded-xl group border border-border/10 bg-zinc-950 dark:bg-zinc-900 shadow-sm ring-1 ring-border/5",
+        className
       )}
     >
-      {/* Header */}
-      <div
-        className={cn(
-          "flex items-center justify-between px-4 py-2",
-          showBorder && "border-b border-border/50"
-        )}
-      >
-        {filename ? (
-          <span className="text-[11px] font-medium text-muted-foreground">
-            {filename}
-          </span>
-        ) : <div />}
-
+      {/* Code viewport */}
+      <div className="relative max-h-[520px] overflow-auto code-scrollbar">
         <Button
           size="icon"
           variant="ghost"
           onClick={copyToClipboard}
-          className="h-7 w-7 text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+          className="absolute right-4 top-4 z-20 h-8 w-8 text-muted-foreground/50 hover:bg-foreground/10 hover:text-foreground opacity-0 group-hover:opacity-100 transition-all duration-200"
         >
           {copied ? (
-            <Icon icon="solar:check-circle-linear" className="h-3.5 w-3.5 text-green-500" />
+            <Icon icon="solar:check-circle-linear" className="h-4 w-4 text-green-500" />
           ) : (
-            <Icon icon="solar:copy-linear" className="h-3.5 w-3.5" />
+            <Icon icon="solar:copy-linear" className="h-4 w-4" />
           )}
           <span className="sr-only">Copy code</span>
         </Button>
-      </div>
 
-      {/* Code viewport */}
-      <div className="relative max-h-[520px] overflow-auto code-scrollbar">
+        {filename && (
+          <div className="absolute left-4 top-3 z-20">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/40">
+              {filename}
+            </span>
+          </div>
+        )}
+
         <pre
           // These attributes MUST exist on first render
           tabIndex={0}
           className={cn(
             "p-5 text-[12px] font-mono leading-relaxed",
-            `language-${language}`
+            `language-${language}`,
+            filename && "pt-10"
           )}
         >
           <code

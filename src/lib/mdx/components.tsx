@@ -197,9 +197,11 @@ function Pre({ children, ...props }: any) {
 
   if (typeof code === 'string') {
     return (
-      <div className="my-6 overflow-hidden rounded-xl border border-border/10 bg-zinc-950 dark:bg-zinc-900 shadow-sm ring-1 ring-border/5">
-        <CodeBlock code={code.trim()} language={language} />
-      </div>
+      <CodeBlock 
+        code={code.trim()} 
+        language={language} 
+        className="my-6"
+      />
     );
   }
 
