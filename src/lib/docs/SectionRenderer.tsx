@@ -31,14 +31,11 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
       {/* Description Section */}
       {(description || config.subDescription) && (
         <section className="mb-14">
-          <h1 className="text-[32px] font-semibold tracking-tight text-foreground mb-4">
-            {config.title}
-          </h1>
-          <p className="text-[17px] text-foreground/80 leading-relaxed tracking-tight max-w-[640px]">
+          <p className="text-[17px] text-foreground/80 leading-relaxed tracking-tight">
             {description}
           </p>
           {config.subDescription && (
-            <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed max-w-[600px]">
+            <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed">
               {config.subDescription}
             </p>
           )}
