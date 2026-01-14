@@ -5,7 +5,7 @@ import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
 import { buildDocsPage } from "@/lib/docs/engine";
 import { SectionRenderer } from "@/lib/docs/SectionRenderer";
-import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
+import { CraftPageLayout } from "@/components/craft/CraftPageLayout";
 
 interface ComponentPageProps {
   params: Promise<{ slug: string }>;
@@ -31,38 +31,19 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const { title, pricing, prev, next } = config;
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary/30">
+    <CraftPageLayout title={title} slug={slug} pricing={pricing}>
       <div className="w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative lg:order-2 border-b lg:border-b-0 lg:border-l border-border/10">
-            <div className="sticky top-0 h-[400px] lg:h-screen p-4">
+            <div className="sticky top-16 h-[calc(100vh-64px)] p-4">
               <ComponentPreview name={slug} />
             </div>
           </div>
 
           {/* Left Column: Docs Content */}
-          <div className="lg:order-1 relative h-full lg:overflow-x-hidden lg:overflow-y-auto">
-            {/* Header breadcrumb */}
-            <header className="sticky top-0 z-30 bg-background/70 backdrop-blur-xl border-b border-border/5">
-              <div className="flex items-center justify-between py-4 px-6 lg:px-8">
-                <div className="flex items-center gap-2 text-sm font-medium capitalize tracking-tight">
-                  <Link href="/craft" className="text-foreground/50 hover:text-foreground transition-colors">
-                    Components
-                  </Link>
-                  <span className="size-[3px] rounded-full bg-foreground/50" />
-                  <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"}`}>
-                    {pricing === "paid" ? "Pro" : "Free"}
-                  </span>
-                  <span className="size-[3px] rounded-full bg-foreground/50" />
-                  <span className="text-foreground/50">{title}</span>
-                </div>
-                <CopyCodeButton name={slug} />
-              </div>
-            </header>
-
-            {/* Main docs content */}
-            <div className="my-[9vh] px-5 lg:px-8">
+          <div className="lg:order-1 relative h-full">
+            <div className="my-[8vh] px-5 lg:px-12 max-w-3xl mx-auto">
               <SectionRenderer config={config} />
 
               {/* Navigation */}
@@ -104,6 +85,6 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           </div>
         </div>
       </div>
-    </main>
+    </CraftPageLayout>
   );
 }

@@ -22,12 +22,12 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  let result: { code: string; fileName: string } | null = null;
+  let code: string | null = null;
 
   if (type === "demo") {
-    result = getDemoSourceCode(name);
+    code = getDemoSourceCode(name);
   } else if (type === "component") {
-    result = getComponentSourceCode(name);
+    code = getComponentSourceCode(name);
   } else {
     return NextResponse.json(
       { error: "Invalid type. Must be 'demo' or 'component'" },
@@ -35,12 +35,12 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  if (!result) {
+  if (!code) {
     return NextResponse.json(
       { error: `Source not found for ${type}: ${name}` },
       { status: 404 }
     );
   }
 
-  return NextResponse.json(result);
+  return NextResponse.json({ code });
 }
