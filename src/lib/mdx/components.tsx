@@ -235,9 +235,9 @@ function Code({ children, className, ...props }: any) {
  */
 function Table({ children, ...props }: any) {
   return (
-    <div className="my-6 w-full overflow-hidden rounded-xl border border-border/10 bg-background/50 shadow-sm">
+    <div className="my-8 w-full border-t border-border/10">
       <div className="overflow-x-auto">
-        <table className="w-full text-sm" {...props}>
+        <table className="w-full text-[14px] text-left" {...props}>
           {children}
         </table>
       </div>
@@ -247,7 +247,7 @@ function Table({ children, ...props }: any) {
 
 function Thead({ children, ...props }: any) {
   return (
-    <thead className="border-b border-border/10" {...props}>
+    <thead className="border-b border-border/10 bg-muted/5" {...props}>
       {children}
     </thead>
   );
@@ -255,7 +255,7 @@ function Thead({ children, ...props }: any) {
 
 function Th({ children, ...props }: any) {
   return (
-    <th className="px-4 py-3 text-left font-normal text-foreground/80 whitespace-nowrap" {...props}>
+    <th className="px-4 py-3 font-medium text-foreground/90 whitespace-nowrap" {...props}>
       {children}
     </th>
   );
@@ -263,7 +263,7 @@ function Th({ children, ...props }: any) {
 
 function Tbody({ children, ...props }: any) {
   return (
-    <tbody className="divide-y divide-border/10 bg-background/50" {...props}>
+    <tbody className="divide-y divide-border/10" {...props}>
       {children}
     </tbody>
   );
@@ -271,7 +271,7 @@ function Tbody({ children, ...props }: any) {
 
 function Tr({ children, ...props }: any) {
   return (
-    <tr className="hover:bg-muted/10 transition-colors group" {...props}>
+    <tr className="hover:bg-muted/5 transition-colors group" {...props}>
       {children}
     </tr>
   );
@@ -279,7 +279,7 @@ function Tr({ children, ...props }: any) {
 
 function Td({ children, ...props }: any) {
   return (
-    <td className="px-4 py-3 text-muted-foreground align-top group-hover:text-foreground transition-colors" {...props}>
+    <td className="px-4 py-4 text-muted-foreground align-top group-hover:text-foreground transition-colors leading-relaxed" {...props}>
       {children}
     </td>
   );
