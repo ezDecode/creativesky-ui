@@ -6,6 +6,7 @@ import { ComponentPreview } from "@/components/craft/ComponentPreview";
 import { buildDocsPage } from "@/lib/docs/engine";
 import { SectionRenderer } from "@/lib/docs/SectionRenderer";
 import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export const dynamic = 'force-dynamic';
 
@@ -41,13 +42,15 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             <div className="sticky top-0 h-[100dvh] lg:h-screen p-2 md:p-3">
               <ComponentPreview 
                 name={slug} 
-                backgroundClassName="bg-zinc-950 dark:bg-zinc-900"
               />
             </div>
           </div>
 
           {/* Left Column: Docs Content */}
           <div className="relative lg:order-1">
+            <ProgressiveBlur position="top" height="120px" className="lg:w-1/2" />
+            <ProgressiveBlur position="bottom" height="100px" className="lg:w-1/2" />
+            
             {/* Header breadcrumb */}
             <header className="sticky lg:fixed top-0 lg:top-9 left-0 lg:left-8 z-[150] w-full lg:w-auto p-2 md:p-3 lg:p-0 bg-transparent lg:bg-transparent backdrop-blur-none lg:backdrop-blur-none border-none lg:border-none">
               <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 lg:bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden max-w-full">

@@ -50,7 +50,7 @@ export function DemoContainer({
   const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
   const baseStyles = cn(
     "relative w-full h-full overflow-hidden",
-    !isFullscreen && "rounded-xl border border-white/5 shadow-2xl ring-1 ring-white/5",
+    !isFullscreen && "rounded-xl border border-border/10 shadow-2xl ring-1 ring-border/10",
     isFullscreen && "rounded-none",
     surfaceStyles,
     className
@@ -97,8 +97,8 @@ function getSurfaceStyles(
 ): string {
   // Background base
   const bgBase = {
-    light: "bg-zinc-100",
-    dark: "bg-zinc-800/50",
+    light: "bg-muted/30",
+    dark: "bg-muted/50",
     transparent: "bg-transparent",
   }[background];
 

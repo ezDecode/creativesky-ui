@@ -87,33 +87,34 @@ export function ComponentPreview({
   }, [isInternalFullscreen]);
 
   // Loading state
-  if (isLoading) {
-    return (
-      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl", className)} {...props}>
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-10 w-10 animate-spin border-4 border-zinc-700 border-t-primary rounded-full" />
-          <p className="text-sm text-zinc-500">Loading component...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Error state
-  if (error || !Component) {
-    return (
-      <div className={cn("w-full h-full flex items-center justify-center bg-zinc-900 rounded-xl", className)} {...props}>
-        <div className="flex flex-col items-center gap-4 text-center p-6">
-          <div className="p-3 rounded-full bg-red-500/10 text-red-500">
-            <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
+    if (isLoading) {
+      return (
+        <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-10 w-10 animate-spin border-4 border-muted border-t-primary rounded-full" />
+            <p className="text-sm text-muted-foreground">Loading component...</p>
           </div>
-            <div>
-              <h3 className="text-sm font-medium text-white">Failed to load component</h3>
-              <p className="text-xs text-zinc-500 mt-1 max-w-xs">{error}</p>
+        </div>
+      );
+    }
+
+    // Error state
+    if (error || !Component) {
+      return (
+        <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
+          <div className="flex flex-col items-center gap-4 text-center p-6">
+            <div className="p-3 rounded-full bg-red-500/10 text-red-500">
+              <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
             </div>
-            <button
-              onClick={handleRetry}
-              className="mt-2 px-4 py-2 text-xs font-normal bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors flex items-center gap-2"
-            >
+              <div>
+                <h3 className="text-sm font-medium text-foreground">Failed to load component</h3>
+                <p className="text-xs text-muted-foreground mt-1 max-w-xs">{error}</p>
+              </div>
+              <button
+                onClick={handleRetry}
+                className="mt-2 px-4 py-2 text-xs font-normal bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors flex items-center gap-2"
+              >
+
 
             <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
             Retry
