@@ -53,9 +53,12 @@ export function PropsTable({ props, className }: PropsTableProps) {
                   {prop.name}
                   {prop.required && <span className="text-red-500 ml-1">*</span>}
                 </td>
-                <td className="px-4 py-3 font-mono text-xs text-muted-foreground bg-muted/20 rounded">
-                  {prop.type}
-                </td>
+                  <td className="px-4 py-3 font-mono text-xs">
+                    <span className="px-2 py-1 rounded bg-muted/50 text-muted-foreground border border-border/5">
+                      {prop.type}
+                    </span>
+                  </td>
+
                 <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
                   {prop.default ?? <span className="text-muted-foreground/50">—</span>}
                 </td>

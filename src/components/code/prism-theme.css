@@ -1,8 +1,8 @@
-/* Prism.js Dark Theme - Calm, Professional, Readable */
+/* Prism.js Dark Theme - Fixed Colors for Dark Background */
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: hsl(var(--foreground) / 0.8);
+  color: #e4e4e7; /* zinc-200 */
   text-shadow: none;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   direction: ltr;
@@ -20,12 +20,12 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: hsl(var(--foreground) / 0.35);
+  color: #71717a; /* zinc-500 */
   font-style: italic;
 }
 
 .token.punctuation {
-  color: hsl(var(--foreground) / 0.5);
+  color: #a1a1aa; /* zinc-400 */
 }
 
 .token.property,
@@ -35,7 +35,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: hsl(210 60% 65%);
+  color: #7dd3fc; /* sky-300 */
 }
 
 .token.selector,
@@ -44,7 +44,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: hsl(150 35% 60%);
+  color: #86efac; /* green-300 */
 }
 
 .token.operator,
@@ -52,24 +52,24 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: hsl(180 30% 60%);
+  color: #67e8f9; /* cyan-300 */
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: hsl(270 40% 70%);
+  color: #c084fc; /* purple-400 */
 }
 
 .token.function,
 .token.class-name {
-  color: hsl(45 60% 65%);
+  color: #fde047; /* yellow-300 */
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: hsl(30 60% 65%);
+  color: #fdba74; /* orange-300 */
 }
 
 .token.important,

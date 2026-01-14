@@ -47,13 +47,22 @@ export function getDemoSourceCode(componentId: string): string | null {
  */
 export function getComponentSourceCode(componentId: string): string | null {
   try {
-    const componentPath = path.join(
-      process.cwd(),
-      `src/content/${componentId}/${componentId}.tsx`
-    );
+    const extensions = [".tsx", ".framer.tsx", ".ts"];
+    let componentPath = "";
     
-    if (!fs.existsSync(componentPath)) {
-      console.warn(`[getComponentSourceCode] Component file not found: ${componentPath}`);
+    for (const ext of extensions) {
+      const fullPath = path.join(
+        process.cwd(),
+        `src/content/${componentId}/${componentId}${ext}`
+      );
+      if (fs.existsSync(fullPath)) {
+        componentPath = fullPath;
+        break;
+      }
+    }
+    
+    if (!componentPath) {
+      console.warn(`[getComponentSourceCode] Component file not found for: ${componentId}`);
       return null;
     }
     
