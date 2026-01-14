@@ -178,7 +178,7 @@ export function ComponentPreview({
                 className={cn(
                   "relative rounded-xl overflow-hidden",
                 isInternalFullscreen 
-                  ? "fixed inset-4 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center" 
+                  ? "fixed inset-1 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center" 
                   : "w-full h-full bg-muted/50"
               )}
             >
