@@ -193,7 +193,7 @@ export function ComponentPreview({
           "relative rounded-xl overflow-hidden",
           isInternalFullscreen
             ? "fixed inset-2 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center"
-            : cn("w-full h-full bg-muted/50", backgroundClassName)
+            : cn("w-full h-full", backgroundClassName)
         )}
       >
         {isInternalFullscreen ? (
