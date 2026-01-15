@@ -342,18 +342,20 @@ export function ScrollRevealTextFramer({
     return (
         <div
             ref={containerRef}
-            className="w-full relative isolate bg-zinc-950"
+            className="w-full relative isolate"
             style={{
                 height: `calc(${totalScrollDistance}px + ${containerHeight})`,
+                // backgroundColor: 'var(--color-bg, #0d0d0d)',
                 color: 'var(--color-text, #fff)'
             }}
         >
             {/* Sticky inner container - pins content while scrolling */}
             <div
-                className="w-full flex items-center justify-center sticky top-0 z-[1] bg-zinc-950"
+                className="w-full flex items-center justify-center sticky top-0 z-[1]"
                 style={{
                     height: containerHeight,
                     backfaceVisibility: 'hidden',
+                    // backgroundColor: 'var(--color-bg, #0d0d0d)',
                     WebkitBackfaceVisibility: 'hidden'
                 }}
             >
