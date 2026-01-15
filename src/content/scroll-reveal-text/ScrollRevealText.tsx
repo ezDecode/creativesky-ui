@@ -345,7 +345,6 @@ export function ScrollRevealTextFramer({
             className="w-full relative isolate bg-zinc-950"
             style={{
                 height: `calc(${totalScrollDistance}px + ${containerHeight})`,
-                // backgroundColor: 'var(--color-bg, #0d0d0d)',
                 color: 'var(--color-text, #fff)'
             }}
         >
@@ -355,7 +354,6 @@ export function ScrollRevealTextFramer({
                 style={{
                     height: containerHeight,
                     backfaceVisibility: 'hidden',
-                    // backgroundColor: 'var(--color-bg, #0d0d0d)',
                     WebkitBackfaceVisibility: 'hidden'
                 }}
             >
