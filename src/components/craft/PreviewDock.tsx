@@ -26,12 +26,12 @@ export function PreviewDock({
   return (
     <section
       className={cn(
-        "flex items-center border-foreground/5 bg-muted-2 shadow-glass select-none gap-1 rounded-2xl border p-1.5 flex-shrink-0",
+        "flex items-center border-foreground/5 bg-muted-2 shadow-glass select-none gap-1.5 rounded-2xl border p-2 flex-shrink-0",
         className
       )}
     >
       {/* Maximize / Fullscreen - Mobile */}
-      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px] lg:hidden">
+      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px] lg:hidden">
         <button
           type="button"
           onClick={onFullscreen}
@@ -39,14 +39,14 @@ export function PreviewDock({
         >
           <Icon
             icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"}
-            className="size-4"
+            className="size-[18px]"
           />
           <span className="sr-only">{isFullscreen ? "Minimize View" : "Maximize View"}</span>
         </button>
       </div>
 
       {/* Maximize / Fullscreen - Desktop */}
-      <div className="bg-muted-3 hidden size-8 items-center justify-center rounded-[16px] lg:flex">
+      <div className="bg-muted-3 hidden size-9 items-center justify-center rounded-[18px] lg:flex">
         <button
           type="button"
           onClick={onFullscreen}
@@ -54,20 +54,20 @@ export function PreviewDock({
         >
           <Icon
             icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"}
-            className="size-4"
+            className="size-[18px]"
           />
           <span className="sr-only">{isFullscreen ? "Minimize View" : "Maximize View"}</span>
         </button>
       </div>
 
       {/* Components Button */}
-      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px]">
+      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px]">
         <button
           type="button"
           onClick={onOpenComponents}
           className="flex items-center justify-center size-full rounded-2xl cursor-pointer transition-all ease-in-out active:scale-95"
         >
-          <Icon icon="lucide:circle-arrow-out-up-right" className="size-4" />
+          <Icon icon="lucide:circle-arrow-out-up-right" className="size-[18px]" />
           <span className="sr-only">Components</span>
         </button>
       </div>
@@ -75,7 +75,7 @@ export function PreviewDock({
       {/* Code Button */}
       <div
         className={cn(
-          "bg-muted-3 relative flex size-8 items-center justify-center rounded-[16px] cursor-pointer active:scale-95",
+          "bg-muted-3 relative flex size-9 items-center justify-center rounded-[18px] cursor-pointer active:scale-95",
           showCode && "bg-foreground/10"
         )}
       >
@@ -84,19 +84,19 @@ export function PreviewDock({
           onClick={onShowCode}
           className="flex items-center justify-center size-full rounded-2xl cursor-pointer"
         >
-          <Icon icon="lucide:code-xml" className="size-4" />
+          <Icon icon="lucide:code-xml" className="size-[18px]" />
           <span className="sr-only">Source Code</span>
         </button>
       </div>
 
       {/* Command Button */}
-      <div className="bg-muted-3 flex size-8 items-center justify-center rounded-[16px]">
+      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px]">
         <button
           type="button"
           onClick={onCommand}
           className="flex items-center justify-center size-full rounded-2xl cursor-pointer transition-all ease-in-out active:scale-95"
         >
-          <Icon icon="lucide:command" className="size-4" />
+          <Icon icon="lucide:command" className="size-[18px]" />
           <span className="sr-only">Command + K</span>
         </button>
       </div>

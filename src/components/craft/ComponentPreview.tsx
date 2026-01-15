@@ -4,7 +4,7 @@ import * as React from "react";
 import { resolveComponent, getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { PreviewDock } from "./PreviewDock";
 import { CraftNavDrawer } from "./CraftNavDrawer";
-import { CodeModal } from "./CodeModal";
+import { useCodePanel } from "@/app/craft/[slug]/CraftPageWrapper";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
@@ -17,11 +17,6 @@ interface ComponentPreviewProps {
 
 /**
  * ComponentPreview - Universal Component Renderer
- * 
- * Simplified structure:
- * - Single container with background
- * - Clean z-index layering (10, 40, 50)
- * - Minimal wrapper nesting
  */
 export function ComponentPreview({
   name,
@@ -34,7 +29,9 @@ export function ComponentPreview({
   const [retryCount, setRetryCount] = React.useState(0);
   const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [showCodeModal, setShowCodeModal] = React.useState(false);
+
+  // Use context for code panel state (the overlay appears on the docs section)
+  const { showCode, toggleCode } = useCodePanel();
 
   const scrollContainerRef = React.useRef<HTMLDivElement | null>(null);
   const allComponents = React.useMemo(() => getAllComponentsMetadata(), []);
@@ -77,17 +74,6 @@ export function ComponentPreview({
   const handleRetry = () => setRetryCount(c => c + 1);
   const toggleFullscreen = () => setIsFullscreen(prev => !prev);
 
-  // Handle code button click - exit fullscreen first if needed
-  const handleShowCode = () => {
-    if (isFullscreen) {
-      setIsFullscreen(false);
-      // Small delay to let fullscreen animation complete before opening modal
-      setTimeout(() => setShowCodeModal(true), 200);
-    } else {
-      setShowCodeModal(true);
-    }
-  };
-
   // Extract demo config
   const demo = metadata?.demo || {};
   const isScrollable = demo.scrollable === true;
@@ -129,7 +115,7 @@ export function ComponentPreview({
           </div>
           <button
             onClick={handleRetry}
-            className="mt-2 px-4 py-2 text-xs font-normal bg-zinc-800 hover:bg-zinc-800 text-foreground rounded-lg transition-colors flex items-center gap-2"
+            className="mt-2 px-4 py-2 text-xs font-normal bg-zinc-800 hover:bg-zinc-700 text-foreground rounded-lg transition-colors flex items-center gap-2"
           >
             <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
             Retry
@@ -205,7 +191,7 @@ export function ComponentPreview({
         {/* Component Content */}
         {renderContent()}
 
-        {/* Dock & Navigation - Positioned within container */}
+        {/* Dock & Navigation */}
         <motion.div
           layout="position"
           className={cn(
@@ -224,20 +210,13 @@ export function ComponentPreview({
 
           <PreviewDock
             onFullscreen={toggleFullscreen}
-            onShowCode={handleShowCode}
+            onShowCode={toggleCode}
             onOpenComponents={() => setIsDrawerOpen(true)}
-            showCode={showCodeModal}
+            showCode={showCode}
             isFullscreen={isFullscreen}
           />
         </motion.div>
       </motion.div>
-
-      {/* Code Modal */}
-      <CodeModal
-        open={showCodeModal}
-        onClose={() => setShowCodeModal(false)}
-        componentName={name}
-      />
     </>
   );
 }
