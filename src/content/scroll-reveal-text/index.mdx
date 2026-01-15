@@ -1,7 +1,7 @@
 ---
 name: "scroll-reveal-text"
 title: "Scroll Reveal Text"
-description: "A scroll-locked text reveal animation with glassmorphic pill overlays that emerge, glow, then dissolve."
+description: "Scroll-locked text reveal with glassmorphic pill overlays that emerge, glow, and dissolve as you scroll."
 category: "Animation"
 version: "3.0.0"
 dependencies: ["framer-motion"]
@@ -41,9 +41,9 @@ export default function Hero() {
 ## Props
 
 <PropsTable props={[
-  { name: "phrase", type: "string", required: true, description: "The text content to be revealed word by word." },
-  { name: "title", type: "string", description: "Optional heading displayed above the text." },
-  { name: "highlightWords", type: "string[]", description: "Words to highlight with the accent color." },
-  { name: "primaryColor", type: "string", default: "'#ff6b00'", description: "Hex color for highlighted words and glows." },
-  { name: "config", type: "ScrollRevealConfig", description: "Animation parameters like leadCount and scrollDistance." }
+  { name: "phrase", description: "The text content to be revealed word by word." },
+  { name: "title", description: "Optional heading displayed above the text." },
+  { name: "highlightWords", description: "Words to highlight with the accent color." },
+  { name: "primaryColor", description: "Hex color for highlighted words and glows." },
+  { name: "config", description: "Animation parameters like leadCount and scrollDistance." }
 ]} />

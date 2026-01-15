@@ -1,7 +1,7 @@
 ---
 name: "filter-chips"
 title: "Filter Chips"
-description: "Animated filter chips with smooth shared layout transitions."
+description: "Animated filter chips with smooth shared layout transitions and spring physics for selection feedback."
 category: "UI"
 version: "1.0.0"
 dependencies: ["framer-motion"]
@@ -44,9 +44,9 @@ export default function Demo() {
 ## Props
 
 <PropsTable props={[
-  { name: "filters", type: "string[]", required: true, description: "Array of filter labels to display." },
-  { name: "activeFilter", type: "string", required: true, description: "The currently selected filter value." },
-  { name: "onFilterChange", type: "(filter: string) => void", required: true, description: "Callback triggered when a new filter is selected." },
-  { name: "variant", type: "'pill' | 'outline'", default: "'pill'", description: "The visual style of the chips." },
-  { name: "activeColor", type: "string", description: "Custom background color for the active chip." }
+  { name: "filters", description: "Array of filter labels to display." },
+  { name: "activeFilter", description: "The currently selected filter value." },
+  { name: "onFilterChange", description: "Callback triggered when a new filter is selected." },
+  { name: "variant", description: "The visual style of the chips." },
+  { name: "activeColor", description: "Custom background color for the active chip." }
 ]} />

@@ -152,12 +152,19 @@ export function ComponentPreview({
         )}
       </AnimatePresence>
 
-      <div className={cn(
-        "right-4 lg:right-8",
-        isInternalFullscreen
-          ? "fixed top-9 z-[140]"
-          : "absolute bottom-4 lg:top-8 lg:bottom-auto z-[110]"
-      )}>
+      <motion.div
+        layout
+        transition={{
+          type: "spring",
+          damping: 30,
+          stiffness: 300
+        }}
+        className={cn(
+          "right-4 lg:right-8",
+          isInternalFullscreen
+            ? "fixed z-[140] bottom-5 lg:top-9 lg:bottom-auto"
+            : "absolute bottom-4 lg:top-8 lg:bottom-auto z-[110]"
+        )}>
 
         <CraftNavDrawer
           components={allComponents}
@@ -173,7 +180,7 @@ export function ComponentPreview({
           showCode={showCode}
           isFullscreen={isInternalFullscreen}
         />
-      </div>
+      </motion.div>
 
       <motion.div
         layout

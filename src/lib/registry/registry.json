@@ -4,7 +4,7 @@
     {
       "id": "adaptive-tooltip",
       "title": "Adaptive Tooltip",
-      "description": "Intelligent tooltips that adapt to user intent with confidence-based delays.",
+      "description": "Intelligent tooltip system that adapts to user intent with confidence-based delays and smooth animations.",
       "category": "ui",
       "status": "stable",
       "pricing": "free",
@@ -39,7 +39,7 @@
     {
       "id": "magnetic-button",
       "title": "Magnetic Button",
-      "description": "Tactile, cursor-following button with GSAP physics and flair animations.",
+      "description": "Cursor-following button with magnetic attraction, GSAP-powered flair animation, and smooth physics.",
       "category": "ui",
       "status": "experimental",
       "pricing": "free",
@@ -73,10 +73,10 @@
     {
       "id": "filter-chips",
       "title": "Filter Chips",
-      "description": "Smooth animated chips with shared layout transitions for selection feedback.",
+      "description": "Animated filter chips with smooth shared layout transitions and spring physics for selection feedback.",
       "category": "ui",
       "status": "stable",
-      "pricing": "paid",
+      "pricing": "free",
       "tags": [
         "framer-motion",
         "animation",
@@ -107,10 +107,10 @@
     {
       "id": "scroll-reveal-text",
       "title": "Scroll Reveal Text",
-      "description": "Premium scroll-driven text reveals with glassmorphic pill effects.",
+      "description": "Scroll-locked text reveal with glassmorphic pill overlays that emerge, glow, and dissolve as you scroll.",
       "category": "animation",
       "status": "stable",
-      "pricing": "free",
+      "pricing": "paid",
       "tags": [
         "framer-motion",
         "scroll",

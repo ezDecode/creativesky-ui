@@ -30,16 +30,11 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
   return (
     <>
       {/* Description Section */}
-      {(description || config.subDescription) && (
+      {description && (
         <section className="mb-14">
-          <p className="text-[17px] text-foreground/80 leading-relaxed tracking-tight">
+          <p className="text-lg text-foreground/90 leading-relaxed tracking-tight">
             {description}
           </p>
-          {config.subDescription && (
-            <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed">
-              {config.subDescription}
-            </p>
-          )}
         </section>
       )}
 
@@ -54,7 +49,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
                 href={dep === "framer-motion" ? "https://motion.dev/" : `https://www.npmjs.com/package/${dep}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-muted hover:bg-muted/80 flex h-9 w-fit cursor-pointer items-center gap-2 rounded-xl px-3 text-xs transition-all duration-300 border border-border/5"
+                className="bg-muted hover:bg-muted/80 flex h-9 w-fit cursor-pointer items-center gap-2 rounded-xl px-3 text-xs font-mono transition-all duration-300 border border-border/5"
               >
                 {dep}
                 {dep === "framer-motion" && <Icon icon="simple-icons:framer" className="size-3" />}
@@ -78,7 +73,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
                   <td className="w-1/4">
                     <InteractionIcon type={interaction.type} />
                   </td>
-                  <td className="text-muted-foreground">{interaction.description}</td>
+                  <td className="text-base text-muted-foreground">{interaction.description}</td>
                 </tr>
               ))}
             </tbody>
@@ -104,7 +99,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
       {showSource && (
         <section className="mb-12">
           <h3 className="docs-h3 text-foreground font-medium mb-4">Source code</h3>
-          <p className="docs-p flex items-center gap-2 flex-wrap text-muted-foreground text-sm">
+          <p className="docs-p flex items-center gap-2 flex-wrap text-muted-foreground text-base">
             Click on the top right
             <span className="flex items-center justify-center bg-muted size-8 rounded-xl border border-border/10">
               <Icon icon="lucide:code-2" className="size-4" />
@@ -120,7 +115,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
           <h3 className="docs-h3 text-foreground font-medium mb-4">License & Usage</h3>
           <ul className="space-y-2 list-none p-0">
             {license.map((item, i) => (
-              <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+              <li key={i} className="text-base text-muted-foreground flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/40 shrink-0" />
                 {item}
               </li>

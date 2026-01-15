@@ -12,16 +12,15 @@ export const DocsPageConfigSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
-  subDescription: z.string().optional(),
   category: z.string(),
   status: z.string(),
   pricing: z.string(),
   dependencies: z.array(z.string()).default([]),
   interactions: z.array(InteractionSchema).optional(),
   license: z.array(z.string()).optional(),
-    showSource: z.boolean().default(true),
-    mdxContent: z.any().optional(), // Serialized MDX Source
-    prev: z.object({ id: z.string(), title: z.string() }).nullable(),
+  showSource: z.boolean().default(true),
+  mdxContent: z.any().optional(), // Serialized MDX Source
+  prev: z.object({ id: z.string(), title: z.string() }).nullable(),
   next: z.object({ id: z.string(), title: z.string() }).nullable(),
 });
 

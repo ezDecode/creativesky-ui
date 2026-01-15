@@ -39,7 +39,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         <div className="flex flex-col lg:grid lg:grid-cols-2">
           {/* Right Column: Sticky Preview */}
           <div className="relative border-b lg:border-b-0 lg:border-l border-border/10 z-40 lg:order-2">
-            <div className="sticky top-0 h-[100dvh] lg:h-screen p-2 md:p-3">
+            <div className="sticky top-0 h-dvh lg:h-screen p-2 md:p-3">
               <ComponentPreview 
                 name={slug} 
               />
@@ -52,7 +52,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             <ProgressiveBlur position="bottom" height="100px" className="lg:w-1/2" />
             
             {/* Header breadcrumb */}
-            <header className="sticky top-0 z-[150] px-5 lg:px-8 py-3">
+            <header className="sticky top-0 z-80 px-5 lg:px-8 py-3">
               <div className="flex h-[46px] items-center gap-3">
                 <Link href="/craft" className="hidden md:block text-foreground/50 hover:text-foreground transition-colors text-base font-medium">
                   Components
@@ -72,7 +72,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
 
               {/* Navigation */}
               <div className="relative z-10 mb-[10vh] mt-20 lg:mt-[20vh]">
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent mb-12" />
+                <div className="h-px w-full bg-linear-to-r from-transparent via-foreground/10 to-transparent mb-12" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {prev ? (
                     <Link 

@@ -1,7 +1,7 @@
 ---
 name: "magnetic-button"
 title: "Magnetic Button"
-description: "A magnetic, cursor-following call-to-action with a GSAP-powered flair animation."
+description: "Cursor-following button with magnetic attraction, GSAP-powered flair animation, and smooth physics."
 category: "UI"
 version: "1.0.0"
 dependencies: ["gsap"]
@@ -39,9 +39,9 @@ export default function Demo() {
 ## Props
 
 <PropsTable props={[
-  { name: "children", type: "ReactNode", required: true, description: "Content to display inside the button." },
-  { name: "className", type: "string", description: "Additional CSS classes for styling." },
-  { name: "onClick", type: "() => void", description: "Click handler function." },
-  { name: "hoverVariant", type: "'light' | 'dark'", default: "'dark'", description: "Predefined color variant for the flair." },
-  { name: "customColor", type: "string", description: "Custom hex/rgb color (overrides hoverVariant)." }
+  { name: "children", description: "Content to display inside the button." },
+  { name: "className", description: "Additional CSS classes for styling." },
+  { name: "onClick", description: "Click handler function." },
+  { name: "hoverVariant", description: "Predefined color variant for the flair." },
+  { name: "customColor", description: "Custom hex/rgb color (overrides hoverVariant)." }
 ]} />

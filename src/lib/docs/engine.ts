@@ -13,25 +13,24 @@ export async function buildDocsPage(slug: string): Promise<DocsPageConfig> {
     const mdx = await loadComponentMDX(slug);
     const components = getAllComponentsMetadata();
     const index = components.findIndex(c => c.id === slug);
-    
+
     const prev = index > 0 ? { id: components[index - 1].id, title: components[index - 1].title } : null;
     const next = index < components.length - 1 ? { id: components[index + 1].id, title: components[index + 1].title } : null;
-  
+
     // Interactions mapping based on registry or design metadata if interactions missing
     // This is where we bridge the "hard-coded" gap
-    const interactions = metadata.demo.scrollable 
+    const interactions = metadata.demo.scrollable
       ? [{ type: "scroll", description: "Scroll down to see the reveal animation" }]
       : [
-          { type: "click", description: "Click on items to see transitions" },
-          { type: "hover", description: "Hover for additional effects" }
-        ];
-  
-      config = {
-        id: metadata.id,
-        title: metadata.title,
-        description: metadata.description,
-        subDescription: (metadata as any).subDescription,
-        category: metadata.category,
+        { type: "click", description: "Click on items to see transitions" },
+        { type: "hover", description: "Hover for additional effects" }
+      ];
+
+    config = {
+      id: metadata.id,
+      title: metadata.title,
+      description: metadata.description,
+      category: metadata.category,
       status: metadata.status,
       pricing: metadata.pricing,
       dependencies: metadata.dependencies || [],

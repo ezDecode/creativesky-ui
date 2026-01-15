@@ -1,7 +1,7 @@
 ---
 name: "adaptive-tooltip"
 title: "Adaptive Tooltip"
-description: "An intelligent tooltip system that adapts to user intent with confidence-based delays."
+description: "Intelligent tooltip system that adapts to user intent with confidence-based delays and smooth animations."
 category: "UI"
 version: "1.0.0"
 dependencies: ["framer-motion", "animejs", "clsx"]
@@ -40,14 +40,14 @@ export default function App() {
 ## Props
 
 <PropsTable props={[
-  { name: "items", type: "AdaptiveTooltipItem[]", required: true, description: "Array of tooltip items to display." },
-  { name: "enablePinning", type: "boolean", default: "false", description: "Enable keyboard pinning functionality." }
+  { name: "items", description: "Array of tooltip items to display." },
+  { name: "enablePinning", description: "Enable keyboard pinning functionality." }
 ]} />
 
 ### AdaptiveTooltipItem
 
 <PropsTable props={[
-  { name: "icon", type: "ReactNode", required: true, description: "Icon element to display." },
-  { name: "label", type: "string", required: true, description: "Tooltip text label." },
-  { name: "hasBadge", type: "boolean", description: "Show a notification badge on the icon." }
+  { name: "icon", description: "Icon element to display." },
+  { name: "label", description: "Tooltip text label." },
+  { name: "hasBadge", description: "Show a notification badge on the icon." }
 ]} />

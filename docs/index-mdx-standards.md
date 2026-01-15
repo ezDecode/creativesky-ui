@@ -22,7 +22,7 @@ All `index.mdx` files **MUST** include YAML frontmatter with the following field
 ---
 name: "component-id"          # kebab-case identifier
 title: "Display Title"        # Human-readable title (Title Case)
-description: "Brief one-line description of the component."
+description: "Brief 20-25 word description of the component."
 category: "UI"                # Must be "UI" (uppercase)
 version: "1.0.0"              # Semantic version
 dependencies: ["library-name"] # Array of npm packages required
@@ -32,15 +32,15 @@ source: "src/content/component-id/index.mdx"
 
 #### Field Requirements
 
-| Field | Type | Example | Notes |
-|-------|------|---------|-------|
-| `name` | string | `"magnetic-button"` | Must match folder name and registry ID |
-| `title` | string | `"Magnetic Button"` | Title Case, human-readable |
-| `description` | string | `"A magnetic, cursor-following..."` | One sentence, ends with period |
-| `category` | string | `"UI"` | **Must be uppercase "UI"** |
-| `version` | string | `"1.0.0"` | Semantic versioning |
-| `dependencies` | array | `["gsap", "framer-motion"]` | NPM package names |
-| `source` | string | `"src/content/magnetic-button/index.mdx"` | Relative path to this file |
+| Field | Example | Notes |
+|-------|---------|-------|
+| `name` | `"magnetic-button"` | Must match folder name and registry ID |
+| `title` | `"Magnetic Button"` | Title Case, human-readable |
+| `description` | `"A magnetic, cursor-following..."` | 20-25 words, ends with period |
+| `category` | `"UI"` | **Must be uppercase "UI"** |
+| `version` | `"1.0.0"` | Semantic versioning |
+| `dependencies` | `["gsap", "framer-motion"]` | NPM package names |
+| `source` | `"src/content/magnetic-button/index.mdx"` | Relative path to this file |
 
 ---
 
@@ -48,74 +48,52 @@ source: "src/content/component-id/index.mdx"
 
 The MDX body **MUST** follow this exact section order:
 
-#### **a) Main Heading**
+#### **a) Installation Section**
 
 ```markdown
-# Component Title
+## Installation
 
-Brief introduction paragraph explaining what the component does and its key features.
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install package-name
+    ```
+  </Step>
+  <Step>
+    Copy the component code into your project.
+  </Step>
+</Steps>
 ```
 
-#### **b) Demo Section**
-
-```markdown
-## Demo
-
-<ComponentPreview name="component-id" />
-```
-
-- Use the exact component ID from frontmatter
-- This renders the live demo component
-
-#### **c) Usage Section**
+#### **b) Usage Section**
 
 ```markdown
 ## Usage
 
-<DemoCode name="component-id" title="Demo Implementation" />
+```tsx
+import { ComponentName } from "@/components/ComponentName";
+
+export default function Demo() {
+  return <ComponentName />;
+}
+```
 ```
 
-- Shows the demo component source code
-- Title can be customized but typically "Demo Implementation"
-
-#### **d) Source Code Section**
-
-```markdown
-## Source Code
-
-<ComponentCode name="component-id" title="Full Component" />
-```
-
-- Displays the actual component implementation
-- Title typically "Full Component"
-
-#### **e) Props Section**
+#### **c) Props Section**
 
 ```markdown
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `propName` | `string` | `'default'` | What this prop does |
-| `onClick` | `() => void` | `undefined` | Click handler function |
+<PropsTable props={[
+  { name: "propName", description: "What this prop does." },
+  { name: "onClick", description: "Click handler function." },
+  { name: "variant", description: "Style variant." }
+]} />
 ```
 
-- Use proper TypeScript type syntax in backticks
-- Wrap prop names in backticks
-- Use `undefined` for optional props without defaults
-- Use `-` for required props
-
-#### **f) Dependencies Section**
-
-```markdown
-## Dependencies
-
-`package-name`
-`another-package`
-```
-
-- List each dependency on a new line wrapped in backticks
-- Should match the `dependencies` array in frontmatter
+- Keep descriptions concise and clear
+- **Do NOT include type, required, or default information** - these should be documented in TypeScript definitions or description if critical.
 
 ---
 
@@ -125,41 +103,49 @@ Brief introduction paragraph explaining what the component does and its key feat
 ---
 name: "magnetic-button"
 title: "Magnetic Button"
-description: "A magnetic, cursor-following call-to-action with a GSAP-powered flair animation."
+description: "Cursor-following button with magnetic attraction, GSAP-powered flair animation, and smooth physics."
 category: "UI"
 version: "1.0.0"
 dependencies: ["gsap"]
 source: "src/content/magnetic-button/index.mdx"
 ---
 
-# Magnetic Button
+## Installation
 
-A magnetic, cursor-following call-to-action with a GSAP-powered flair animation. The button features a dynamic hover effect that tracks cursor movement, creating an engaging visual experience.
-
-## Demo
-
-<ComponentPreview name="magnetic-button" />
+<Steps>
+  <Step>
+    Install the required dependencies:
+    ```bash
+    npm install gsap
+    ```
+  </Step>
+  <Step>
+    Copy the component code into your project.
+  </Step>
+</Steps>
 
 ## Usage
 
-<DemoCode name="magnetic-button" title="Demo Implementation" />
+```tsx
+import { MagneticButton } from "@/components/craft/magnetic-button";
 
-## Source Code
-
-<ComponentCode name="magnetic-button" title="Full Component" />
+export default function Demo() {
+  return (
+    <MagneticButton onClick={() => console.log("clicked")}>
+      Get Started
+    </MagneticButton>
+  );
+}
+```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Content to display inside the button |
-| `className` | `string` | `''` | Additional CSS classes for styling |
-| `onClick` | `() => void` | `undefined` | Click handler function |
-| `hoverVariant` | `'light' \| 'dark'` | `'light'` | Predefined color variant for the flair |
-
-## Dependencies
-
-`gsap`
+<PropsTable props={[
+  { name: "children", description: "Content to display inside the button." },
+  { name: "className", description: "Additional CSS classes for styling." },
+  { name: "onClick", description: "Click handler function." },
+  { name: "hoverVariant", description: "Predefined color variant for the flair." }
+]} />
 ```
 
 ---
@@ -171,15 +157,15 @@ A magnetic, cursor-following call-to-action with a GSAP-powered flair animation.
 - Missing frontmatter closing `---`
 - Extra `---` delimiters
 - Inconsistent section order
-- Missing `#` heading
-- Wrong component name in `<ComponentPreview>`
+- Including `type` in props (removed for cleaner docs)
+- Descriptions over 25 words
 
 ✅ **CORRECT:**
 - `category: "UI"` (uppercase)
 - Clean frontmatter with opening and closing `---`
 - Sections in documented order
-- Heading matches title
-- Component ID matches everywhere
+- Concise 20-25 word descriptions
+- Props with name, description, and optional required/default
 
 ---
 
@@ -189,10 +175,10 @@ Before committing an `index.mdx` file, verify:
 
 - [ ] Frontmatter has all 7 required fields
 - [ ] Category is `"UI"` (uppercase)
+- [ ] Description is 20-25 words
 - [ ] Component name matches folder name
 - [ ] All sections present in correct order
-- [ ] ComponentPreview, DemoCode, ComponentCode all use same ID
-- [ ] Props table is complete and properly formatted
+- [ ] Props table is complete (name, description, required/default)
 - [ ] Dependencies match frontmatter array
 
 ---
