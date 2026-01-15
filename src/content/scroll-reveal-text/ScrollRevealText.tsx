@@ -12,7 +12,7 @@ export interface ScrollRevealTextProps {
     phrase: string;
     /** Optional heading displayed above the text */
     title?: string;
-    /** Words to highlight with primary color and glow */
+    /** Words to highlight with primary color */
     highlightWords?: string[];
     /** Hex color for highlighted words (e.g., "#ff6b00") */
     primaryColor?: string;
@@ -41,27 +41,26 @@ interface AnimatedWordProps {
     isHighlighted: boolean;
     primaryColor: string;
     leadCount: number;
-    springConfig: { stiffness: number; damping: number; restDelta: number };
 }
 
 // ===========================================================================
-// CONFIGURATION - Refined for smoother feel
+// CONFIGURATION - Optimized for smooth, lightweight scrolling
 // ===========================================================================
 
 const ANIMATION_CONFIG = {
-    leadCount: { desktop: 8, mobile: 5 },
-    scrollDistance: { desktop: 150, mobile: 100 },
+    leadCount: { desktop: 12, mobile: 7 },
+    scrollDistance: { desktop: 60, mobile: 40 },
     paddingDuration: 2,
-    // Refined spring config for buttery-smooth animations
+    // Optimized spring: smoother with less bounce
     spring: {
-        stiffness: 80,      // Lower = smoother, less snappy
-        damping: 25,        // Lower = more fluid motion
-        restDelta: 0.0001   // More precise rest detection
+        stiffness: 60,      // Lower for smoother transitions
+        damping: 35,        // Higher for less oscillation/bounce
+        restDelta: 0.01     // Less precise = fewer updates = better performance
     },
     phases: {
-        emergence: { start: 0, end: 0.12 },    // Slightly faster emergence
-        focus: { start: 0.12, end: 0.65 },     // Extended focus phase
-        reveal: { start: 0.65, end: 1.0 }      // Longer reveal for smoothness
+        emergence: { start: 0, end: 0.15 },
+        focus: { start: 0.15, end: 0.60 },
+        reveal: { start: 0.60, end: 1.0 }
     }
 } as const;
 
@@ -93,7 +92,7 @@ const isWordHighlighted = (word: string, highlightWords: string[]): boolean => {
 };
 
 // ===========================================================================
-// ANIMATED WORD COMPONENT - Refined with smoother transitions
+// ANIMATED WORD COMPONENT - Simplified, no shadows/glows
 // ===========================================================================
 
 function AnimatedWord({
@@ -104,7 +103,6 @@ function AnimatedWord({
     isHighlighted,
     primaryColor,
     leadCount,
-    springConfig,
 }: AnimatedWordProps) {
     const rgb = hexToRgb(primaryColor);
     const { phases } = ANIMATION_CONFIG;
@@ -117,74 +115,53 @@ function AnimatedWord({
     // Phase boundaries within this word's window
     const phaseToScroll = (phase: number) => wordStart + (wordEnd - wordStart) * phase;
 
-    // Per-word spring for ultra-smooth individual animations
-    const wordProgress = useSpring(scrollProgress, {
-        stiffness: springConfig.stiffness * 1.2,  // Slightly stiffer for words
-        damping: springConfig.damping * 0.9,
-        restDelta: springConfig.restDelta
-    });
-
-    // Box opacity: 0 → 0.3 → 1 → 0 (smoother emergence)
+    // Box opacity: 0 → 0.4 → 1 → 0 (clean fade)
     const boxOpacity = useTransform(
-        wordProgress,
+        scrollProgress,
         [
             phaseToScroll(phases.emergence.start),
             phaseToScroll(phases.emergence.end),
             phaseToScroll(phases.focus.end),
             phaseToScroll(phases.reveal.end)
         ],
-        [0, 0.3, 1, 0]
+        [0, 0.4, 1, 0]
     );
 
-    // Box scale: 0.92 → 0.97 → 1 → 1.03 (more subtle scale animation)
+    // Box scale: 0.95 → 1 → 1.02 (subtle, smooth)
     const boxScale = useTransform(
-        wordProgress,
+        scrollProgress,
         [
             phaseToScroll(phases.emergence.start),
-            phaseToScroll(phases.emergence.end),
-            phaseToScroll(phases.focus.end),
+            phaseToScroll(phases.focus.start),
             phaseToScroll(phases.reveal.end)
         ],
-        [0.92, 0.97, 1, 1.03]
+        [0.95, 1, 1.02]
     );
 
-    // Box blur: 0 → 10px (during reveal - softer fade)
-    const boxBlur = useTransform(
-        wordProgress,
-        [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
-        [0, 10]
-    );
 
-    // Box background opacity - refined for glassmorphism
+    // Box background opacity - simple fade
     const bgOpacity = useTransform(
-        wordProgress,
+        scrollProgress,
         [
             phaseToScroll(phases.emergence.start),
             phaseToScroll(phases.focus.start),
             phaseToScroll(phases.focus.end)
         ],
-        [0.08, 0.25, isHighlighted ? 0.5 : 0.4]
-    );
-
-    // Box shadow - subtle only, no glow
-    const shadowOpacity = useTransform(
-        wordProgress,
-        [phaseToScroll(phases.focus.start), phaseToScroll(phases.focus.end)],
-        [0, 0.15]
+        [0.05, 0.2, isHighlighted ? 0.35 : 0.25]
     );
 
     // Text opacity: 0 → 1 (during reveal phase)
     const textOpacity = useTransform(
-        wordProgress,
+        scrollProgress,
         [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
         [0, 1]
     );
 
-    // Text subtle Y movement for added depth
+    // Text Y movement - subtle rise
     const textY = useTransform(
-        wordProgress,
+        scrollProgress,
         [phaseToScroll(phases.reveal.start), phaseToScroll(phases.reveal.end)],
-        [4, 0]
+        [3, 0]
     );
 
     return (
@@ -195,49 +172,39 @@ function AnimatedWord({
                 fontFamily: 'var(--font-poly, sans-serif)',
             }}
         >
-            {/* Text element */}
+            {/* Text element - NO text shadow */}
             <motion.span
                 className="relative z-[2] whitespace-nowrap"
                 style={{
                     opacity: textOpacity,
                     y: textY,
                     color: isHighlighted ? primaryColor : undefined,
-                    textShadow: isHighlighted ? `0 0 20px ${primaryColor}40` : undefined,
-                    willChange: 'opacity, transform',
                     transition: 'color 0.3s ease'
                 }}
             >
                 {word}
             </motion.span>
 
-            {/* Glassmorphic pill/box element */}
+            {/* Glassmorphic pill - NO shadow, NO glow */}
             <motion.span
                 aria-hidden="true"
                 className="absolute z-[1] left-1/2 top-1/2 pointer-events-none rounded-full"
                 style={{
                     width: '102%',
-                    height: '72%',
+                    height: '70%',
                     x: "-50%",
                     y: "-50%",
                     opacity: boxOpacity,
                     scale: boxScale,
-                    filter: useTransform(boxBlur, (v) => `blur(${v}px)`),
                     backgroundColor: useTransform(
                         bgOpacity,
                         (v) => isHighlighted
                             ? `rgba(${rgb}, ${v})`
                             : `rgba(255, 255, 255, ${v})`
                     ),
-                    boxShadow: useTransform(
-                        shadowOpacity,
-                        (v) => `0 2px 10px rgba(0, 0, 0, ${v})`
-                    ),
-                    backdropFilter: 'blur(6px)',
-                    WebkitBackdropFilter: 'blur(6px)',
                     border: isHighlighted
-                        ? `1px solid rgba(${rgb}, 0.3)`
-                        : '1px solid rgba(255, 255, 255, 0.1)',
-                    willChange: 'opacity, transform, background-color'
+                        ? `1px solid rgba(${rgb}, 0.2)`
+                        : '1px solid rgba(255, 255, 255, 0.08)',
                 }}
             />
         </span>
@@ -245,20 +212,14 @@ function AnimatedWord({
 }
 
 // ===========================================================================
-// MAIN COMPONENT - Tailwind CSS Version (Refined)
+// MAIN COMPONENT - Lightweight, smooth scrolling
 // ===========================================================================
 
 /**
  * ScrollRevealTextFramer Component
  * 
  * A scroll-locked text reveal animation powered by Framer Motion.
- * Uses Tailwind CSS for styling with refined, buttery-smooth animations.
- * 
- * SCROLL MECHANICS:
- * - Container height creates scroll distance for animation
- * - Sticky positioning pins content at viewport top
- * - useScroll tracks container position as 0-1 progress
- * - useSpring applies physics smoothing for natural feel
+ * Optimized for smooth, lightweight scrolling performance.
  * 
  * @example
  * ```tsx
@@ -290,7 +251,7 @@ export function ScrollRevealTextFramer({
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    // Merge config with defaults - prioritize user config
+    // Merge config with defaults
     const leadCount = config.leadCount ?? (isMobile
         ? ANIMATION_CONFIG.leadCount.mobile
         : ANIMATION_CONFIG.leadCount.desktop);
@@ -299,7 +260,7 @@ export function ScrollRevealTextFramer({
         ? ANIMATION_CONFIG.scrollDistance.mobile
         : ANIMATION_CONFIG.scrollDistance.desktop);
 
-    // Refined spring config for ultra-smooth scrolling
+    // Optimized spring config
     const springConfig = {
         stiffness: config.springStiffness ?? ANIMATION_CONFIG.spring.stiffness,
         damping: config.springDamping ?? ANIMATION_CONFIG.spring.damping,
@@ -310,23 +271,23 @@ export function ScrollRevealTextFramer({
     const totalScrollDistance = (words.length + leadCount) * scrollDistance +
         (ANIMATION_CONFIG.paddingDuration * scrollDistance);
 
-    // Track scroll progress using the container as target
+    // Track scroll progress
     const { scrollYProgress } = useScroll({
         target: containerRef,
         container: (scrollContainerRef && scrollContainerRef.current) ? scrollContainerRef : undefined,
         offset: ["start start", "end end"]
     });
 
-    // Apply spring smoothing for buttery-smooth feel
+    // Single spring for all words - more efficient
     const smoothProgress = useSpring(scrollYProgress, {
         stiffness: springConfig.stiffness,
         damping: springConfig.damping,
-        restDelta: 0.001,
+        restDelta: springConfig.restDelta,
     });
 
     // Get container height for sticky element sizing
     const [containerHeight, setContainerHeight] = useState("100vh");
-    
+
     useEffect(() => {
         if (scrollContainerRef?.current) {
             const updateHeight = () => {
@@ -342,10 +303,9 @@ export function ScrollRevealTextFramer({
     return (
         <div
             ref={containerRef}
-            className="w-full relative isolate"
+            className="w-full relative"
             style={{
                 height: `calc(${totalScrollDistance}px + ${containerHeight})`,
-                // backgroundColor: 'var(--color-bg, #0d0d0d)',
                 color: 'var(--color-text, #fff)'
             }}
         >
@@ -354,9 +314,6 @@ export function ScrollRevealTextFramer({
                 className="w-full flex items-center justify-center sticky top-0 z-[1]"
                 style={{
                     height: containerHeight,
-                    backfaceVisibility: 'hidden',
-                    // backgroundColor: 'var(--color-bg, #0d0d0d)',
-                    WebkitBackfaceVisibility: 'hidden'
                 }}
             >
                 {/* Content wrapper with responsive sizing */}
@@ -369,7 +326,7 @@ export function ScrollRevealTextFramer({
                         boxSizing: 'border-box'
                     }}
                 >
-                    {/* Title with gradient text */}
+                    {/* Title */}
                     {title && (
                         <h1
                             className="font-bold leading-[1.15]"
@@ -379,11 +336,6 @@ export function ScrollRevealTextFramer({
                                     : 'clamp(2.5rem, 5vw, 5rem)',
                                 marginBottom: isMobile ? '1.25rem' : '2rem',
                                 letterSpacing: '-0.03em',
-                                // background: 'linear-gradient(to bottom, #fff 40%, #555)',
-                                WebkitBackgroundClip: 'text',
-                                backgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                color: 'transparent'
                             }}
                         >
                             {title}
@@ -413,7 +365,6 @@ export function ScrollRevealTextFramer({
                                 isHighlighted={isWordHighlighted(word, highlightWords)}
                                 primaryColor={primaryColor}
                                 leadCount={leadCount}
-                                springConfig={springConfig}
                             />
                         ))}
                     </div>

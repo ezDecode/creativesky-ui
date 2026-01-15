@@ -15,8 +15,8 @@ const ScrollRevealTextDemo: React.FC<{ scrollContainerRef?: React.RefObject<HTML
     return (
         <ScrollRevealTextFramer
             phrase="Meanwhile, beneath the surface of yesterday's dreams, a constellation of possibility whispered secrets to the patient minds who dared to listen. Every moment transforms into a doorway, every question becomes an invitation to discover what we never knew we were searching for."
-            highlightWords={["dreams", "constellation", "whispered", "patient", "transforms", "doorway", "invitation", "discover"]}
-            primaryColor="#6366f1"
+            highlightWords={["transforms"]}
+            primaryColor="#ff6b00"
             scrollContainerRef={scrollContainerRef}
         />
     );

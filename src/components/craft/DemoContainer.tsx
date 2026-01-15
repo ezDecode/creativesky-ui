@@ -34,7 +34,7 @@ export function DemoContainer({
   }, [onScrollContainerRef]);
 
   const baseStyles = cn(
-    "relative w-full h-full overflow-hidden bg-zinc-950",
+    "relative w-full h-full overflow-hidden bg-zinc-800",
     !isFullscreen && "rounded-xl border border-border/10 shadow-2xl ring-1 ring-border/10",
     className
   );
@@ -58,7 +58,7 @@ export function DemoContainer({
   }
 
   return (
-    <div 
+    <div
       className={cn(baseStyles, "flex items-center justify-center")}
       style={{ minHeight }}
       {...props}

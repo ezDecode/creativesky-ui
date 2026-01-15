@@ -112,19 +112,28 @@
   --font-serif: 'Inter Tight', ui-serif, Georgia, Cambria,
     'Times New Roman', Times, serif;
 
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
 
   /* Mathematical Typography Scale (1.25 - Major Third) */
-  --text-xs: 0.64rem;      /* 10.24px */
-  --text-sm: 0.8rem;       /* 12.8px */
-  --text-base: 1rem;       /* 16px */
-  --text-lg: 1.25rem;      /* 20px */
-  --text-xl: 1.563rem;     /* 25px */
-  --text-2xl: 1.953rem;    /* 31.25px */
-  --text-3xl: 2.441rem;    /* 39.06px */
-  --text-4xl: 3.052rem;    /* 48.83px */
-  --text-5xl: 3.815rem;    /* 61.04px */
+  --text-xs: 0.64rem;
+  /* 10.24px */
+  --text-sm: 0.8rem;
+  /* 12.8px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.25rem;
+  /* 20px */
+  --text-xl: 1.563rem;
+  /* 25px */
+  --text-2xl: 1.953rem;
+  /* 31.25px */
+  --text-3xl: 2.441rem;
+  /* 39.06px */
+  --text-4xl: 3.052rem;
+  /* 48.83px */
+  --text-5xl: 3.815rem;
+  /* 61.04px */
 
   --radius: 0.5rem;
 
@@ -142,7 +151,8 @@
 /* DARK THEME                                                                  */
 /* -------------------------------------------------------------------------- */
 .dark {
-  --background: #09090b; /* zinc-950 */
+  --background: #18181b;
+  /* zinc-900 - Darker but distinguishable from preview */
   --foreground: #eeeeee;
 
   --card: #121212;
@@ -209,7 +219,12 @@
     @apply bg-background text-foreground font-sans antialiased leading-relaxed tracking-normal;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-sans);
   }
 
@@ -223,44 +238,44 @@
 /* UTILITIES                                                                   */
 /* -------------------------------------------------------------------------- */
 @layer utilities {
-    .scrollbar-hide {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 
-    /* Documentation typography styles */
-    .docs-h3 {
-      @apply text-lg font-medium tracking-tight mt-10 mb-4 text-foreground;
-    }
+  /* Documentation typography styles */
+  .docs-h3 {
+    @apply text-lg font-medium tracking-tight mt-10 mb-4 text-foreground;
+  }
 
-    .docs-p {
-      @apply text-[15px] leading-relaxed text-muted-foreground mb-4;
-    }
+  .docs-p {
+    @apply text-[15px] leading-relaxed text-muted-foreground mb-4;
+  }
 
-    .docs-ul {
-      @apply my-4 space-y-2;
-    }
+  .docs-ul {
+    @apply my-4 space-y-2;
+  }
 
-    .docs-li {
-      @apply text-[15px] leading-relaxed text-muted-foreground relative pl-5;
-    }
+  .docs-li {
+    @apply text-[15px] leading-relaxed text-muted-foreground relative pl-5;
+  }
 
-    .docs-li::before {
-      content: "";
-      @apply absolute left-0 top-2.5 size-1.5 rounded-full bg-foreground/30;
-    }
+  .docs-li::before {
+    content: "";
+    @apply absolute left-0 top-2.5 size-1.5 rounded-full bg-foreground/30;
+  }
 
-    .docs-article {
-      @apply mt-8;
-    }
+  .docs-article {
+    @apply mt-8;
+  }
 
-    .docs-code-wrapper {
-      @apply relative my-4 overflow-hidden rounded-xl border border-border/10 bg-zinc-950;
-    }
+  .docs-code-wrapper {
+    @apply relative my-4 overflow-hidden rounded-xl border border-border/10 bg-zinc-800;
+  }
 
-    .docs-copy-button {
-      @apply absolute right-3 top-3 flex size-8 items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer;
-    }
+  .docs-copy-button {
+    @apply absolute right-3 top-3 flex size-8 items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer;
+  }
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -302,4 +317,3 @@
     background: transparent;
   }
 }
-

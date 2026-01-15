@@ -69,7 +69,7 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl group border border-border/10 bg-zinc-950 dark:bg-zinc-900 shadow-sm ring-1 ring-border/5",
+        "relative overflow-hidden rounded-xl group border border-border/10 bg-zinc-800 dark:bg-zinc-800 shadow-sm ring-1 ring-border/5",
         className
       )}
     >
