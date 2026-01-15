@@ -43,7 +43,6 @@ export const ComponentDemoSchema = z.object({
     scrollable: z.boolean().optional(),
     external: z.string().url().optional(),
     minHeight: z.string().optional(),
-    background: z.enum(['light', 'dark', 'transparent']).optional(),
 });
 
 // Component design schema

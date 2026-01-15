@@ -32,8 +32,6 @@ export interface ComponentDemo {
   external?: string;
   /** Minimum height for demo container */
   minHeight?: string;
-  /** Background preference */
-  background?: "light" | "dark" | "transparent";
 }
 
 export interface ComponentDesign {
