@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FilterChips } from "@/content/filter-chips/FilterChips";
 
-const FILTERS = ["All", "Design", "Development", "Marketing"] as const;
+const FILTERS = ["All", "Premium", "Experimental", "Buy Pro"] as const;
 
 const FilterChipsDemo: React.FC = () => {
     const [active, setActive] = useState<string>("All");

@@ -5,7 +5,7 @@ import { getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { ComponentPreview } from "@/components/craft/ComponentPreview";
 import { buildDocsPage } from "@/lib/docs/engine";
 import { SectionRenderer } from "@/lib/docs/SectionRenderer";
-import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
+// import { CopyCodeButton } from "@/components/craft/CopyCodeButton";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 export const dynamic = 'force-dynamic';
@@ -52,22 +52,17 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
             <ProgressiveBlur position="bottom" height="100px" className="lg:w-1/2" />
             
             {/* Header breadcrumb */}
-            <header className="sticky lg:fixed top-0 lg:top-9 left-0 lg:left-8 z-[150] w-full lg:w-auto p-2 md:p-3 lg:p-0 bg-transparent lg:bg-transparent backdrop-blur-none lg:backdrop-blur-none border-none lg:border-none">
-              <div className="flex h-[46px] items-center justify-between px-4 py-2 bg-muted-2/80 lg:bg-muted-2/80 backdrop-blur-md shadow-glass border border-border/10 rounded-2xl overflow-hidden max-w-full">
-                <div className="flex items-center gap-3 text-[14px] lg:text-[15px] font-medium capitalize tracking-tight overflow-hidden whitespace-nowrap pr-4">
-                  <Link href="/craft" className="hidden md:block text-foreground/50 hover:text-foreground transition-colors shrink-0">
-                    Components
-                  </Link>
-                  <div className="hidden md:block size-1.5 rounded-full bg-primary/40 shrink-0" />
-                  <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50 hover:text-foreground"} shrink-0`}>
-                    {pricing === "paid" ? "Pro" : "Free"}
-                  </span>
-                  <div className="size-1.5 rounded-full bg-primary/40 shrink-0" />
-                  <span className="text-foreground/50 shrink-0 truncate max-w-[100px] md:max-w-[200px]">{title}</span>
-                </div>
-                <div className="shrink-0">
-                  <CopyCodeButton name={slug} />
-                </div>
+            <header className="sticky top-0 z-[150] px-5 lg:px-8 py-3">
+              <div className="flex h-[46px] items-center gap-3">
+                <Link href="/craft" className="hidden md:block text-foreground/50 hover:text-foreground transition-colors text-base font-medium">
+                  Components
+                </Link>
+                <div className="hidden md:block size-1.5 rounded-full bg-primary/40" />
+                <span className={`${pricing === "paid" ? "text-amber-500" : "text-foreground/50"} text-base font-medium`}>
+                  {pricing === "paid" ? "Pro" : "Free"}
+                </span>
+                <div className="size-1.5 rounded-full bg-primary/40" />
+                <span className="text-foreground/50 text-base font-medium truncate">{title}</span>
               </div>
             </header>
 

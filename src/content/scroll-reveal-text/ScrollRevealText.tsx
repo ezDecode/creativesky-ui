@@ -345,7 +345,7 @@ export function ScrollRevealTextFramer({
             className="w-full relative isolate"
             style={{
                 height: `calc(${totalScrollDistance}px + ${containerHeight})`,
-                backgroundColor: 'var(--color-bg, #0d0d0d)',
+                // backgroundColor: 'var(--color-bg, #0d0d0d)',
                 color: 'var(--color-text, #fff)'
             }}
         >
@@ -355,7 +355,7 @@ export function ScrollRevealTextFramer({
                 style={{
                     height: containerHeight,
                     backfaceVisibility: 'hidden',
-                    backgroundColor: 'var(--color-bg, #0d0d0d)',
+                    // backgroundColor: 'var(--color-bg, #0d0d0d)',
                     WebkitBackfaceVisibility: 'hidden'
                 }}
             >
@@ -379,7 +379,7 @@ export function ScrollRevealTextFramer({
                                     : 'clamp(2.5rem, 5vw, 5rem)',
                                 marginBottom: isMobile ? '1.25rem' : '2rem',
                                 letterSpacing: '-0.03em',
-                                background: 'linear-gradient(to bottom, #fff 40%, #555)',
+                                // background: 'linear-gradient(to bottom, #fff 40%, #555)',
                                 WebkitBackgroundClip: 'text',
                                 backgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
