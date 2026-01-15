@@ -128,7 +128,6 @@ export function ComponentPreview({
   // Extract demo config from metadata
   const demo = metadata?.demo || {};
   const isScrollable = demo.scrollable === true;
-  const background = demo.background || "dark";
   const minHeight = demo.minHeight;
 
   return (
@@ -224,9 +223,8 @@ export function ComponentPreview({
           )
         ) : (
           <DemoContainer
-              scrollable={isScrollable}
-              background={background}
-              minHeight={minHeight}
+            scrollable={isScrollable}
+            minHeight={minHeight}
             onScrollContainerRef={handleScrollContainerRef}
             className="w-full h-full border-none shadow-none ring-0"
             isFullscreen={isInternalFullscreen}

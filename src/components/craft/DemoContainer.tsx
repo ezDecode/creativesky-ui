@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   scrollable?: boolean;
-  background?: "light" | "dark" | "transparent";
   minHeight?: string;
   onScrollContainerRef?: (ref: HTMLDivElement | null) => void;
   isFullscreen?: boolean;
@@ -15,7 +14,6 @@ interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 export function DemoContainer({
   children,
   scrollable = false,
-  background = "dark",
   minHeight,
   onScrollContainerRef,
   className,
@@ -35,15 +33,8 @@ export function DemoContainer({
     };
   }, [onScrollContainerRef]);
 
-  const bgClass = {
-    light: "bg-zinc-100",
-    dark: "bg-zinc-950",
-    transparent: "bg-transparent",
-  }[background];
-
   const baseStyles = cn(
-    "relative w-full h-full overflow-hidden",
-    bgClass,
+    "relative w-full h-full overflow-hidden bg-zinc-950",
     !isFullscreen && "rounded-xl border border-border/10 shadow-2xl ring-1 ring-border/10",
     className
   );
