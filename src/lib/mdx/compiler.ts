@@ -1,17 +1,52 @@
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
+import { LRUCache } from 'lru-cache';
 
 /**
- * In-memory cache for compiled MDX
+ * MDX Compiler with LRU Cache
+ * 
+ * Features:
+ * - LRU eviction with configurable max size (50MB default)
+ * - TTL-based expiration (1 hour)
+ * - Size-based eviction using serialized content length
  */
-const compiledMDXCache = new Map<string, { 
+
+interface CachedMDX {
   source: any;
   compiledAt: number;
-}>();
+}
 
-const CACHE_SIZE_LIMIT = 100;
-const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour in production
+// LRU Cache configuration
+const CACHE_MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
+const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour
+const CACHE_MAX_ENTRIES = 200;
+
+/**
+ * Calculate approximate size of compiled MDX in bytes
+ */
+function calculateSize(value: CachedMDX): number {
+  // Rough estimate: JSON stringify length in bytes
+  try {
+    return JSON.stringify(value.source).length * 2; // *2 for UTF-16
+  } catch {
+    return 1024; // Default 1KB if can't calculate
+  }
+}
+
+/**
+ * LRU Cache for compiled MDX
+ * - Evicts least recently used items when size limit reached
+ * - Automatically expires items after TTL
+ */
+const compiledMDXCache = new LRUCache<string, CachedMDX>({
+  max: CACHE_MAX_ENTRIES,
+  maxSize: CACHE_MAX_SIZE_BYTES,
+  sizeCalculation: calculateSize,
+  ttl: CACHE_TTL_MS,
+  // In development, don't use TTL to allow hot reload
+  ttlAutopurge: process.env.NODE_ENV === 'production',
+});
 
 /**
  * Compile MDX content using next-mdx-remote
@@ -22,11 +57,9 @@ export async function compileMDX(
   cacheKey?: string
 ): Promise<{ source: any }> {
   // Check cache
-  if (cacheKey && compiledMDXCache.has(cacheKey)) {
-    const cached = compiledMDXCache.get(cacheKey)!;
-    const age = Date.now() - cached.compiledAt;
-    
-    if (process.env.NODE_ENV === 'development' || age < CACHE_TTL_MS) {
+  if (cacheKey) {
+    const cached = compiledMDXCache.get(cacheKey);
+    if (cached) {
       return { source: cached.source };
     }
   }
@@ -41,11 +74,8 @@ export async function compileMDX(
     parseFrontmatter: false,
   });
 
+  // Cache the result
   if (cacheKey) {
-    if (compiledMDXCache.size >= CACHE_SIZE_LIMIT) {
-      const firstKey = compiledMDXCache.keys().next().value;
-      if (firstKey) compiledMDXCache.delete(firstKey);
-    }
     compiledMDXCache.set(cacheKey, {
       source: mdxSource,
       compiledAt: Date.now(),
@@ -69,7 +99,10 @@ export function clearMDXCache(): void {
 export function getMDXCacheStats() {
   return {
     size: compiledMDXCache.size,
-    limit: CACHE_SIZE_LIMIT,
+    calculatedSize: compiledMDXCache.calculatedSize,
+    maxSize: CACHE_MAX_SIZE_BYTES,
+    maxEntries: CACHE_MAX_ENTRIES,
     ttl: CACHE_TTL_MS,
   };
 }
+

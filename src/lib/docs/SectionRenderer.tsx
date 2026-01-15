@@ -9,6 +9,7 @@ import { Steps, Step } from "@/components/mdx/Steps";
 import { PropsTable, PropItem } from "@/components/mdx/PropsTable";
 import { Callout } from "@/components/mdx/Callout";
 import { MDXContent } from "@/lib/mdx/MDXContent";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export function SectionRenderer({ config }: { config: DocsPageConfig }) {
   const { description, dependencies, interactions, license, showSource, mdxContent } = config;
@@ -53,27 +54,27 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
                 href={dep === "framer-motion" ? "https://motion.dev/" : `https://www.npmjs.com/package/${dep}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                  className="bg-muted hover:bg-muted/80 flex h-9 w-fit cursor-pointer items-center gap-2 rounded-xl px-3 text-xs transition-all duration-300 border border-border/5"
-                >
-                  {dep}
-                  {dep === "framer-motion" && <Icon icon="simple-icons:framer" className="size-3" />}
-                  {dep === "lucide-react" && <Icon icon="simple-icons:lucide" className="size-4" />}
-                  {dep === "gsap" && <Icon icon="simple-icons:greensock" className="size-4" />}
-                  {dep === "animejs" && <Icon icon="simple-icons:javascript" className="size-4" />}
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-  
-        {/* Interactions Section */}
-        {interactions && interactions.length > 0 && (
-          <section className="mb-12">
-            <h3 className="docs-h3 text-foreground font-medium mb-4">Interaction</h3>
-            <table className="w-full">
-              <tbody>
-                {interactions.map((interaction: Interaction, i: number) => (
-                  <tr key={i} className="border-foreground/10 h-12 border-t tracking-tight last:border-b">
+                className="bg-muted hover:bg-muted/80 flex h-9 w-fit cursor-pointer items-center gap-2 rounded-xl px-3 text-xs transition-all duration-300 border border-border/5"
+              >
+                {dep}
+                {dep === "framer-motion" && <Icon icon="simple-icons:framer" className="size-3" />}
+                {dep === "lucide-react" && <Icon icon="simple-icons:lucide" className="size-4" />}
+                {dep === "gsap" && <Icon icon="simple-icons:greensock" className="size-4" />}
+                {dep === "animejs" && <Icon icon="simple-icons:javascript" className="size-4" />}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Interactions Section */}
+      {interactions && interactions.length > 0 && (
+        <section className="mb-12">
+          <h3 className="docs-h3 text-foreground font-medium mb-4">Interaction</h3>
+          <table className="w-full">
+            <tbody>
+              {interactions.map((interaction: Interaction, i: number) => (
+                <tr key={i} className="border-foreground/10 h-12 border-t tracking-tight last:border-b">
                   <td className="w-1/4">
                     <InteractionIcon type={interaction.type} />
                   </td>
@@ -88,10 +89,12 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
       {/* MDX Content (Installation, Usage, Props) */}
       <article className="docs-article prose prose-zinc dark:prose-invert max-w-none mb-12">
         {mdxContent ? (
-          <MDXContent 
-            source={mdxContent} 
-            components={mdxComponents} 
-          />
+          <ErrorBoundary componentName="Documentation">
+            <MDXContent
+              source={mdxContent}
+              components={mdxComponents}
+            />
+          </ErrorBoundary>
         ) : (
           <p className="text-muted-foreground italic">No documentation available.</p>
         )}

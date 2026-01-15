@@ -5,6 +5,7 @@ import { resolveComponent, getAllComponentsMetadata } from "@/lib/registry/resol
 import { DemoContainer } from "./DemoContainer";
 import { PreviewDock } from "./PreviewDock";
 import { CraftNavDrawer } from "./CraftNavDrawer";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 
@@ -33,7 +34,7 @@ export function ComponentPreview({
   const [showCode, setShowCode] = React.useState(false);
   const [isInternalFullscreen, setIsInternalFullscreen] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  
+
   const scrollContainerRef = React.useRef<HTMLDivElement | null>(null);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const allComponents = React.useMemo(() => getAllComponentsMetadata(), []);
@@ -87,33 +88,33 @@ export function ComponentPreview({
   }, [isInternalFullscreen]);
 
   // Loading state
-    if (isLoading) {
-      return (
-        <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
-          <div className="flex flex-col items-center gap-4">
-            <div className="h-10 w-10 animate-spin border-4 border-muted border-t-primary rounded-full" />
-            <p className="text-sm text-muted-foreground">Loading component...</p>
-          </div>
+  if (isLoading) {
+    return (
+      <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="h-10 w-10 animate-spin border-4 border-muted border-t-primary rounded-full" />
+          <p className="text-sm text-muted-foreground">Loading component...</p>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    // Error state
-    if (error || !Component) {
-      return (
-        <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
-          <div className="flex flex-col items-center gap-4 text-center p-6">
-            <div className="p-3 rounded-full bg-red-500/10 text-red-500">
-              <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
-            </div>
-              <div>
-                <h3 className="text-sm font-medium text-foreground">Failed to load component</h3>
-                <p className="text-xs text-muted-foreground mt-1 max-w-xs">{error}</p>
-              </div>
-              <button
-                onClick={handleRetry}
-                className="mt-2 px-4 py-2 text-xs font-normal bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors flex items-center gap-2"
-              >
+  // Error state
+  if (error || !Component) {
+    return (
+      <div className={cn("w-full h-full flex items-center justify-center bg-muted/50 rounded-xl", className)} {...props}>
+        <div className="flex flex-col items-center gap-4 text-center p-6">
+          <div className="p-3 rounded-full bg-red-500/10 text-red-500">
+            <Icon icon="solar:danger-triangle-bold" className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-foreground">Failed to load component</h3>
+            <p className="text-xs text-muted-foreground mt-1 max-w-xs">{error}</p>
+          </div>
+          <button
+            onClick={handleRetry}
+            className="mt-2 px-4 py-2 text-xs font-normal bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors flex items-center gap-2"
+          >
 
 
             <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
@@ -131,12 +132,12 @@ export function ComponentPreview({
   const minHeight = demo.minHeight;
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className={cn(
         "relative w-full h-full",
         !isInternalFullscreen && className
-      )} 
+      )}
       {...props}
     >
       <AnimatePresence>
@@ -151,12 +152,12 @@ export function ComponentPreview({
         )}
       </AnimatePresence>
 
-              <div className={cn(
-                "right-4 lg:right-8",
-                isInternalFullscreen 
-                  ? "fixed top-9 z-[140]" 
-                  : "absolute bottom-4 lg:top-8 lg:bottom-auto z-[110]"
-              )}>
+      <div className={cn(
+        "right-4 lg:right-8",
+        isInternalFullscreen
+          ? "fixed top-9 z-[140]"
+          : "absolute bottom-4 lg:top-8 lg:bottom-auto z-[110]"
+      )}>
 
         <CraftNavDrawer
           components={allComponents}
@@ -164,7 +165,7 @@ export function ComponentPreview({
           onOpenChange={setIsDrawerOpen}
           trigger={null}
         />
-        
+
         <PreviewDock
           onFullscreen={toggleFullscreen}
           onShowCode={() => setShowCode(!showCode)}
@@ -174,65 +175,73 @@ export function ComponentPreview({
         />
       </div>
 
-            <motion.div 
-              layout
-              transition={{ 
-                type: "spring", 
-                damping: 30, 
-                stiffness: 300
+      <motion.div
+        layout
+        transition={{
+          type: "spring",
+          damping: 30,
+          stiffness: 300
+        }}
+        className={cn(
+          "relative rounded-xl overflow-hidden",
+          isInternalFullscreen
+            ? "fixed inset-1 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center"
+            : cn("w-full h-full bg-muted/50", backgroundClassName)
+        )}
+      >
+        {isInternalFullscreen ? (
+          isScrollable ? (
+            <div
+              ref={handleScrollContainerRef}
+              className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide"
+              style={{
+                WebkitOverflowScrolling: "touch",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
               }}
-                className={cn(
-                  "relative rounded-xl overflow-hidden",
-                isInternalFullscreen 
-                  ? "fixed inset-1 z-[101] bg-muted shadow-2xl border border-border/50 flex items-center justify-center" 
-                  : cn("w-full h-full bg-muted/50", backgroundClassName)
+            >
+              {scrollContainer && (
+                <ErrorBoundary componentName={name}>
+                  <Component
+                    key={isInternalFullscreen ? "fullscreen" : "normal"}
+                    {...(demo.defaultProps || {})}
+                    scrollContainerRef={scrollContainerRef}
+                  />
+                </ErrorBoundary>
               )}
-            >
-          {isInternalFullscreen ? (
-            isScrollable ? (
-              <div
-                ref={handleScrollContainerRef}
-                className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide"
-                style={{
-                  WebkitOverflowScrolling: "touch",
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                }}
-                >
-                    {scrollContainer && (
-                      <Component
-                        key={isInternalFullscreen ? "fullscreen" : "normal"}
-                        {...(demo.defaultProps || {})}
-                        scrollContainerRef={scrollContainerRef}
-                      />
-                    )}
-                </div>
-            ) : (
-              <Component {...(demo.defaultProps || {})} />
-            )
+            </div>
           ) : (
-            <DemoContainer
-              design={metadata?.design}
-              scrollable={isScrollable}
-              background="transparent"
-              minHeight={minHeight}
-              onScrollContainerRef={handleScrollContainerRef}
-              className="w-full h-full border-none shadow-none ring-0"
-              isFullscreen={isInternalFullscreen}
-            >
-              {isScrollable ? (
-                scrollContainer && (
+            <ErrorBoundary componentName={name}>
+              <Component {...(demo.defaultProps || {})} />
+            </ErrorBoundary>
+          )
+        ) : (
+          <DemoContainer
+            design={metadata?.design}
+            scrollable={isScrollable}
+            background="transparent"
+            minHeight={minHeight}
+            onScrollContainerRef={handleScrollContainerRef}
+            className="w-full h-full border-none shadow-none ring-0"
+            isFullscreen={isInternalFullscreen}
+          >
+            {isScrollable ? (
+              scrollContainer && (
+                <ErrorBoundary componentName={name}>
                   <Component
                     {...(demo.defaultProps || {})}
                     scrollContainerRef={scrollContainerRef}
                   />
-                )
-              ) : (
+                </ErrorBoundary>
+              )
+            ) : (
+              <ErrorBoundary componentName={name}>
                 <Component {...(demo.defaultProps || {})} />
-              )}
-            </DemoContainer>
-          )}
-        </motion.div>
+              </ErrorBoundary>
+            )}
+          </DemoContainer>
+        )}
+      </motion.div>
     </div>
   );
 }

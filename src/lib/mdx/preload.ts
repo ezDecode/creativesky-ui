@@ -27,25 +27,25 @@ import { getMDXCacheStats } from '@/lib/mdx/compiler';
 export async function preloadAllMDX() {
   console.log('[MDX Preload] Starting MDX compilation...');
   const startTime = performance.now();
-  
+
   // Get all component metadata from registry
   const components = getAllComponentsMetadata();
   const slugs = components.map(c => c.id);
-  
+
   console.log(`[MDX Preload] Found ${slugs.length} components to process`);
-  
+
   // Preload all MDX files
   const loaded = await preloadComponentMDX(slugs);
-  
+
   const endTime = performance.now();
   const duration = Math.round(endTime - startTime);
-  
+
   console.log(`[MDX Preload] ✓ Compiled ${loaded.size} MDX files in ${duration}ms`);
-  
+
   // Show cache stats
   const stats = getMDXCacheStats();
-  console.log(`[MDX Preload] Cache size: ${stats.size}/${stats.limit}`);
-  
+  console.log(`[MDX Preload] Cache size: ${stats.size}/${stats.maxEntries}`);
+
   return loaded;
 }
 
@@ -57,7 +57,7 @@ export async function preloadAllMDX() {
 export async function validateMDXCompilation() {
   const components = getAllComponentsMetadata();
   const errors: Array<{ slug: string; error: string }> = [];
-  
+
   for (const component of components) {
     try {
       const { loadComponentMDX } = await import('@/lib/mdx/loader');
@@ -69,7 +69,7 @@ export async function validateMDXCompilation() {
       });
     }
   }
-  
+
   if (errors.length > 0) {
     console.error('[MDX Validation] Compilation errors found:');
     errors.forEach(({ slug, error }) => {
@@ -78,7 +78,7 @@ export async function validateMDXCompilation() {
   } else {
     console.log('[MDX Validation] ✓ All MDX files compiled successfully');
   }
-  
+
   return errors;
 }
 

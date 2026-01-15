@@ -32,7 +32,7 @@ class MDXPerformanceMonitor {
 
   recordCompilation(duration: number, fromCache: boolean) {
     this.metrics.compilations++;
-    
+
     if (fromCache) {
       this.metrics.cacheHits++;
     } else {
@@ -74,7 +74,7 @@ class MDXPerformanceMonitor {
     console.log(`   Cache hits: ${metrics.cacheHits} (${hitRate}%)`);
     console.log(`   Cache misses: ${metrics.cacheMisses}`);
     console.log(`   Avg compile time: ${Math.round(metrics.averageCompileTime)}ms`);
-    console.log(`   Cache size: ${metrics.cacheStats.size}/${metrics.cacheStats.limit}`);
+    console.log(`   Cache size: ${metrics.cacheStats.size}/${metrics.cacheStats.maxEntries}`);
   }
 }
 
@@ -118,7 +118,7 @@ export function assertCompilePerformance(duration: number, maxMs: number = 500) 
  */
 export function checkCacheHealth(minHitRate: number = 0.8): boolean {
   const hitRate = mdxPerformanceMonitor.getCacheHitRate();
-  
+
   if (hitRate < minHitRate && mdxPerformanceMonitor.getMetrics().compilations > 10) {
     console.warn(
       `[MDX Perf] ⚠️  Cache hit rate is ${(hitRate * 100).toFixed(1)}% ` +
@@ -127,6 +127,6 @@ export function checkCacheHealth(minHitRate: number = 0.8): boolean {
     );
     return false;
   }
-  
+
   return true;
 }

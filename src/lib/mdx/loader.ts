@@ -1,9 +1,8 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { compileAndExecuteMDX } from './compiler';
-import type { ComponentType } from 'react';
-import type { MDXFrontmatter } from './types';
+import { parseFrontmatter, type MDXFrontmatter } from './frontmatter-schema';
 
 export interface LoadedMDX {
   frontmatter: MDXFrontmatter;
@@ -13,7 +12,10 @@ export interface LoadedMDX {
 
 export async function loadMDXFile(filePath: string): Promise<LoadedMDX> {
   const rawContent = readFileSync(filePath, 'utf-8');
-  const { data: frontmatter } = matter(rawContent);
+  const { data } = matter(rawContent);
+
+  // Validate frontmatter with Zod (returns safe defaults on failure)
+  const frontmatter = parseFrontmatter(data);
 
   const { source } = await compileAndExecuteMDX(
     rawContent,
@@ -21,7 +23,7 @@ export async function loadMDXFile(filePath: string): Promise<LoadedMDX> {
   );
 
   return {
-    frontmatter: frontmatter as MDXFrontmatter,
+    frontmatter,
     source,
     rawContent,
   };
@@ -46,7 +48,7 @@ export async function loadComponentMDX(slug: string): Promise<LoadedMDX | null> 
 
 export async function preloadComponentMDX(slugs: string[]): Promise<Map<string, LoadedMDX>> {
   const loaded = new Map<string, LoadedMDX>();
-  
+
   for (const slug of slugs) {
     try {
       const mdx = await loadComponentMDX(slug);
@@ -57,6 +59,6 @@ export async function preloadComponentMDX(slugs: string[]): Promise<Map<string, 
       console.error(`Failed to preload MDX for "${slug}":`, error);
     }
   }
-  
+
   return loaded;
 }

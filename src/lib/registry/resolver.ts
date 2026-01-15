@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import type { RegistryComponent } from "../types";
 import registryData from "./registry.json";
+import { RegistrySchema } from "./schema";
 
 /**
  * Component Resolver
@@ -24,10 +25,19 @@ import registryData from "./registry.json";
  * That's it! No other code changes needed.
  */
 
-const registry = registryData as {
-  version: string;
-  components: RegistryComponent[];
-};
+// Validate registry at load time (fail-fast)
+let registry: { version: string; components: RegistryComponent[] };
+try {
+  const parsed = RegistrySchema.parse(registryData);
+  registry = {
+    version: parsed.version,
+    components: parsed.components as RegistryComponent[],
+  };
+  console.info(`[resolver] Registry validated: v${registry.version}, ${registry.components.length} components`);
+} catch (error) {
+  console.error('[resolver] Registry validation FAILED:', error);
+  throw new Error('Invalid registry.json - see console for details');
+}
 
 /**
  * Demo Import Registry
