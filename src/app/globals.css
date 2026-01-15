@@ -243,30 +243,45 @@
     -ms-overflow-style: none;
   }
 
-  /* Documentation typography styles */
+  /* Documentation typography styles - 20px (1.25rem) consistent across all breakpoints */
   .docs-h3 {
-    @apply text-lg font-medium tracking-tight mt-10 mb-4 text-foreground;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    @apply font-medium tracking-tight mt-10 mb-4 text-foreground;
   }
 
   .docs-p {
-    @apply text-[15px] leading-relaxed text-muted-foreground mb-4;
+    font-size: 1.25rem;
+    line-height: 1.75;
+    @apply text-muted-foreground mb-4;
   }
 
   .docs-ul {
-    @apply my-4 space-y-2;
+    @apply my-4 space-y-3;
   }
 
   .docs-li {
-    @apply text-[15px] leading-relaxed text-muted-foreground relative pl-5;
+    font-size: 1.25rem;
+    line-height: 1.75;
+    @apply text-muted-foreground relative pl-6;
   }
 
   .docs-li::before {
-    content: "";
-    @apply absolute left-0 top-2.5 size-1.5 rounded-full bg-foreground/30;
+    content: "-";
+    @apply absolute left-0 top-0 text-muted-foreground/60 font-medium;
   }
 
   .docs-article {
+    font-size: 1.25rem;
+    line-height: 1.75;
     @apply mt-8;
+  }
+
+  .docs-article p,
+  .docs-article li,
+  .docs-article td {
+    font-size: 1.25rem;
+    line-height: 1.75;
   }
 
   .docs-code-wrapper {

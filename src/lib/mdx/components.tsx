@@ -62,7 +62,7 @@ function H2({ children, ...props }: any) {
   return (
     <h2
       id={id}
-      className="text-xl font-medium tracking-tight text-foreground mt-12 mb-4 scroll-mt-24"
+      className="text-2xl font-medium tracking-tight text-foreground mt-12 mb-4 scroll-mt-24"
       {...props}
     >
       {children}
@@ -91,7 +91,7 @@ function H3({ children, ...props }: any) {
  */
 function P({ children, ...props }: any) {
   return (
-    <p className="text-[15px] leading-relaxed text-muted-foreground mb-4 last:mb-0" {...props}>
+    <p className="text-lg leading-relaxed text-muted-foreground mb-4 last:mb-0" {...props}>
       {children}
     </p>
   );
@@ -110,9 +110,9 @@ function Ul({ children, ...props }: any) {
 
 function Li({ children, ...props }: any) {
   return (
-    <li className="relative pl-2" {...props}>
-      <span className="absolute -left-6 top-2.5 h-1.5 w-1.5 rounded-full bg-primary/60 content-['']" />
-      <span className="text-muted-foreground leading-7">{children}</span>
+    <li className="relative pl-6" {...props}>
+      <span className="absolute left-0 top-0 text-muted-foreground/60 font-medium">-</span>
+      <span className="text-lg text-muted-foreground leading-relaxed">{children}</span>
     </li>
   );
 }
@@ -197,9 +197,9 @@ function Pre({ children, ...props }: any) {
 
   if (typeof code === 'string') {
     return (
-      <CodeBlock 
-        code={code.trim()} 
-        language={language} 
+      <CodeBlock
+        code={code.trim()}
+        language={language}
         className="my-6"
       />
     );
@@ -237,7 +237,7 @@ function Table({ children, ...props }: any) {
   return (
     <div className="my-6 w-full overflow-hidden rounded-xl border border-border/10 bg-background/50 shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full text-sm" {...props}>
+        <table className="w-full text-lg" {...props}>
           {children}
         </table>
       </div>
@@ -279,7 +279,7 @@ function Tr({ children, ...props }: any) {
 
 function Td({ children, ...props }: any) {
   return (
-    <td className="px-4 py-3 text-muted-foreground align-top group-hover:text-foreground transition-colors" {...props}>
+    <td className="px-4 py-3 text-lg text-muted-foreground align-top group-hover:text-foreground transition-colors" {...props}>
       {children}
     </td>
   );

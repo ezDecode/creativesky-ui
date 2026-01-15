@@ -48,7 +48,7 @@ interface AnimatedWordProps {
 // ===========================================================================
 
 const ANIMATION_CONFIG = {
-    leadCount: { desktop: 12, mobile: 7 },
+    leadCount: { desktop: 15, mobile: 10 },
     scrollDistance: { desktop: 60, mobile: 40 },
     paddingDuration: 2,
     // Optimized spring: smoother with less bounce

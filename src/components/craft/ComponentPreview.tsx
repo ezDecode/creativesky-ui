@@ -4,6 +4,7 @@ import * as React from "react";
 import { resolveComponent, getAllComponentsMetadata } from "@/lib/registry/resolver";
 import { PreviewDock } from "./PreviewDock";
 import { CraftNavDrawer } from "./CraftNavDrawer";
+import { CodeModal } from "./CodeModal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
@@ -31,9 +32,9 @@ export function ComponentPreview({
   const [error, setError] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [retryCount, setRetryCount] = React.useState(0);
-  const [showCode, setShowCode] = React.useState(false);
   const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [showCodeModal, setShowCodeModal] = React.useState(false);
 
   const scrollContainerRef = React.useRef<HTMLDivElement | null>(null);
   const allComponents = React.useMemo(() => getAllComponentsMetadata(), []);
@@ -75,6 +76,17 @@ export function ComponentPreview({
 
   const handleRetry = () => setRetryCount(c => c + 1);
   const toggleFullscreen = () => setIsFullscreen(prev => !prev);
+
+  // Handle code button click - exit fullscreen first if needed
+  const handleShowCode = () => {
+    if (isFullscreen) {
+      setIsFullscreen(false);
+      // Small delay to let fullscreen animation complete before opening modal
+      setTimeout(() => setShowCodeModal(true), 200);
+    } else {
+      setShowCodeModal(true);
+    }
+  };
 
   // Extract demo config
   const demo = metadata?.demo || {};
@@ -194,7 +206,8 @@ export function ComponentPreview({
         {renderContent()}
 
         {/* Dock & Navigation - Positioned within container */}
-        <div
+        <motion.div
+          layout="position"
           className={cn(
             "absolute z-10 right-4 lg:right-6",
             isFullscreen
@@ -211,13 +224,20 @@ export function ComponentPreview({
 
           <PreviewDock
             onFullscreen={toggleFullscreen}
-            onShowCode={() => setShowCode(!showCode)}
+            onShowCode={handleShowCode}
             onOpenComponents={() => setIsDrawerOpen(true)}
-            showCode={showCode}
+            showCode={showCodeModal}
             isFullscreen={isFullscreen}
           />
-        </div>
+        </motion.div>
       </motion.div>
+
+      {/* Code Modal */}
+      <CodeModal
+        open={showCodeModal}
+        onClose={() => setShowCodeModal(false)}
+        componentName={name}
+      />
     </>
   );
 }

@@ -73,7 +73,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
                   <td className="w-1/4">
                     <InteractionIcon type={interaction.type} />
                   </td>
-                  <td className="text-base text-muted-foreground">{interaction.description}</td>
+                  <td className="text-lg text-muted-foreground">{interaction.description}</td>
                 </tr>
               ))}
             </tbody>
@@ -99,7 +99,7 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
       {showSource && (
         <section className="mb-12">
           <h3 className="docs-h3 text-foreground font-medium mb-4">Source code</h3>
-          <p className="docs-p flex items-center gap-2 flex-wrap text-muted-foreground text-base">
+          <p className="docs-p flex items-center gap-2 flex-wrap text-muted-foreground">
             Click on the top right
             <span className="flex items-center justify-center bg-muted size-8 rounded-xl border border-border/10">
               <Icon icon="lucide:code-2" className="size-4" />
@@ -115,8 +115,8 @@ export function SectionRenderer({ config }: { config: DocsPageConfig }) {
           <h3 className="docs-h3 text-foreground font-medium mb-4">License & Usage</h3>
           <ul className="space-y-2 list-none p-0">
             {license.map((item, i) => (
-              <li key={i} className="text-base text-muted-foreground flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/40 shrink-0" />
+              <li key={i} className="text-lg text-muted-foreground flex items-start gap-2">
+                <span className="text-muted-foreground/60 font-medium shrink-0">-</span>
                 {item}
               </li>
             ))}
