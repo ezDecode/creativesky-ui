@@ -351,7 +351,7 @@ export function ScrollRevealTextFramer({
         >
             {/* Sticky inner container - pins content while scrolling */}
             <div
-                className="w-full flex items-center justify-center sticky top-0 z-[1] bg-zinc-950"
+                className="w-full flex items-center justify-center sticky top-0 z-[1]"
                 style={{
                     height: containerHeight,
                     backfaceVisibility: 'hidden',
