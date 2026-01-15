@@ -2,11 +2,9 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ComponentDesign } from "@/lib/types";
 
 interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  design?: ComponentDesign;
   scrollable?: boolean;
   background?: "light" | "dark" | "transparent";
   minHeight?: string;
@@ -14,18 +12,8 @@ interface DemoContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   isFullscreen?: boolean;
 }
 
-/**
- * DemoContainer - Universal Preview Container
- * 
- * Handles all component preview scenarios:
- * - Scrollable: For scroll-based animations (creates independent scroll context)
- * - Non-scrollable: For standard components (centered)
- * - Background variants: light, dark, transparent
- * - Surface styles based on design tokens
- */
 export function DemoContainer({
   children,
-  design,
   scrollable = false,
   background = "dark",
   minHeight,
@@ -47,23 +35,22 @@ export function DemoContainer({
     };
   }, [onScrollContainerRef]);
 
-  const surfaceStyles = getSurfaceStyles(design?.surface ?? "flat", background);
+  const bgClass = {
+    light: "bg-zinc-100",
+    dark: "bg-zinc-950",
+    transparent: "bg-transparent",
+  }[background];
+
   const baseStyles = cn(
     "relative w-full h-full overflow-hidden",
+    bgClass,
     !isFullscreen && "rounded-xl border border-border/10 shadow-2xl ring-1 ring-border/10",
-    isFullscreen && "rounded-none",
-    surfaceStyles,
     className
   );
 
-  // Scrollable: independent scroll context for scroll-based animations
   if (scrollable) {
     return (
-      <div 
-        className={baseStyles}
-        style={{ minHeight }}
-        {...props}
-      >
+      <div className={baseStyles} style={{ minHeight }} {...props}>
         <div
           ref={scrollRef}
           className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide"
@@ -79,7 +66,6 @@ export function DemoContainer({
     );
   }
 
-  // Non-scrollable: centered container
   return (
     <div 
       className={cn(baseStyles, "flex items-center justify-center")}
@@ -89,26 +75,4 @@ export function DemoContainer({
       {children}
     </div>
   );
-}
-
-function getSurfaceStyles(
-  surface: ComponentDesign["surface"], 
-  background: "light" | "dark" | "transparent"
-): string {
-  // Background base
-  const bgBase = {
-    light: "bg-muted/30",
-    dark: "bg-muted/50",
-    transparent: "bg-transparent",
-  }[background];
-
-  // Surface modifiers
-  const surfaceModifier = {
-    flat: "",
-    elevated: "shadow-lg",
-    inset: "shadow-inner",
-    glassmorphic: "backdrop-blur-sm",
-  }[surface];
-
-  return cn(bgBase, surfaceModifier);
 }

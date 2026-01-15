@@ -224,10 +224,9 @@ export function ComponentPreview({
           )
         ) : (
           <DemoContainer
-            design={metadata?.design}
-            scrollable={isScrollable}
-            background="transparent"
-            minHeight={minHeight}
+              scrollable={isScrollable}
+              background={background}
+              minHeight={minHeight}
             onScrollContainerRef={handleScrollContainerRef}
             className="w-full h-full border-none shadow-none ring-0"
             isFullscreen={isInternalFullscreen}
