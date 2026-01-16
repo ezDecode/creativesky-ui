@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface PreviewDockProps {
   onFullscreen?: () => void;
@@ -24,82 +25,79 @@ export function PreviewDock({
   className,
 }: PreviewDockProps) {
   return (
-    <section
+    <motion.section
+      layout
       className={cn(
-        "flex items-center border-foreground/5 bg-muted-2 shadow-glass select-none gap-1.5 rounded-2xl border p-2 flex-shrink-0",
+        "flex items-center gap-1 p-1.5 rounded-2xl",
+        "bg-zinc-900/80 backdrop-blur-md",
+        "border border-white/5",
+        "shadow-2xl shadow-black/40",
         className
       )}
     >
-      {/* Maximize / Fullscreen - Mobile */}
-      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px] lg:hidden">
-        <button
-          type="button"
-          onClick={onFullscreen}
-          className="flex items-center justify-center size-full cursor-pointer transition-all ease-in-out active:scale-95"
-        >
-          <Icon
-            icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"}
-            className="size-[18px]"
-          />
-          <span className="sr-only">{isFullscreen ? "Minimize View" : "Maximize View"}</span>
-        </button>
-      </div>
+      <DockItem
+        onClick={onFullscreen}
+        icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"}
+        label={isFullscreen ? "Minimize" : "Maximize"}
+        isActive={isFullscreen}
+      />
 
-      {/* Maximize / Fullscreen - Desktop */}
-      <div className="bg-muted-3 hidden size-9 items-center justify-center rounded-[18px] lg:flex">
-        <button
-          type="button"
-          onClick={onFullscreen}
-          className="flex items-center justify-center size-full rounded-2xl cursor-pointer transition-all ease-in-out active:scale-95"
-        >
-          <Icon
-            icon={isFullscreen ? "lucide:minimize" : "lucide:maximize"}
-            className="size-[18px]"
-          />
-          <span className="sr-only">{isFullscreen ? "Minimize View" : "Maximize View"}</span>
-        </button>
-      </div>
+      <div className="w-px h-4 bg-white/5 mx-0.5" />
 
-      {/* Components Button */}
-      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px]">
-        <button
-          type="button"
-          onClick={onOpenComponents}
-          className="flex items-center justify-center size-full rounded-2xl cursor-pointer transition-all ease-in-out active:scale-95"
-        >
-          <Icon icon="lucide:circle-arrow-out-up-right" className="size-[18px]" />
-          <span className="sr-only">Components</span>
-        </button>
-      </div>
+      <DockItem
+        onClick={onOpenComponents}
+        icon="lucide:circle-arrow-out-up-right"
+        label="Components"
+      />
 
-      {/* Code Button */}
-      <div
-        className={cn(
-          "bg-muted-3 relative flex size-9 items-center justify-center rounded-[18px] cursor-pointer active:scale-95",
-          showCode && "bg-foreground/10"
-        )}
-      >
-        <button
-          type="button"
-          onClick={onShowCode}
-          className="flex items-center justify-center size-full rounded-2xl cursor-pointer"
-        >
-          <Icon icon="lucide:code-xml" className="size-[18px]" />
-          <span className="sr-only">Source Code</span>
-        </button>
-      </div>
+      <DockItem
+        onClick={onShowCode}
+        icon="lucide:code-xml"
+        label="Code"
+        isActive={showCode}
+      />
 
-      {/* Command Button */}
-      <div className="bg-muted-3 flex size-9 items-center justify-center rounded-[18px]">
-        <button
-          type="button"
-          onClick={onCommand}
-          className="flex items-center justify-center size-full rounded-2xl cursor-pointer transition-all ease-in-out active:scale-95"
-        >
-          <Icon icon="lucide:command" className="size-[18px]" />
-          <span className="sr-only">Command + K</span>
-        </button>
-      </div>
-    </section>
+      <DockItem
+        onClick={onCommand}
+        icon="lucide:command"
+        label="Cmd+K"
+        className="hidden sm:flex"
+      />
+    </motion.section>
+  );
+}
+
+interface DockItemProps {
+  icon: string;
+  label: string;
+  onClick?: () => void;
+  isActive?: boolean;
+  className?: string;
+}
+
+function DockItem({ icon, label, onClick, isActive, className }: DockItemProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "group relative flex items-center justify-center size-9 rounded-xl transition-all duration-200",
+        "text-zinc-400 hover:text-zinc-100",
+        "hover:bg-zinc-800/50",
+        isActive && "bg-zinc-800 text-zinc-50 shadow-inner",
+        className
+      )}
+    >
+      <Icon
+        icon={icon}
+        className="size-[18px] transition-transform duration-200 group-hover:scale-110 group-active:scale-95"
+      />
+      <span className="sr-only">{label}</span>
+
+      {/* Subtle active indicator */}
+      {isActive && (
+        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-0.5 bg-zinc-400 rounded-full" />
+      )}
+    </button>
   );
 }

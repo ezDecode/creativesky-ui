@@ -195,7 +195,7 @@ export function ComponentPreview({
         <motion.div
           layout="position"
           className={cn(
-            "absolute z-10 right-4 lg:right-6",
+            "absolute z-[100] right-4 lg:right-6",
             isFullscreen
               ? "bottom-4 lg:top-6 lg:bottom-auto"
               : "bottom-4 lg:top-6 lg:bottom-auto"
